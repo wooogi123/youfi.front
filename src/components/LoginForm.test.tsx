@@ -4,8 +4,8 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm test', () => {
   it('render LoginForm component', () => {
-    const { getByPlaceholderText } = render(<LoginForm />);
-    getByPlaceholderText(/ID/i);
-    getByPlaceholderText(/PW/i);
-  })
-})
+    const { getByLabelText } = render(<LoginForm />);
+    getByLabelText('ID');
+    getByLabelText('PW');
+  });
+});
