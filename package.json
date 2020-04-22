@@ -15,6 +15,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -23,7 +24,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "lint:fix": "eslint --fix src/**/*.{ts,tsx}"
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,6 +55,11 @@
     }
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.18",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
     "eslint": "^6.8.0",
