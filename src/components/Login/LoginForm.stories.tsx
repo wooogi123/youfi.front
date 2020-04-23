@@ -2,7 +2,7 @@ import React from 'react';
 import LoginForm from './LoginForm';
 
 export default {
-  title: 'components/LoginForm',
+  title: 'Components|LoginForm',
   component: LoginForm,
 };
 
