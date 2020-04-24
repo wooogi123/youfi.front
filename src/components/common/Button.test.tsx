@@ -19,7 +19,7 @@ describe('<Button />', () => {
       getByText(text);
     });
     it('Button on click event', () => {
-      const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {};
+      const onClick = (e?: React.MouseEvent<HTMLButtonElement>) => {};
       const { getByText } = render(<Button onClick={onClick}>{text}</Button>);
       fireEvent.click(getByText(text));
     });
