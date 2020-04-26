@@ -6,4 +6,6 @@ export default {
   component: LoginForm,
 };
 
-export const standard = () => <LoginForm />;
+export function standard() {
+  return <LoginForm />;
+}
