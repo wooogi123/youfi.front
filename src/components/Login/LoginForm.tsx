@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import { Link } from 'react-router-dom';
 import Button from '../common/Button';
 
 const Wrapper = css`
@@ -52,8 +53,9 @@ const input = css`
   height: 3rem;
 
   &:focus {
+    color: #793698;
     transition: all 0.4s;
-    border: 1px solid #827ffe;
+    border: 1px solid #793698;
   }
 `;
 
@@ -61,7 +63,7 @@ const forget = css`
   display: flex;
 
   a {
-    color: #827ffe;
+    color: #793698;
     line-height: 1.5;
     font-size: 0.8rem;
   }
@@ -96,7 +98,7 @@ function LoginForm() {
         </div>
         <div css={forget}>
           <div>
-            <a>아이디 또는 비밀번호를 잊으셧나요?</a>
+            <Link to='/auth/find'>아이디 또는 비밀번호를 잊으셧나요?</Link>
           </div>
         </div>
         <div css={buttonWrapper}>

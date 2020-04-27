@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import oc from 'open-color';
 
 const style = css`
   outline: none;
@@ -28,56 +29,56 @@ const style = css`
 
 const themes = {
   primary: css`
-    background: #20c997;
-    color: #ffffff;
+    background: ${oc.violet[9]};
+    color: ${oc.white};
     svg {
-      fill: #fff;
+      fill: ${oc.white};
     }
     &:hover:enabled {
-      background: #38d9a9;
+      background: ${oc.violet[7]};
     }
     &:active:enabled {
-      background: #12b886;
+      background: ${oc.violet[7]};
     }
     &:disabled {
-      background: #aed9cc;
+      background: ${oc.violet[3]};
     }
   `,
   secondary: css`
-    background: #e9ecef;
-    color: #343a40;
+    background: ${oc.gray[2]};
+    color: ${oc.gray[8]};
     svg {
-      fill: #343a40;
+      fill: ${oc.gray[8]};
     }
     &:hover:enabled {
-      background: #f1f3f5;
+      background: ${oc.gray[4]};
     }
     &:active:enabled {
-      background: #c3fae8;
+      background: ${oc.gray[4]};
     }
     &:disabled {
-      color: #c6d3e1;
+      color: ${oc.gray[5]};
       svg {
-        fill: #c6d3e1;
+        fill: ${oc.gray[5]};
       }
     }
   `,
   tertiary: css`
     background: #none;
-    color: #20c997;
+    color: ${oc.violet[9]};
     svg {
-      fill: #20c997;
+      fill: ${oc.violet[9]};
     }
     &:hover:enabled {
-      background: #e6fcf5;
+      color: ${oc.violet[7]};
     }
     &:active:enabled {
-      background: #c3fae8;
+      color: ${oc.violet[7]};
     }
     &:disabled {
-      color: #bcd9d0;
+      color: ${oc.violet[3]};
       svg {
-        fill: #bcd9d0;
+        fill: ${oc.violet[3]};
       }
     }
   `,
