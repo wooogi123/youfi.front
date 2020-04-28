@@ -1,13 +1,16 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { Link } from 'react-router-dom';
 import Button from '../common/Button';
 
 const Wrapper = css`
-  width: 25rem;
+  width: 100%;
   background: #fff;
   border-radius: 0.5rem;
   position: relative;
+  
+  @media (min-width: 768px) {
+    width: 25rem;
+  }
 `;
 
 const paddingY = css`
@@ -66,6 +69,7 @@ const forget = css`
     color: #793698;
     line-height: 1.5;
     font-size: 0.8rem;
+    text-decoration: none;
   }
 `;
 
@@ -98,7 +102,7 @@ function LoginForm() {
         </div>
         <div css={forget}>
           <div>
-            <Link to='/auth/find'>아이디 또는 비밀번호를 잊으셧나요?</Link>
+            <a href='/auth/find'>아이디 또는 비밀번호를 잊으셧나요?</a>
           </div>
         </div>
         <div css={buttonWrapper}>
@@ -114,4 +118,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginForm
