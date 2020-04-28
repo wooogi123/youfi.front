@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import oc from 'open-color';
 
 const style = css`
   outline: none;
@@ -20,49 +21,68 @@ const style = css`
   &:focus:disabled {
     cursor: not-allowed;
   }
+  svg {
+    width: 1em;
+    margin-rioght: 1em;
+  }
 `;
 
 const themes = {
   primary: css`
-    background: #20c997;
-    color: #ffffff;
+    background: ${oc.violet[9]};
+    color: ${oc.white};
+    svg {
+      fill: ${oc.white};
+    }
     &:hover:enabled {
-      background: #38d9a9;
+      background: ${oc.violet[7]};
     }
     &:active:enabled {
-      background: #12b886;
+      background: ${oc.violet[7]};
     }
     &:disabled {
-      background: #aed9cc;
+      background: ${oc.violet[3]};
     }
   `,
   secondary: css`
-    background: #e9ecef;
-    color: #343a40;
+    background: ${oc.gray[2]};
+    color: ${oc.gray[8]};
+    svg {
+      fill: ${oc.gray[8]};
+    }
     &:hover:enabled {
-      background: #f1f3f5;
+      background: ${oc.gray[4]};
     }
     &:active:enabled {
-      background: #c3fae8;
+      background: ${oc.gray[4]};
     }
     &:disabled {
-      color: #c6d3e1;
+      color: ${oc.gray[5]};
+      svg {
+        fill: ${oc.gray[5]};
+      }
     }
   `,
   tertiary: css`
     background: #none;
-    color: #20c997;
+    color: ${oc.violet[9]};
+    svg {
+      fill: ${oc.violet[9]};
+    }
     &:hover:enabled {
-      background: #e6fcf5;
+      color: ${oc.violet[7]};
     }
     &:active:enabled {
-      background: #c3fae8;
+      color: ${oc.violet[7]};
     }
     &:disabled {
-      color: #bcd9d0;
+      color: ${oc.violet[3]};
+      svg {
+        fill: ${oc.violet[3]};
+      }
     }
   `,
-}
+};
 
 const sizes = {
   small: css`
@@ -80,7 +100,27 @@ const sizes = {
     font-size: 1.125rem;
     padding: 0 1.5rem;
   `,
-}
+};
+
+const iconOnlyStyle = css`
+  padding: 0;
+  border-radius: 50%;
+  svg {
+    margin: 0;
+  }
+`;
+
+const iconOnlySizes = {
+  small: css`
+    width: 1.75rem;
+  `,
+  medium: css`
+    width: 2.5rem;
+  `,
+  large: css`
+    width: 3rem;
+  `,
+};
 
 interface ButtonProps {
   /** 버튼 텍스트 */
@@ -95,13 +135,32 @@ interface ButtonProps {
   disabled?: boolean;
   /** 버튼 너비 설정 */
   width?: string;
+  /** 버튼 아이콘만 보이게하는 설정 */
+  iconOnly?: boolean;
+  /** 버튼 설명 */
+  alt?: string;
 }
 
 /** `Button` 컴포넌트 */
-function Button({ children, theme, size, disabled, width, onClick }: ButtonProps) {
+function Button({
+  children,
+  theme,
+  size,
+  disabled,
+  width,
+  iconOnly,
+  alt,
+  onClick
+}: ButtonProps) {
   return (
     <button
-      css={[style, themes[theme], sizes[size], { width }]}
+      css={[
+        style,
+        themes[theme],
+        sizes[size],
+        { width },
+        iconOnly && [iconOnlyStyle, iconOnlySizes[size]]
+      ]}
       disabled={disabled}
       onClick={onClick}
     >

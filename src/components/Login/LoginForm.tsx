@@ -1,73 +1,121 @@
-import React from 'react';
-import styled from '@emotion/styled';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import Button from '../common/Button';
 
-const Spacer = styled.div`
-  margin-top: 4rem;
-`;
-
-const Form = styled.form`
-  width: 60%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.5rem;
-  border: 1px solid #000;
-  border-radius: 0.25rem;
-`;
-
-const InputWrapper = styled.div`
+const Wrapper = css`
   width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  & + & {
-    margin-top: 1rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  position: relative;
+  
+  @media (min-width: 768px) {
+    width: 25rem;
   }
 `;
 
-const Label = styled.label`
+const paddingY = css`
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+`;
+
+const form = css`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
+const formTitle = css`
+  font-size: 1rem;
+  color: #403866;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
   width: 100%;
   display: block;
-  margin-bottom: 0.5rem;
+  padding-bottom: 2rem;
 `;
 
-const Input = styled.input`
+const inputWrapper = css`
   width: 100%;
-  appearance: none;
-  line-height: 1.25;
-  padding: 0.5rem 0.75rem;
+  position: relative;
+  background-color: #e6e6e6;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
 `;
 
-const Button = styled.button`
-  width: 20%;
+const input = css`
+  color: #403866;
+  line-height: 1.2;
+  font-size: 1.2rem;
+  display: block;
+  width: 100%;
+  border: 1px solid #a0aec0;
+  border-radius: 0.2rem;
+  height: 3rem;
+
+  &:focus {
+    color: #793698;
+    transition: all 0.4s;
+    border: 1px solid #793698;
+  }
+`;
+
+const forget = css`
+  display: flex;
+
+  a {
+    color: #793698;
+    line-height: 1.5;
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+`;
+
+const buttonWrapper = css`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 1rem;
-  border: 1px solid #000;
-  border-radius: 0.25rem;
 `;
 
 function LoginForm() {
   return (
-    <>
-    <Spacer></Spacer>
-    <Form>
-      <InputWrapper>
-        <Label htmlFor="username">ID</Label>
-        <Input
-          id="username"
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <Label htmlFor="password">PW</Label>
-        <Input
-          id="password"
-        />
-      </InputWrapper>
-      <Button>Submit</Button>
-    </Form>
-    </>
+    <div css={[Wrapper, paddingY]}>
+      <form css={form}>
+        <h1 css={formTitle}>LOGIN</h1>
+        <div css={inputWrapper}>
+          <input
+            type='text'
+            name='username'
+            placeholder='Username'
+            css={input}
+          />
+        </div>
+        <div css={inputWrapper}>
+          <input
+            type='password'
+            placeholder='Password'
+            css={input}
+          />
+        </div>
+        <div css={forget}>
+          <div>
+            <a href='/auth/find'>아이디 또는 비밀번호를 잊으셧나요?</a>
+          </div>
+        </div>
+        <div css={buttonWrapper}>
+          <Button
+            width='100%'
+            size='large'
+          >
+            LOGIN
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }
 
-export default LoginForm;
+export default LoginForm

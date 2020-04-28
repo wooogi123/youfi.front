@@ -3,6 +3,8 @@ import { jsx, css } from '@emotion/core';
 import Button from './Button';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
+import ButtonGroup from './ButtonGroup';
+import Icon from './Icon';
 
 export default {
   component: Button,
@@ -14,10 +16,6 @@ const GroupWrapper = css`
   display: flex;
   justify-items: center;
   align-content: center;
-
-  button {
-    margin-top: 2rem;
-  }
 
   & > button + button {
     margin-left: 2rem;
@@ -61,7 +59,7 @@ export function themes() {
       <Button theme='secondary'>{text('secondary', 'SECONDARY')}</Button>
       <Button theme='tertiary'>{text('tertiary', 'TERTIARY')}</Button>
     </div>
-  )
+  );
 }
 
 export function sizes() {
@@ -81,7 +79,7 @@ export function disabled() {
       <Button theme='secondary' disabled>{text('disabled-secondary', 'SECONDARY')}</Button>
       <Button theme='tertiary' disabled>{text('disabled-tertiary', 'TERTIARY')}</Button>
     </div>
-  )
+  );
 }
 
 export function customSized() {
@@ -90,5 +88,41 @@ export function customSized() {
       <Button width="20rem">{text('custom-width', '20rem')}</Button>
       <Button width="100%">{text('full-width', '100%')}</Button>
     </div>
-  )
+  );
+}
+
+export function withIcon() {
+  return (
+    <div>
+      <ButtonGroup>
+        <Button size='small'>
+          <Icon icon='arrow' /> ARROW
+        </Button>
+        <Button>
+          <Icon icon='arrow' /> ARROW
+        </Button>
+        <Button size='large'>
+          <Icon icon='arrow' /> ARROW
+        </Button>
+      </ButtonGroup>
+    </div>
+  );
+}
+
+export function iconOnly() {
+  return (
+    <div>
+      <ButtonGroup>
+        <Button iconOnly size='small'>
+          <Icon icon='arrow' />
+        </Button>
+        <Button iconOnly>
+          <Icon icon='arrow' />
+        </Button>
+        <Button iconOnly size='large'>
+          <Icon icon='arrow' />
+        </Button>
+      </ButtonGroup>
+    </div>
+  );
 }
