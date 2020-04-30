@@ -23,19 +23,28 @@ const WhiteBox = css`
   background: #ffffff;
   border-radius: 0.25rem;
 
-  .logo {
-    display: block;
-    padding-bottom: 2rem;
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 0.25rem;
-  }
-
   @media (max-width: 767px) {
     width: 75%;
     height: 75%;
   }
-`
+`;
+
+const logo = css`
+  display: block;
+  padding-bottom: 2rem;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: 0.25rem;
+
+  a {
+    color: ${oc.gray[8]};
+  }
+
+  a:hover {
+    color: ${oc.gray[6]};
+  }
+`;
 
 interface AuthTemplateProps {
   children?: React.ReactNode;
@@ -45,7 +54,7 @@ function AuthTemplate({ children }: AuthTemplateProps) {
   return (
     <div css={Wrapper}>
       <div css={WhiteBox}>
-        <div className='logo'>
+        <div css={logo}>
           <Link to='/'>YouFI</Link>
         </div>
         {children}

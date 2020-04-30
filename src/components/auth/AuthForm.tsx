@@ -4,12 +4,10 @@ import { jsx, css } from '@emotion/core';
 import oc from 'open-color';
 import Button from '../common/Button';
 
-const AuthFormWrapper = css`
-  h3 {
-    margin: 0;
-    color: ${oc.gray[8]};
-    margin-bottom: 1rem;
-  }
+const AuthFormTitle = css`
+  margin: 0;
+  color: ${oc.gray[8]};
+  margin-bottom: 1rem;
 `;
 
 const spacerTop = css`
@@ -56,8 +54,8 @@ interface AuthProps {
 
 function AuthForm({ type }: AuthProps) {
   return (
-    <div css={AuthFormWrapper}>
-      <h3>
+    <div>
+      <h3 css={AuthFormTitle}>
         {type === 'login' ? '로그인' : '회원가입'}
       </h3>
       <form>
