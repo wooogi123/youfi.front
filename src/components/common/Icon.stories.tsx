@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import Icon, { IconTypes } from './Icon';
+import { withKnobs, select, text } from '@storybook/addon-knobs';
 
 const iconListStyle = css`
   list-style: none;
@@ -19,16 +20,22 @@ const iconListStyle = css`
 `;
 
 export default {
+  title: 'components|Icon',
   component: Icon,
-  title: 'components|Icon'
+  decorators: [withKnobs],
 };
 
 export function icon() {
-  return <Icon icon='arrow' />;
+  const icon = select('icon', [
+    'arrow', 'inbox', 'magnifier', 'view', 'warning', 'xmark',
+  ], 'arrow');
+  const color = text('color', 'blue');
+  const size = text('size', '4rem');
+  return <Icon icon={icon} color={color} size={size} />;
 }
 
 icon.story = {
-  name: 'Arrow',
+  name: 'Icon',
 };
 
 export function customSize() {
