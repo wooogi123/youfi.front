@@ -3,7 +3,7 @@ import StoryRouter from 'storybook-react-router';
 import Navbar from './Navbar';
 
 export default {
-  title: 'components|Navbar',
+  title: 'components|common/Navbar',
   component: Navbar,
   decorators: [StoryRouter()],
 };
@@ -17,5 +17,5 @@ export function navbar() {
     { name: 'Test5', href: '/5' },
     { name: 'Test6', href: '/6' },
   ]
-  return <Navbar services={services} />;
+  return <Navbar services={services} size='large' />;
 }

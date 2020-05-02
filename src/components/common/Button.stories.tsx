@@ -8,7 +8,7 @@ import Icon from './Icon';
 
 export default {
   component: Button,
-  title: 'Components|Button',
+  title: 'components|common/Button',
   decorators: [withKnobs],
 }
 

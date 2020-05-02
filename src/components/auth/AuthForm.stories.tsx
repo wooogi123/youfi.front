@@ -3,7 +3,7 @@ import StoryRouter from 'storybook-react-router';
 import AuthForm from './AuthForm'
 
 export default {
-  title: 'components|AuthForm',
+  title: 'components|auth/AuthForm',
   component: AuthForm,
   decorators: [StoryRouter()],
 };

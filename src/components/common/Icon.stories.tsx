@@ -20,7 +20,7 @@ const iconListStyle = css`
 `;
 
 export default {
-  title: 'components|Icon',
+  title: 'components|common/Icon',
   component: Icon,
   decorators: [withKnobs],
 };
