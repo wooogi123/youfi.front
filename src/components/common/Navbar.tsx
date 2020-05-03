@@ -20,7 +20,7 @@ const linkStyle = css`
   }
 `;
 
-interface Service {
+export interface Service {
   name: string;
   href: string;
 }

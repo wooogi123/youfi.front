@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import Button from './Button';
+import Navbar, { Service } from './Navbar';
 
 const headerWrapper = css`
   width: 100%;
@@ -43,16 +43,19 @@ const right = css`
 `;
 
 interface HeaderProps {
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+  services: Array<Service>;
 }
 
-function Header({ onClick }: HeaderProps) {
+function Header({ services }: HeaderProps) {
   return (
     <div css={headerWrapper}>
       <div css={[responsive, wrapper]}>
         <div css={logo}>YOU FI</div>
         <div css={right}>
-          <Button onClick={onClick}>로그인</Button>
+          <Navbar
+            services={services}
+            size='large'
+          />
         </div>
       </div>
     </div>
