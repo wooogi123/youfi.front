@@ -137,8 +137,6 @@ interface ButtonProps {
   width?: string;
   /** 버튼 아이콘만 보이게하는 설정 */
   iconOnly?: boolean;
-  /** 버튼 설명 */
-  alt?: string;
 }
 
 /** `Button` 컴포넌트 */
@@ -149,7 +147,6 @@ function Button({
   disabled,
   width,
   iconOnly,
-  alt,
   onClick
 }: ButtonProps) {
   return (

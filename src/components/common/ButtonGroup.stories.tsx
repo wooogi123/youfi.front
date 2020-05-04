@@ -4,7 +4,7 @@ import Button from './Button';
 import { withKnobs, text, radios, boolean } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|ButtonGroup',
+  title: 'components|common/ButtonGroup',
   component: ButtonGroup,
   decorators: [withKnobs],
 };
@@ -24,7 +24,7 @@ export function buttonGroup() {
       <Button>확인</Button>
     </ButtonGroup>
   );
-};
+}
 
 buttonGroup.story = {
   name: 'Default',
@@ -37,7 +37,7 @@ export function rightAlign() {
       <Button>확인</Button>
     </ButtonGroup>
   );
-};
+}
 
 export function column() {
   return (
@@ -46,7 +46,7 @@ export function column() {
       <Button>Click</Button>
     </ButtonGroup>
   );
-};
+}
 
 export function customGap() {
   return (
@@ -55,7 +55,7 @@ export function customGap() {
       <Button>확인</Button>
     </ButtonGroup>
   );
-};
+}
 
 export function customGapColumn() {
   return (
@@ -64,4 +64,4 @@ export function customGapColumn() {
       <Button>Click</Button>
     </ButtonGroup>
   );
-};
+}
