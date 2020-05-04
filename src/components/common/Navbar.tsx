@@ -6,9 +6,26 @@ import oc from 'open-color';
 import Icon from './Icon';
 import Button from './Button';
 
+const wrapper = css`
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 const ulStyle = css`
   margin: 0;
   list-style: none;
+`;
+
+const liStyle = css`
+  margin-top: 1rem;
+  padding: 0.5rem;
+
+  & + & {
+    margin: 0;
+    border-top: 1px solid ${oc.gray[6]};
+  }
 `;
 
 const linkStyle = css`
@@ -34,7 +51,7 @@ function Navbar({ services, size }: NavbarProps) {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div>
+    <div css={[wrapper]}>
       <Button
         size={size}
         onClick={() => { setToggle(!toggle); }}
@@ -48,7 +65,7 @@ function Navbar({ services, size }: NavbarProps) {
       {toggle &&
       <ul css={ulStyle}>
         {services.map(service =>
-          <li key={service.name}>
+          <li key={service.name} css={liStyle}>
             <Link
               to={service.href}
               css={linkStyle}>

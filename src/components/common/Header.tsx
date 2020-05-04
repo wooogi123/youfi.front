@@ -5,7 +5,6 @@ import Navbar, { Service } from './Navbar';
 const headerWrapper = css`
   width: 100%;
   position: fixed;
-  background: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 `;
 
@@ -25,13 +24,13 @@ const responsive = css`
 `;
 
 const wrapper = css`
-  height: 4rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 `;
 
 const logo = css`
+  margin-top: 2rem;
   font-size: 1.125rem;
   font-weight: 800;
   letter-spacing: 2px;
