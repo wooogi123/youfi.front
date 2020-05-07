@@ -88,12 +88,7 @@ function AuthForm({ type }: AuthFormProps) {
             {type === 'login' ? '로그인' : '회원가입'}
           </Button>
           {type === 'login' ? (
-            <Grid container>
-              <Grid item xs>
-                <Link component={RouterLink} variant='body2' to='/auth/find'>
-                  패스워드를 잊어버리셨나요?
-                </Link>
-              </Grid>
+            <Grid container justify='flex-end'>
               <Grid item>
                 <Link component={RouterLink} variant='body2' to='/auth/register'>
                   아직 회원이 아니신가요?
