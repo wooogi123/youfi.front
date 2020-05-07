@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Hidden } from '@material-ui/core';
 import Appbar from './Appbar';
 import SideDrawer from './SideDrawer';
 
@@ -11,8 +12,10 @@ function Header() {
 
   return (
     <>
-      <Appbar title={'YOUFI'} open={open} toggleDrawer={toggleDrawer} />
-      <SideDrawer open={open} toggleDrawer={toggleDrawer} />
+      <Appbar title={'YOUFI'} toggleDrawer={toggleDrawer} />
+      <Hidden lgUp>
+        <SideDrawer open={open} toggleDrawer={toggleDrawer} />
+      </Hidden>
     </>
   );
 }

@@ -7,10 +7,11 @@ import {
   makeStyles,
   fade,
   InputBase,
+  Hidden,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import clsx from 'clsx';
+import ListContent from './ListContent';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -33,21 +34,19 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 12,
     marginRight: -12,
   },
-  menuButtonHidden: {
-    display: 'none',
-  },
   title: {
     flexGrow: 1,
   },
   search: {
     flexGrow: 1,
+    width: 'auto',
+    marginRight: 12,
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    width: '100%',
     [theme.breakpoints.down('md')]: {
       marginLeft: theme.spacing(1),
       width: 'auto',
@@ -69,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
-    width: '100%',
+    width: '20ch',
     [theme.breakpoints.down('md')]: {
       width: '12ch',
     },
@@ -78,15 +77,14 @@ const useStyles = makeStyles((theme) => ({
 
 interface AppbarProps {
   title: string;
-  open: boolean;
   toggleDrawer: () => void;
 }
 
-function Appbar({ title, open, toggleDrawer }: AppbarProps) {
+function Appbar({ title, toggleDrawer }: AppbarProps) {
   const classes = useStyles();
 
   return (
-    <AppBar position={'absolute'} className={clsx(classes.appBar)}>
+    <AppBar position={'absolute'} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <Typography
           component={'h1'}
@@ -110,14 +108,19 @@ function Appbar({ title, open, toggleDrawer }: AppbarProps) {
             inputProps={{ 'aria-label': 'search' }}
           />
         </div>
-        <IconButton
-          color={'inherit'}
-          aria-label={'open drawer'}
-          onClick={toggleDrawer}
-          className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-        >
-          <MenuIcon />
-        </IconButton>
+        <Hidden mdDown>
+          <ListContent orientation={'vertical'} />
+        </Hidden>
+        <Hidden lgUp>
+          <IconButton
+            color={'inherit'}
+            aria-label={'open drawer'}
+            onClick={toggleDrawer}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
       </Toolbar>
     </AppBar>
   );
