@@ -5,9 +5,9 @@ import { Link as RouterLink } from 'react-router-dom';
 
 function Copyright() {
   return (
-    <Typography variant='body2' color='textSecondary' align='center'>
+    <Typography variant={'body2'} color={'textSecondary'} align={'center'}>
       {'Copyright © '}
-      <Link component={RouterLink} color='inherit' to='/'>
+      <Link component={RouterLink} color={'inherit'} to={'/'}>
         YOUFI
       </Link>
       {' 2020. '}

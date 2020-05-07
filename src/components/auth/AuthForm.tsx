@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  }
+  },
 }));
 
 interface AuthFormProps {
@@ -37,68 +37,68 @@ function AuthForm({ type }: AuthFormProps) {
   const classes = useStyles();
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component={'main'} maxWidth={'xs'}>
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component='h1' variant='h5'>
+        <Typography component={'h1'} variant={'h5'}>
           {type === 'login' ? '로그인' : '회원가입'}
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant={'outlined'}
+            margin={'normal'}
             required
             fullWidth
-            id='email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
+            id={'email'}
+            label={'Email Address'}
+            name={'email'}
+            autoComplete={'email'}
             autoFocus
           />
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant={'outlined'}
+            margin={'normal'}
             required
             fullWidth
-            id='password'
-            label='Password'
-            name='password'
-            type='password'
-            autoComplete='current-password'
+            id={'password'}
+            label={'Password'}
+            name={'password'}
+            type={'password'}
+            autoComplete={'current-password'}
           />
           {type === 'register' && (
             <TextField
-              variant='outlined'
-              margin='normal'
+              variant={'outlined'}
+              margin={'normal'}
               required
               fullWidth
-              id='passwordConfirm'
-              label='Password 확인'
-              name='passwordConfirm'
-              type='password'
+              id={'passwordConfirm'}
+              label={'Password 확인'}
+              name={'passwordConfirm'}
+              type={'password'}
             />
           )}
           <Button
-            type='submit'
+            type={'submit'}
             fullWidth
-            variant='contained'
-            color='primary'
+            variant={'contained'}
+            color={'primary'}
             className={classes.submit}
           >
             {type === 'login' ? '로그인' : '회원가입'}
           </Button>
           {type === 'login' ? (
-            <Grid container justify='flex-end'>
+            <Grid container justify={'flex-end'}>
               <Grid item>
-                <Link component={RouterLink} variant='body2' to='/auth/register'>
+                <Link component={RouterLink} variant={'body2'} to={'/auth/register'}>
                   아직 회원이 아니신가요?
                 </Link>
               </Grid>
             </Grid>
           ) : (
-            <Grid container justify='flex-end'>
+            <Grid container justify={'flex-end'}>
               <Grid item>
-                <Link component={RouterLink} variant='body2' to='/auth/login'>
+                <Link component={RouterLink} variant={'body2'} to={'/auth/login'}>
                   이미 계정이 있으신가요?
                 </Link>
               </Grid>

@@ -3,7 +3,7 @@ import AuthForm from '../components/auth/AuthForm';
 
 function LoginPage() {
   return (
-    <AuthForm type='login' />
+    <AuthForm type={'login'} />
   );
 }
 

@@ -79,16 +79,22 @@ const useStyles = makeStyles((theme) => ({
 interface AppbarProps {
   title: string;
   open: boolean;
-  toggleDrawer: (e: React.MouseEvent) => void;
+  toggleDrawer: () => void;
 }
 
 function Appbar({ title, open, toggleDrawer }: AppbarProps) {
   const classes = useStyles();
 
   return (
-    <AppBar position='absolute' className={clsx(classes.appBar)}>
+    <AppBar position={'absolute'} className={clsx(classes.appBar)}>
       <Toolbar className={classes.toolbar}>
-        <Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
+        <Typography
+          component={'h1'}
+          variant={'h6'}
+          color={'inherit'}
+          noWrap
+          className={classes.title}
+        >
           {title}
         </Typography>
         <div className={classes.search}>
@@ -96,7 +102,7 @@ function Appbar({ title, open, toggleDrawer }: AppbarProps) {
             <SearchIcon />
           </div>
           <InputBase
-            placeholder='Search'
+            placeholder={'Search'}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
@@ -105,8 +111,8 @@ function Appbar({ title, open, toggleDrawer }: AppbarProps) {
           />
         </div>
         <IconButton
-          color='inherit'
-          aria-label='open drawer'
+          color={'inherit'}
+          aria-label={'open drawer'}
           onClick={toggleDrawer}
           className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
         >

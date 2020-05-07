@@ -3,7 +3,7 @@ import AuthForm from '../components/auth/AuthForm';
 
 function RegisterPage() {
   return (
-    <AuthForm type='register' />
+    <AuthForm type={'register'} />
   );
 }
 

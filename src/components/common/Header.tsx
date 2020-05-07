@@ -5,7 +5,7 @@ import SideDrawer from './SideDrawer';
 function Header() {
   const [open, setOpen] = useState(false);
 
-  function toggleDrawer(e: React.MouseEvent) {
+  function toggleDrawer() {
     setOpen(!open);
   }
 
