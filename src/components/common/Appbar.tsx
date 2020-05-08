@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -8,6 +9,7 @@ import {
   fade,
   InputBase,
   Hidden,
+  Link,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -93,7 +95,14 @@ function Appbar({ title, toggleDrawer }: AppbarProps) {
           noWrap
           className={classes.title}
         >
-          {title}
+          <Link
+            component={RouterLink}
+            to={'/'}
+            color={'inherit'}
+            underline={'none'}
+          >
+            {title}
+          </Link>
         </Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
@@ -109,7 +118,7 @@ function Appbar({ title, toggleDrawer }: AppbarProps) {
           />
         </div>
         <Hidden mdDown>
-          <ListContent orientation={'vertical'} />
+          <ListContent orientation={'horizontal'} />
         </Hidden>
         <Hidden lgUp>
           <IconButton

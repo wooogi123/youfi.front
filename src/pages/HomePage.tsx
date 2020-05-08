@@ -5,6 +5,13 @@ function HomePage() {
   return (
     <>
       <Header />
+      <div
+        style={{
+          marginTop: 64,
+        }}
+      >
+        HomePage
+      </div>
     </>
   );
 }

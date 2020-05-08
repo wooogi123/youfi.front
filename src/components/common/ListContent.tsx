@@ -7,16 +7,17 @@ import {
   Divider,
   makeStyles,
 } from '@material-ui/core';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
   },
   vertical: {
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   horizontal: {
-    flexDirection: 'column',
+    flexDirection: 'row',
   },
 }));
 
@@ -29,11 +30,17 @@ function ListContent({ orientation }: ListContentProps) {
 
   return (
     <>
-      <List component={'nav'} className={(classes.root, classes[orientation])}>
-        {['저축', '대출', '투자', '맞춤 금융상품', '금융 사전'].map((text) => (
-          <ListItem button key={text}>
+      <List component={'nav'} className={clsx(classes.root, classes[orientation])}>
+        {[
+          { name: '저축', href: '/service/store' },
+          { name: '대출', href: '/service/loan' },
+          { name: '투자', href: '/service/invest' },
+          { name: '맞춤 금융상품', href: '/service/recommend' },
+          { name: '금융 사전', href: '/service/dict' },
+        ].map(({ name, href }) => (
+          <ListItem button component={RouterLink} to={href} key={name}>
             <ListItemText
-              primary={text}
+              primary={name}
               primaryTypographyProps={{
                 noWrap: true,
               }}

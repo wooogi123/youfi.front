@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Drawer,
   makeStyles,
@@ -34,12 +35,12 @@ function SideDrawer({ open, toggleDrawer }: SideDrawerProps) {
     >
       <div className={classes.list}>
         <List>
-          <ListItem button>
+          <ListItem button component={RouterLink} to={'/'}>
             <ListItemText primary={'YOUFI'} />
           </ListItem>
         </List>
         <Divider />
-        <ListContent orientation={'horizontal'} />
+        <ListContent orientation={'vertical'} />
       </div>
     </Drawer>
   );
