@@ -12,7 +12,7 @@ function Header() {
 
   return (
     <>
-      <Appbar title={'YOUFI'} toggleDrawer={toggleDrawer} />
+      <Appbar title={'YouFI'} toggleDrawer={toggleDrawer} />
       <Hidden lgUp>
         <SideDrawer open={open} toggleDrawer={toggleDrawer} />
       </Hidden>

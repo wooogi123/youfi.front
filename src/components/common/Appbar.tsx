@@ -16,8 +16,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import ListContent from './ListContent';
 
 const useStyles = makeStyles((theme) => ({
-  toolbar: {
-  },
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -87,7 +85,7 @@ function Appbar({ title, toggleDrawer }: AppbarProps) {
 
   return (
     <AppBar position={'absolute'} className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar>
         <Typography
           component={'h1'}
           variant={'h6'}
