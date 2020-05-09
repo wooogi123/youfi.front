@@ -1,12 +1,12 @@
 import React from 'react';
 import Template from '../components/service/Template';
 
-function HomePage() {
+function InvestPage() {
   return (
     <Template>
-      HomePage
+      InvestPage
     </Template>
   );
 }
 
-export default HomePage;
+export default InvestPage;

@@ -1,12 +1,12 @@
 import React from 'react';
 import Template from '../components/service/Template';
 
-function HomePage() {
+function RecommendPage() {
   return (
     <Template>
-      HomePage
+      RecommendPage
     </Template>
   );
 }
 
-export default HomePage;
+export default RecommendPage;

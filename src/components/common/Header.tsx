@@ -1,64 +1,22 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import Navbar, { Service } from './Navbar';
+import React, { useState } from 'react';
+import { Hidden } from '@material-ui/core';
+import Appbar from './Appbar';
+import SideDrawer from './SideDrawer';
 
-const headerWrapper = css`
-  width: 100%;
-  position: fixed;
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-`;
+function Header() {
+  const [open, setOpen] = useState(false);
 
-const responsive = css`
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 1024px;
-  margin: 0 auto;
-
-  @media (max-width: 1024px) {
-    width: 768px;
+  function toggleDrawer() {
+    setOpen(!open);
   }
 
-  @media (max-width: 768px) {
-    width: 90%;
-  }
-`;
-
-const wrapper = css`
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const logo = css`
-  font-size: 1.125rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-`;
-
-const right = css`
-  display: flex;
-  align-items: center;
-`;
-
-interface HeaderProps {
-  services: Array<Service>;
-}
-
-function Header({ services }: HeaderProps) {
   return (
-    <div css={headerWrapper}>
-      <div css={[responsive, wrapper]}>
-        <div css={logo}>YOU FI</div>
-        <div css={right}>
-          <Navbar
-            services={services}
-            size='large'
-          />
-        </div>
-      </div>
-    </div>
+    <>
+      <Appbar title={'YouFI'} toggleDrawer={toggleDrawer} />
+      <Hidden lgUp>
+        <SideDrawer open={open} toggleDrawer={toggleDrawer} />
+      </Hidden>
+    </>
   );
 }
 

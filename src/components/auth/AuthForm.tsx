@@ -1,104 +1,115 @@
-/** @jsx jsx */
-import { Link } from 'react-router-dom';
-import { jsx, css } from '@emotion/core';
-import oc from 'open-color';
-import Button from '../common/Button';
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  makeStyles,
+  Container,
+} from '@material-ui/core';
+import Copyright from '../common/Copyright';
 
-const AuthFormTitle = css`
-  margin: 0;
-  color: ${oc.gray[8]};
-  margin-bottom: 1rem;
-`;
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
-const spacerTop = css`
-  margin-top: 1rem;
-`;
-
-const input = css`
-  width: 100%;
-  line-height: 1.2;
-  font-size: 1rem;
-  color: ${oc.gray[8]};
-  outline: none;
-  border: none;
-  border-bottom: 1px solid ${oc.gray[5]};
-  padding-bottom: 1rem;
-
-  &:focus {
-    color: ${oc.violet[7]};
-    border-bottom: 1px solid ${oc.violet[7]};
-  }
-
-  & + & {
-    margin-top: 1rem;
-  }
-`;
-
-const footer = css`
-  margin-top: 2rem;
-  text-align: right;
-
-  a {
-    color: ${oc.violet[5]};
-    text-decoration: none;
-    &:hover {
-      color: ${oc.violet[7]};
-      text-decoration: underline;
-    }
-  }
-`;
-
-interface AuthProps {
+interface AuthFormProps {
   type: string;
 }
 
-function AuthForm({ type }: AuthProps) {
+function AuthForm({ type }: AuthFormProps) {
+  const classes = useStyles();
+
   return (
-    <div>
-      <h3 css={AuthFormTitle}>
-        {type === 'login' ? '로그인' : '회원가입'}
-      </h3>
-      <form>
-        <input
-          type='text'
-          name='username'
-          placeholder='Username'
-          css={input}
-          autoComplete='username'
-        />
-        <input
-          type='password'
-          name='password'
-          placeholder='Password'
-          css={input}
-          autoComplete='new-password'
-        />
-        {type === 'register' && (
-          <input
-            type='password'
-            name='passwordConfirm'
-            placeholder='Password 확인'
-            css={input}
-            autoComplete='new-password'
+    <Container component={'main'} maxWidth={'xs'}>
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component={'h1'} variant={'h5'}>
+          {type === 'login' ? '로그인' : '회원가입'}
+        </Typography>
+        <form className={classes.form} noValidate>
+          <TextField
+            variant={'outlined'}
+            margin={'normal'}
+            required
+            fullWidth
+            id={'email'}
+            label={'Email Address'}
+            name={'email'}
+            autoComplete={'email'}
+            autoFocus
           />
-        )}
-        <div css={spacerTop}>
+          <TextField
+            variant={'outlined'}
+            margin={'normal'}
+            required
+            fullWidth
+            id={'password'}
+            label={'Password'}
+            name={'password'}
+            type={'password'}
+            autoComplete={'current-password'}
+          />
+          {type === 'register' && (
+            <TextField
+              variant={'outlined'}
+              margin={'normal'}
+              required
+              fullWidth
+              id={'passwordConfirm'}
+              label={'Password 확인'}
+              name={'passwordConfirm'}
+              type={'password'}
+            />
+          )}
           <Button
-            width='100%'
-            size='large'
+            type={'submit'}
+            fullWidth
+            variant={'contained'}
+            color={'primary'}
+            className={classes.submit}
           >
             {type === 'login' ? '로그인' : '회원가입'}
           </Button>
-        </div>
-      </form>
-      <div css={footer}>
-        {type === 'login' ? (
-          <Link to='/auth/register'>회원가입</Link>
-        ) : (
-          <Link to='/auth/login'>로그인</Link>
-        )}
+          {type === 'login' ? (
+            <Grid container justify={'flex-end'}>
+              <Grid item>
+                <Link component={RouterLink} variant={'body2'} to={'/auth/register'}>
+                  아직 회원이 아니신가요?
+                </Link>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid container justify={'flex-end'}>
+              <Grid item>
+                <Link component={RouterLink} variant={'body2'} to={'/auth/login'}>
+                  이미 계정이 있으신가요?
+                </Link>
+              </Grid>
+            </Grid>
+          )}
+        </form>
       </div>
-    </div>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+    </Container>
   );
 }
 

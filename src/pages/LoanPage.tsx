@@ -1,12 +1,12 @@
 import React from 'react';
 import Template from '../components/service/Template';
 
-function HomePage() {
+function LoanPage() {
   return (
     <Template>
-      HomePage
+      LoanPage
     </Template>
   );
 }
 
-export default HomePage;
+export default LoanPage;

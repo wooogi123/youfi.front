@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/core": "^10.0.28",
-    "@emotion/styled": "^10.0.27",
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -15,8 +15,8 @@
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
+    "clsx": "^1.1.0",
     "immer": "^6.0.3",
-    "open-color": "^1.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -32,12 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/**/*.{ts,tsx} && eslint src/**/*.{ts,tsx}",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "lint": "eslint --ext .tsx,.ts src/**/"
   },
   "browserslist": {
     "production": [
@@ -63,26 +58,15 @@
     }
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.18",
-    "@storybook/addon-docs": "^5.3.18",
-    "@storybook/addon-knobs": "^5.3.18",
-    "@storybook/addon-links": "^5.3.18",
-    "@storybook/addon-viewport": "^5.3.18",
-    "@storybook/addons": "^5.3.18",
-    "@storybook/preset-create-react-app": "^2.1.1",
-    "@storybook/react": "^5.3.18",
-    "@types/storybook-react-router": "^1.0.1",
-    "storybook-react-router": "^1.0.8",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "husky": "^4.2.5",
-    "lint-staged": "^10.1.4",
-    "react-docgen-typescript-loader": "^3.7.2"
+    "lint-staged": "^10.1.4"
   }
 }

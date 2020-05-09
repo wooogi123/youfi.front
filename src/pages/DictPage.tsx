@@ -1,12 +1,13 @@
 import React from 'react';
 import Template from '../components/service/Template';
 
-function HomePage() {
+
+function DictPage() {
   return (
     <Template>
-      HomePage
+      DictPage
     </Template>
   );
 }
 
-export default HomePage;
+export default DictPage;
