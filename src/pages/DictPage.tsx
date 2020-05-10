@@ -4,7 +4,7 @@ import Template from '../components/service/Template';
 
 function DictPage() {
   return (
-    <Template>
+    <Template title={'금융 사전'}>
       DictPage
     </Template>
   );

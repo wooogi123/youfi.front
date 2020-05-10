@@ -3,7 +3,7 @@ import Template from '../components/service/Template';
 
 function HomePage() {
   return (
-    <Template>
+    <Template title={'You-Fi'}>
       HomePage
     </Template>
   );
