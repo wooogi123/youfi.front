@@ -3,7 +3,7 @@ import Template from '../components/service/Template';
 
 function StorePage() {
   return (
-    <Template>
+    <Template title={'저축'}>
       StorePage
     </Template>
   );
