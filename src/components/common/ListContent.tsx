@@ -38,7 +38,12 @@ function ListContent({ orientation }: ListContentProps) {
           { name: '맞춤 금융상품', href: '/service/recommend' },
           { name: '금융 사전', href: '/service/dict' },
         ].map(({ name, href }) => (
-          <ListItem button component={RouterLink} to={href} key={name}>
+          <ListItem
+            button
+            component={RouterLink}
+            to={href}
+            key={name}
+          >
             <ListItemText
               primary={name}
               primaryTypographyProps={{

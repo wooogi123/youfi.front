@@ -1,11 +1,11 @@
 import React from 'react';
-import PageTemplate from '../components/PageTemplate';
+import Template from '../components/service/Template';
 
 function HomePage() {
   return (
-    <PageTemplate>
+    <Template title={'You-Fi'}>
       HomePage
-    </PageTemplate>
+    </Template>
   );
 }
 

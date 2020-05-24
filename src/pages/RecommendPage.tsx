@@ -1,11 +1,11 @@
 import React from 'react';
-import PageTemplate from '../components/PageTemplate';
+import Template from '../components/service/Template';
 
 function RecommendPage() {
   return (
-    <PageTemplate>
+    <Template title={'맞춤 금융상품'}>
       RecommendPage
-    </PageTemplate>
+    </Template>
   );
 }
 

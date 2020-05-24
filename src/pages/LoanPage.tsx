@@ -1,11 +1,11 @@
 import React from 'react';
-import PageTemplate from '../components/PageTemplate';
+import Template from '../components/service/Template';
 
 function LoanPage() {
   return (
-    <PageTemplate>
+    <Template title={'대출'}>
       LoanPage
-    </PageTemplate>
+    </Template>
   );
 }
 

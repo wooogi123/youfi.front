@@ -1,11 +1,11 @@
 import React from 'react';
-import PageTemplate from '../components/PageTemplate';
+import Template from '../components/service/Template';
 
 function StorePage() {
   return (
-    <PageTemplate>
+    <Template title={'저축'}>
       StorePage
-    </PageTemplate>
+    </Template>
   );
 }
 

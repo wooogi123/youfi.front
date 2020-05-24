@@ -1,23 +1,19 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
-  Typography,
   IconButton,
   makeStyles,
   fade,
   InputBase,
   Hidden,
-  Link,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ListContent from './ListContent';
+import ResponsiveTitle from './ResponsiveTitle';
 
 const useStyles = makeStyles((theme) => ({
-  toolbar: {
-  },
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -35,9 +31,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     paddingRight: 12,
     marginRight: -12,
-  },
-  title: {
-    flexGrow: 1,
   },
   search: {
     flexGrow: 1,
@@ -78,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface AppbarProps {
-  title: string;
+  title: 'You-Fi' | '저축' | '대출' | '투자' | '맞춤 금융상품' | '금융 사전';
   toggleDrawer: () => void;
 }
 
@@ -87,23 +80,8 @@ function Appbar({ title, toggleDrawer }: AppbarProps) {
 
   return (
     <AppBar position={'absolute'} className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
-        <Typography
-          component={'h1'}
-          variant={'h6'}
-          color={'inherit'}
-          noWrap
-          className={classes.title}
-        >
-          <Link
-            component={RouterLink}
-            to={'/'}
-            color={'inherit'}
-            underline={'none'}
-          >
-            {title}
-          </Link>
-        </Typography>
+      <Toolbar>
+        <ResponsiveTitle title={title} />
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
