@@ -1,18 +1,11 @@
 import React from 'react';
-import Header from '../components/common/Header';
+import PageTemplate from '../components/PageTemplate';
 
 function HomePage() {
   return (
-    <>
-      <Header />
-      <div
-        style={{
-          marginTop: 64,
-        }}
-      >
-        HomePage
-      </div>
-    </>
+    <PageTemplate>
+      HomePage
+    </PageTemplate>
   );
 }
 
