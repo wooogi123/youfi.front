@@ -29,8 +29,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export type AuthType = 'login' | 'register';
+
 interface AuthFormProps {
-  type: string;
+  type: AuthType;
 }
 
 function AuthForm({ type }: AuthFormProps) {

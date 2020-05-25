@@ -11,7 +11,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ListContent from './ListContent';
-import ResponsiveTitle from './ResponsiveTitle';
+import ResponsiveTitle, { ServiceTitle } from './ResponsiveTitle';
 
 const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface AppbarProps {
-  title: 'You-Fi' | '저축' | '대출' | '투자' | '맞춤 금융상품' | '금융 사전';
+  title: ServiceTitle;
   toggleDrawer: () => void;
 }
 

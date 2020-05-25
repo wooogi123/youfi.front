@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Hidden } from '@material-ui/core';
 import Appbar from './Appbar';
 import SideDrawer from './SideDrawer';
+import { ServiceTitle } from './ResponsiveTitle';
 
 interface HeaderProps {
-  title: 'You-Fi' | '저축' | '대출' | '투자' | '맞춤 금융상품' | '금융 사전';
+  title: ServiceTitle;
 }
 
 function Header({ title }: HeaderProps) {
