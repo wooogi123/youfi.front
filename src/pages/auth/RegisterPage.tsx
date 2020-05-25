@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthForm from '../components/auth/AuthForm';
+import AuthForm from '../../components/auth/AuthForm';
 
 function RegisterPage() {
   return (

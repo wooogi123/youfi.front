@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import AuthRoute from './routes/Auth';
 import ServiceRoute from './routes/Service';
-import HomePage from './pages/HomePage';
+import HomePage from './pages';
 import './App.css';
 
 function App() {
