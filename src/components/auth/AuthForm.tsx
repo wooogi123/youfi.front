@@ -11,7 +11,7 @@ import {
   makeStyles,
   Container,
 } from '@material-ui/core';
-import Copyright from '../common/Copyright';
+import { Copyright } from '../common';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
