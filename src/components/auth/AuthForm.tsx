@@ -33,9 +33,16 @@ export type AuthType = 'login' | 'register';
 
 interface AuthFormProps {
   type: AuthType;
+  email: string;
+  password: string;
+  passwordConfirm?: string;
+  onChange: (e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function AuthForm({ type }: AuthFormProps) {
+function AuthForm({
+  type, email, password, passwordConfirm, onChange, onClick,
+}: AuthFormProps) {
   const classes = useStyles();
 
   return (
@@ -55,6 +62,8 @@ function AuthForm({ type }: AuthFormProps) {
             label={'Email Address'}
             name={'email'}
             autoComplete={'email'}
+            value={email}
+            onChange={onChange}
             autoFocus
           />
           <TextField
@@ -66,6 +75,8 @@ function AuthForm({ type }: AuthFormProps) {
             label={'Password'}
             name={'password'}
             type={'password'}
+            value={password}
+            onChange={onChange}
             autoComplete={'current-password'}
           />
           {type === 'register' && (
@@ -78,6 +89,8 @@ function AuthForm({ type }: AuthFormProps) {
               label={'Password 확인'}
               name={'passwordConfirm'}
               type={'password'}
+              value={passwordConfirm}
+              onChange={onChange}
             />
           )}
           <Button
@@ -86,6 +99,7 @@ function AuthForm({ type }: AuthFormProps) {
             variant={'contained'}
             color={'primary'}
             className={classes.submit}
+            onClick={onClick}
           >
             {type === 'login' ? '로그인' : '회원가입'}
           </Button>

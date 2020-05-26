@@ -10,5 +10,6 @@ export interface RegisterForm extends LoginForm {
 export interface AuthState {
   user: LoginForm;
   isLogin: boolean;
+  isError: boolean;
   error: Error;
 }

@@ -17,6 +17,7 @@ const initializeState: AuthState = {
     password: '',
   },
   isLogin: false,
+  isError: false,
   error: new Error(),
 };
 
@@ -24,29 +25,35 @@ export default createReducer<AuthState, AuthAction>(initializeState, {
   [LOGIN_ASYNC_REQUEST]: (state) =>
     produce(state, (draft) => {
       draft.isLogin = true;
+      draft.isError = false;
     }),
   [LOGIN_ASYNC_SUCCESS]: (state, action: AuthAction) =>
     produce(state, (draft) => {
       draft.user = action.payload as LoginForm;
       draft.isLogin = true;
+      draft.isError = false;
     }),
   [LOGIN_ASYNC_FAILURE]: (state, action: AuthAction) =>
     produce(state, (draft) => {
       draft.isLogin = false;
+      draft.isError = true;
       draft.error = action.payload as Error;
     }),
   [REGISTER_ASYNC_REQUEST]: (state) =>
     produce(state, (draft) => {
       draft.isLogin = false;
+      draft.isError = false;
     }),
   [REGISTER_ASYNC_SUCCESS]: (state, action: AuthAction) =>
     produce(state, (draft) => {
       draft.user = action.payload as LoginForm;
       draft.isLogin = true;
+      draft.isError = false;
     }),
   [REGISTER_ASYNC_FAILURE]: (state, action: AuthAction) =>
     produce(state, (draft) => {
-      draft.error = action.payload as Error;
       draft.isLogin = false;
+      draft.isError = false;
+      draft.error = action.payload as Error;
     }),
 });
