@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: theme.spacing(1),
   },
+  error: {
+    marginTop: theme.spacing(2),
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -36,12 +39,13 @@ interface AuthFormProps {
   email: string;
   password: string;
   passwordConfirm?: string;
+  isError: boolean;
   onChange: (e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function AuthForm({
-  type, email, password, passwordConfirm, onChange, onClick,
+  type, email, password, passwordConfirm, isError, onChange, onClick,
 }: AuthFormProps) {
   const classes = useStyles();
 
@@ -63,6 +67,7 @@ function AuthForm({
             name={'email'}
             autoComplete={'email'}
             value={email}
+            error={isError}
             onChange={onChange}
             autoFocus
           />
@@ -76,6 +81,7 @@ function AuthForm({
             name={'password'}
             type={'password'}
             value={password}
+            error={isError}
             onChange={onChange}
             autoComplete={'current-password'}
           />
@@ -90,6 +96,7 @@ function AuthForm({
               name={'passwordConfirm'}
               type={'password'}
               value={passwordConfirm}
+              error={isError}
               onChange={onChange}
             />
           )}

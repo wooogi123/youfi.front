@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useLoginAction } from '../hooks/auth';
+import { useAuthStore, useLoginAction } from '../hooks/auth';
 import AuthForm from '../components/auth/AuthForm';
 
 function LoginContainer() {
+  const store = useAuthStore();
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -20,6 +21,10 @@ function LoginContainer() {
   function onClick(e?: React.MouseEvent<HTMLButtonElement>) {
     e?.preventDefault();
     loginAction(login);
+    setLogin({
+      ...login,
+      password: '',
+    });
   }
 
   return (
@@ -27,6 +32,7 @@ function LoginContainer() {
       type={'login'}
       email={login.email}
       password={login.password}
+      isError={store.isError.login}
       onChange={onChange}
       onClick={onClick}
     />

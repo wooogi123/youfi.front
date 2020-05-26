@@ -8,6 +8,10 @@ function loginRequest(payload: LoginForm): LoginForm {
 }
 
 function registerRequest(payload: RegisterForm): LoginForm {
+  if (payload.password !== payload.passwordConfirm) {
+    throw new Error('not match password');
+  }
+
   return {
     email: payload.email,
     password: payload.password,

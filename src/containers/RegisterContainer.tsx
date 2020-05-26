@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useRegisterAction } from '../hooks/auth';
+import { useAuthStore, useRegisterAction } from '../hooks/auth';
 import AuthForm from '../components/auth/AuthForm';
 
 function RegisterContainer() {
+  const store = useAuthStore();
   const [register, setRegister] = useState({
     email: '',
     password: '',
@@ -21,6 +22,11 @@ function RegisterContainer() {
   function onClick(e?: React.MouseEvent<HTMLButtonElement>) {
     e?.preventDefault();
     registerAction(register);
+    setRegister({
+      email: '',
+      password: '',
+      passwordConfirm: '',
+    });
   }
 
   return (
@@ -29,6 +35,7 @@ function RegisterContainer() {
       email={register.email}
       password={register.password}
       passwordConfirm={register.passwordConfirm}
+      isError={store.isError.register}
       onChange={onChange}
       onClick={onClick}
     />

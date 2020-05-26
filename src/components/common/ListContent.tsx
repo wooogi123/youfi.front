@@ -23,9 +23,10 @@ const useStyles = makeStyles(() => ({
 
 interface ListContentProps {
   orientation: 'vertical' | 'horizontal';
+  isLogin: boolean;
 }
 
-function ListContent({ orientation }: ListContentProps) {
+function ListContent({ orientation, isLogin }: ListContentProps) {
   const classes = useStyles();
 
   return (
@@ -53,14 +54,25 @@ function ListContent({ orientation }: ListContentProps) {
           </ListItem>
         ))}
         <Divider orientation={orientation} />
-        <ListItem button component={RouterLink} to={'/auth/login'}>
-          <ListItemText
-            primary={'로그인'}
-            primaryTypographyProps={{
-              noWrap: true,
-            }}
-          />
-        </ListItem>
+        {!isLogin ? (
+          <ListItem button component={RouterLink} to={'/auth/login'}>
+            <ListItemText
+              primary={'로그인'}
+              primaryTypographyProps={{
+                noWrap: true,
+              }}
+            />
+          </ListItem>
+        ) : (
+          <ListItem button component={RouterLink} to={'/auth/logout'}>
+            <ListItemText
+              primary={'로그아웃'}
+              primaryTypographyProps={{
+                noWrap: true,
+              }}
+            />
+          </ListItem>
+        )}
       </List>
     </>
   );

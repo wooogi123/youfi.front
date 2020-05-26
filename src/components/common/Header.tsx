@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Hidden } from '@material-ui/core';
 import Appbar from './Appbar';
 import SideDrawer from './SideDrawer';
@@ -6,20 +6,27 @@ import { ServiceTitle } from './ResponsiveTitle';
 
 interface HeaderProps {
   title: ServiceTitle;
+  isOpen: boolean;
+  isLogin: boolean;
+  toggleDrawer: () => void;
 }
 
-function Header({ title }: HeaderProps) {
-  const [open, setOpen] = useState(false);
-
-  function toggleDrawer() {
-    setOpen(!open);
-  }
-
+function Header({
+  title, isOpen, isLogin, toggleDrawer,
+}: HeaderProps) {
   return (
     <>
-      <Appbar title={title} toggleDrawer={toggleDrawer} />
+      <Appbar
+        title={title}
+        isLogin={isLogin}
+        toggleDrawer={toggleDrawer}
+      />
       <Hidden lgUp>
-        <SideDrawer open={open} toggleDrawer={toggleDrawer} />
+        <SideDrawer
+          open={isOpen}
+          isLogin={isLogin}
+          toggleDrawer={toggleDrawer}
+        />
       </Hidden>
     </>
   );

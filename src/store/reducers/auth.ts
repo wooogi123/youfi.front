@@ -1,6 +1,6 @@
 import { createReducer } from 'typesafe-actions';
 import produce from 'immer';
-import { LoginForm, AuthState } from '../types/auth';
+import { LoginForm, AuthError, AuthState } from '../types/auth';
 import {
   LOGIN_ASYNC_REQUEST,
   LOGIN_ASYNC_SUCCESS,
@@ -11,49 +11,58 @@ import {
   AuthAction,
 } from '../actions/auth';
 
-const initializeState: AuthState = {
-  user: {
-    email: '',
-    password: '',
-  },
-  isLogin: false,
-  isError: false,
-  error: new Error(),
+const initUser: LoginForm = {
+  email: '',
+  password: '',
 };
 
-export default createReducer<AuthState, AuthAction>(initializeState, {
+const initError: AuthError = {
+  login: false,
+  register: false,
+};
+
+const initState: AuthState = {
+  user: initUser,
+  isLogin: false,
+  isError: initError,
+  errorMsg: '',
+};
+
+export default createReducer<AuthState, AuthAction>(initState, {
   [LOGIN_ASYNC_REQUEST]: (state) =>
     produce(state, (draft) => {
-      draft.isLogin = true;
-      draft.isError = false;
+      draft.isLogin = false;
+      draft.isError.login = false;
     }),
   [LOGIN_ASYNC_SUCCESS]: (state, action: AuthAction) =>
     produce(state, (draft) => {
       draft.user = action.payload as LoginForm;
       draft.isLogin = true;
-      draft.isError = false;
+      draft.isError.login = false;
     }),
   [LOGIN_ASYNC_FAILURE]: (state, action: AuthAction) =>
     produce(state, (draft) => {
+      draft.user.password = '';
       draft.isLogin = false;
-      draft.isError = true;
-      draft.error = action.payload as Error;
+      draft.isError.login = true;
+      draft.errorMsg = (action.payload as Error).message;
     }),
   [REGISTER_ASYNC_REQUEST]: (state) =>
     produce(state, (draft) => {
       draft.isLogin = false;
-      draft.isError = false;
+      draft.isError.register = false;
     }),
   [REGISTER_ASYNC_SUCCESS]: (state, action: AuthAction) =>
     produce(state, (draft) => {
       draft.user = action.payload as LoginForm;
       draft.isLogin = true;
-      draft.isError = false;
+      draft.isError.register = false;
     }),
   [REGISTER_ASYNC_FAILURE]: (state, action: AuthAction) =>
     produce(state, (draft) => {
+      draft.user.password = '';
       draft.isLogin = false;
-      draft.isError = false;
-      draft.error = action.payload as Error;
+      draft.isError.register = true;
+      draft.errorMsg = (action.payload as Error).message;
     }),
 });

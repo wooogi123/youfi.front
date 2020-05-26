@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Header, ServiceTitle } from '../common';
+import { ServiceTitle } from '../common';
+import HeaderContainer from '../../containers/HeaderContainer';
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -19,7 +20,7 @@ function Template({ children, title }: serviceTemplateProps) {
 
   return (
     <>
-      <Header title={title} />
+      <HeaderContainer title={title} />
       <div className={classes.appBarSpacer}></div>
       <div>
         {children}

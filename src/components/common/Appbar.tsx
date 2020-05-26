@@ -72,10 +72,11 @@ const useStyles = makeStyles((theme) => ({
 
 interface AppbarProps {
   title: ServiceTitle;
+  isLogin: boolean;
   toggleDrawer: () => void;
 }
 
-function Appbar({ title, toggleDrawer }: AppbarProps) {
+function Appbar({ title, isLogin, toggleDrawer }: AppbarProps) {
   const classes = useStyles();
 
   return (
@@ -96,7 +97,10 @@ function Appbar({ title, toggleDrawer }: AppbarProps) {
           />
         </div>
         <Hidden mdDown>
-          <ListContent orientation={'horizontal'} />
+          <ListContent
+            orientation={'horizontal'}
+            isLogin={isLogin}
+          />
         </Hidden>
         <Hidden lgUp>
           <IconButton

@@ -7,9 +7,14 @@ export interface RegisterForm extends LoginForm {
   passwordConfirm: string;
 }
 
+export interface AuthError {
+  login: boolean;
+  register: boolean;
+}
+
 export interface AuthState {
   user: LoginForm;
   isLogin: boolean;
-  isError: boolean;
-  error: Error;
+  isError: AuthError;
+  errorMsg: string;
 }

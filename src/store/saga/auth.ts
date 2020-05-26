@@ -13,8 +13,8 @@ function* loginAsync(action: AuthAction) {
   try {
     const resp: LoginForm = yield call(loginRequest, action.payload as LoginForm);
     yield put(loginAction.success(resp));
-  } catch (e) {
-    yield put(loginAction.failure(e));
+  } catch (err) {
+    yield put(loginAction.failure(err));
   }
 }
 
@@ -22,8 +22,8 @@ function* registerAsync(action: AuthAction) {
   try {
     const resp: LoginForm = yield call(registerRequest, action.payload as RegisterForm);
     yield put(registerAction.success(resp));
-  } catch (e) {
-    yield put(registerAction.failure(e));
+  } catch (err) {
+    yield put(registerAction.failure(err));
   }
 }
 
