@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer, { rootSaga } from './store';
+import rootReducer, { rootSaga, dictionaryAction } from './store';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
@@ -19,6 +19,8 @@ const store = createStore(rootReducer, /* preloadedState, */ composeEnhancer(
   applyMiddleware(sagaMiddleware),
 ));
 sagaMiddleware.run(rootSaga);
+
+store.dispatch(dictionaryAction.request('/dictionary.json'));
 
 ReactDOM.render(
   <Provider store={store}>

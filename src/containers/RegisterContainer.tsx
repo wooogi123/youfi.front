@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthStore, useRegisterAction } from '../hooks/auth';
+import { useAuthStore, useRegisterAction } from '../hooks';
 import AuthForm from '../components/auth/AuthForm';
 
 function RegisterContainer() {

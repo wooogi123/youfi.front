@@ -13,6 +13,7 @@
   "extends": ["react-app", "airbnb-typescript"],
   "rules": {
     "implicit-arrow-linebreak": "off",
+    "operator-linebreak": ["error", "after"],
     "no-param-reassign": ["error", { "props": false }],
     "jsx-quotes": ["error", "prefer-single"],
     "react/jsx-curly-brace-presence": ["error", { "props": "always", "children": "never" }],

@@ -1,11 +1,9 @@
 import React from 'react';
-import Template from '../../components/service/Template';
+import DictContainer from '../../containers/DictContainer';
 
 function DictPage() {
   return (
-    <Template title={'금융 사전'}>
-      DictPage
-    </Template>
+    <DictContainer />
   );
 }
 

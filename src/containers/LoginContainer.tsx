@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthStore, useLoginAction } from '../hooks/auth';
+import { useAuthStore, useLoginAction } from '../hooks';
 import AuthForm from '../components/auth/AuthForm';
 
 function LoginContainer() {

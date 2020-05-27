@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthStore } from '../hooks/auth';
+import { useAuthStore } from '../hooks';
 import { ServiceTitle, Header } from '../components/common';
 
 interface HeaderContainerProps {
