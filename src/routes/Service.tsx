@@ -1,10 +1,12 @@
 import React from 'react';
 import { Switch, Route, RouteComponentProps } from 'react-router-dom';
-import DictPage from '../pages/DictPage';
-import InvestPage from '../pages/InvestPage';
-import LoanPage from '../pages/LoanPage';
-import RecommendPage from '../pages/RecommendPage';
-import StorePage from '../pages/StorePage';
+import {
+  DictPage,
+  InvestPage,
+  LoanPage,
+  RecommendPage,
+  StorePage,
+} from '../pages';
 
 function Service({ match }: RouteComponentProps) {
   return (

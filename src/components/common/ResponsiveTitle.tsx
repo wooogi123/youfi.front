@@ -13,25 +13,25 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface iServices {
-  [key: string]: string;
-}
+export type ServiceTitle = 'You-Fi' | '저축' | '대출' | '투자' | '맞춤 금융상품' | '금융 사전' | '';
 
-const services: iServices = {
-  'You-FI': '/',
+const services: Record<ServiceTitle, string> = {
+  'You-Fi': '/',
   저축: '/service/store',
   대출: '/service/loan',
   투자: '/service/invest',
   '맞춤 금융상품': '/service/recommend',
   '금융 사전': '/service/dict',
+  '': '/',
 };
 
-interface rTitleProps {
-  title: 'You-Fi' | '저축' | '대출' | '투자' | '맞춤 금융상품' | '금융 사전' | '';
+interface ResponsiveTitleProps {
+  title: ServiceTitle;
 }
 
-function ResponsiveTitle({ title }: rTitleProps) {
+function ResponsiveTitle({ title }: ResponsiveTitleProps) {
   const classes = useStyles();
+
   return (
     <Typography
       component={'h1'}

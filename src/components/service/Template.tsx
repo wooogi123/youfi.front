@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import Header from '../common/Header';
+import { ServiceTitle } from '../common';
+import HeaderContainer from '../../containers/HeaderContainer';
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface serviceTemplateProps {
   children: React.ReactNode;
-  title: 'You-Fi' | '저축' | '대출' | '투자' | '맞춤 금융상품' | '금융 사전';
+  title: ServiceTitle;
 }
 
 function Template({ children, title }: serviceTemplateProps) {
@@ -19,7 +20,7 @@ function Template({ children, title }: serviceTemplateProps) {
 
   return (
     <>
-      <Header title={title} />
+      <HeaderContainer title={title} />
       <div className={classes.appBarSpacer}></div>
       <div>
         {children}
