@@ -1,5 +1,5 @@
 import React from 'react';
-import Template from '../components/service/Template';
+import Template from '../../components/service/Template';
 
 function RecommendPage() {
   return (

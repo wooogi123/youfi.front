@@ -1,9 +1,9 @@
 import React from 'react';
-import AuthForm from '../components/auth/AuthForm';
+import LoginContainer from '../../containers/LoginContainer';
 
 function LoginPage() {
   return (
-    <AuthForm type={'login'} />
+    <LoginContainer />
   );
 }
 

@@ -11,7 +11,7 @@ import {
   makeStyles,
   Container,
 } from '@material-ui/core';
-import Copyright from '../common/Copyright';
+import { Copyright } from '../common';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,16 +24,29 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: theme.spacing(1),
   },
+  error: {
+    marginTop: theme.spacing(2),
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
 
+export type AuthType = 'login' | 'register';
+
 interface AuthFormProps {
-  type: string;
+  type: AuthType;
+  email: string;
+  password: string;
+  passwordConfirm?: string;
+  isError: boolean;
+  onChange: (e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function AuthForm({ type }: AuthFormProps) {
+function AuthForm({
+  type, email, password, passwordConfirm, isError, onChange, onClick,
+}: AuthFormProps) {
   const classes = useStyles();
 
   return (
@@ -53,6 +66,9 @@ function AuthForm({ type }: AuthFormProps) {
             label={'Email Address'}
             name={'email'}
             autoComplete={'email'}
+            value={email}
+            error={isError}
+            onChange={onChange}
             autoFocus
           />
           <TextField
@@ -64,6 +80,9 @@ function AuthForm({ type }: AuthFormProps) {
             label={'Password'}
             name={'password'}
             type={'password'}
+            value={password}
+            error={isError}
+            onChange={onChange}
             autoComplete={'current-password'}
           />
           {type === 'register' && (
@@ -76,6 +95,9 @@ function AuthForm({ type }: AuthFormProps) {
               label={'Password 확인'}
               name={'passwordConfirm'}
               type={'password'}
+              value={passwordConfirm}
+              error={isError}
+              onChange={onChange}
             />
           )}
           <Button
@@ -84,6 +106,7 @@ function AuthForm({ type }: AuthFormProps) {
             variant={'contained'}
             color={'primary'}
             className={classes.submit}
+            onClick={onClick}
           >
             {type === 'login' ? '로그인' : '회원가입'}
           </Button>

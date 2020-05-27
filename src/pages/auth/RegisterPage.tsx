@@ -1,9 +1,9 @@
 import React from 'react';
-import AuthForm from '../components/auth/AuthForm';
+import RegisterContainer from '../../containers/RegisterContainer';
 
 function RegisterPage() {
   return (
-    <AuthForm type={'register'} />
+    <RegisterContainer />
   );
 }
 
