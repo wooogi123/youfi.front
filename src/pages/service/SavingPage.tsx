@@ -1,12 +1,12 @@
 import React from 'react';
 import Template from '../../components/service/Template';
 
-function StorePage() {
+function SavingPage() {
   return (
-    <Template title={'저축'} isSearch={false}>
-      StorePage
+    <Template title={'적금'} isSearch={false}>
+      SavingPage
     </Template>
   );
 }
 
-export default StorePage;
+export default SavingPage;

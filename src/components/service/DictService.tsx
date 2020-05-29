@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Template from './Template';
 import { DictionaryContent } from '../../store';
-import { ContentCard, SearchProps } from '../common';
+import { DictionaryCard, SearchProps } from '../common';
 
 const useStyles = makeStyles({
   root: {
@@ -30,7 +30,7 @@ function DictService({
     >
       <div className={classes.root}>
         {contents.map((dict: DictionaryContent) => (
-          <ContentCard
+          <DictionaryCard
             category={dict.category}
             title={dict.title}
             keywords={dict.keywords}
