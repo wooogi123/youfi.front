@@ -1,6 +1,10 @@
 import { createReducer } from 'typesafe-actions';
 import produce from 'immer';
-import { DepositResponse, DepositState } from '../types/deposit';
+import {
+  DepositResponse,
+  DepositResult,
+  DepositState,
+} from '../types/deposit';
 import {
   DEPOSIT_ASYNC_REQUEST,
   DEPOSIT_ASYNC_SUCCESS,
@@ -8,13 +12,14 @@ import {
   DepositAction,
 } from '../actions/deposit';
 
-const initContent: DepositResponse = {
-  results: [],
-  totalPage: '1',
+const initResult: DepositResult = {
+  status: [],
+  products: [],
+  options: [],
 };
 
 const initState: DepositState = {
-  contents: initContent,
+  contents: initResult,
   isError: false,
 };
 
@@ -26,11 +31,11 @@ export default createReducer<DepositState, DepositAction>(initState, {
   [DEPOSIT_ASYNC_SUCCESS]: (state, action: DepositAction) =>
     produce(state, (draft) => {
       draft.isError = false;
-      draft.contents = action.payload as DepositResponse;
+      draft.contents = (action.payload as DepositResponse).results;
     }),
   [DEPOSIT_ASYNC_FAILURE]: (state) =>
     produce(state, (draft) => {
       draft.isError = true;
-      draft.contents = initContent;
+      draft.contents = initResult;
     }),
 });

@@ -12,7 +12,9 @@ function DepositContainer() {
 
   return (
     <DepositService
-      contents={store.contents.results.filter((el) => (el.base.kor_co_nm.indexOf(search) !== -1))}
+      products={store.contents.products.filter((el) =>
+        (el.financialCompanyName.indexOf(search) !== -1))}
+      options={store.contents.options}
       isSearch
       search={search}
       onChangeSearch={onChange}
