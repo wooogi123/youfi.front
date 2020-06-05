@@ -1,14 +1,13 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { DepositRequest, DepositResponse } from '../types/deposit';
+import { DepositResponse } from '../types/deposit';
 import {
-  depositAction, DepositAction, DEPOSIT_ASYNC_REQUEST,
+  depositAction, DEPOSIT_ASYNC_REQUEST,
 } from '../actions/deposit';
 import fetchDeposit from '../api/deposit';
 
-function* fetchDepositAsync(action: DepositAction) {
+function* fetchDepositAsync() {
   try {
-    const resp: DepositResponse =
-      yield call(fetchDeposit, action.payload as DepositRequest);
+    const resp: DepositResponse = yield call(fetchDeposit);
     yield put(depositAction.success(resp));
   } catch (err) {
     yield put(depositAction.failure(err));

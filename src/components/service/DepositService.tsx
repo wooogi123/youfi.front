@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Template from './Template';
 import { SearchProps, DepositCard } from '../common';
+import { Base, Option } from '../../store';
 
 const useStyles = makeStyles({
   root: {
@@ -11,14 +12,10 @@ const useStyles = makeStyles({
   },
 });
 
-interface Response {
-  [key: string]: string;
-}
-
 
 interface DepositServiceProps extends SearchProps {
-  products: Response[];
-  options: Response[];
+  products: Base[];
+  options: Option[];
 }
 
 function DepositService({
@@ -38,7 +35,7 @@ function DepositService({
       onChangeSearch={onChangeSearch}
     >
       <div className={classes.root}>
-        {products.map((product: Response) => (
+        {products.map((product: Base) => (
           <DepositCard
             bankName={product.financialCompanyName}
             title={product.financialProductName}
@@ -50,7 +47,7 @@ function DepositService({
             maxLimit={product.maxLimit}
             startDate={product.disclosureStartDay}
             endDate={product.disclosureEndDay}
-            options={options.filter((option: Response) =>
+            options={options.filter((option: Option) =>
               (option.financialProductCode === product.financialProductCode))}
             key={product.financialProductName}
           />

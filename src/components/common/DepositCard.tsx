@@ -29,10 +29,10 @@ interface DepositCardProps {
   maturityAfterInterest: string;
   special: string;
   joinMember: string;
-  comment: string;
-  maxLimit?: string;
-  startDate: string;
-  endDate?: string;
+  comment?: string;
+  maxLimit?: number;
+  startDate: Date;
+  endDate?: Date;
   options?: Option[];
 }
 
@@ -107,7 +107,7 @@ function DepositCard({
             {el}
           </Typography>
         ))}
-        {comment.split('\n').map((el, idx) => (
+        {comment && comment.split('\n').map((el, idx) => (
           <Typography
             className={classes.subMargin}
             variant={'subtitle2'}

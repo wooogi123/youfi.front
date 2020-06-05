@@ -1,20 +1,43 @@
 interface Response {
-  [key: string]: string;
+  id: number;
+  disclosureMonth: Date;
+  financialCompanyCode: string;
+  financialProductCode: string;
 }
 
-export interface Status extends Response {}
-export interface Base extends Response {}
-export interface Option extends Response {}
+export interface Status {
+  topFinancialGroupCode: string;
+  totalCount: number;
+  maxPageNumber: number;
+}
+
+export interface Base extends Response {
+  financialCompanyName: string;
+  financialProductName: string;
+  joinWay: string;
+  joinDeny: string;
+  joinMember: string;
+  maturityAfterInterest: string;
+  specialCondition: string;
+  comment?: string;
+  maxLimit?: number;
+  disclosureStartDay: Date;
+  disclosureEndDay?: Date;
+  financialCompanySubmitDay: Date;
+}
+
+export interface Option extends Response {
+  interestRateType: string;
+  interestRateTypeName: string;
+  saveTerm: string;
+  interestRate: number;
+  interestRate2: number;
+}
 
 export interface Deposit<S, T, U> {
   status: S[];
   products: T[];
   options: U[];
-}
-
-export interface DepositRequest {
-  topFinGrpNo: string;
-  pageNo: string;
 }
 
 export interface DepositResult extends Deposit<Status, Base, Option> {}

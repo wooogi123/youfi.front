@@ -8,7 +8,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 store.dispatch(dictionaryAction.request('/dictionary.json'));
-store.dispatch(depositAction.request({ topFinGrpNo: '020000', pageNo: '1' }));
+store.dispatch(depositAction.request());
 
 ReactDOM.render(
   <Provider store={store}>

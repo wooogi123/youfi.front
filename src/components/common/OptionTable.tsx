@@ -46,11 +46,11 @@ function OptionTable({ options }: OptionTableProps) {
         </TableHead>
         <TableBody>
           {options.map((el) => (
-            <TableRow key={el.save_trm + el.intr_rate}>
-              <TableCell>{el.intr_rate_type_nm}</TableCell>
-              <TableCell>{el.save_trm}</TableCell>
-              <TableCell>{el.intr_rate}</TableCell>
-              <TableCell>{el.intr_rate2}</TableCell>
+            <TableRow key={el.id}>
+              <TableCell>{el.interestRateTypeName}</TableCell>
+              <TableCell>{el.saveTerm}</TableCell>
+              <TableCell>{(el.interestRate as number) / 100}</TableCell>
+              <TableCell>{(el.interestRate2 as number) / 100}</TableCell>
             </TableRow>
           ))}
         </TableBody>
