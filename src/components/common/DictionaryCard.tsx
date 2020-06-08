@@ -6,7 +6,7 @@ import {
 const useStyles = makeStyles({
   root: {
     marginTop: '2rem',
-    maxWidth: '75%',
+    width: '75%',
     minWidth: 300,
   },
   subMargin: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface ContentCard {
+interface DictionaryCardProps {
   category: string;
   title: string;
   keywords: string[];
@@ -22,9 +22,9 @@ interface ContentCard {
   detail: string;
 }
 
-function ContentCard({
+function DictionaryCard({
   category, title, keywords, summary, detail,
-}: ContentCard) {
+}: DictionaryCardProps) {
   const classes = useStyles();
 
   return (
@@ -38,7 +38,11 @@ function ContentCard({
         >
           {category}
         </Typography>
-        <Typography variant={'h5'} component={'h2'} gutterBottom>
+        <Typography
+          variant={'h5'}
+          component={'h2'}
+          gutterBottom
+        >
           {title}
         </Typography>
         <Typography
@@ -65,4 +69,4 @@ function ContentCard({
   );
 }
 
-export default ContentCard;
+export default DictionaryCard;

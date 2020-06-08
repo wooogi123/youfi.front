@@ -33,9 +33,9 @@ function ListContent({ orientation, isLogin }: ListContentProps) {
     <>
       <List component={'nav'} className={clsx(classes.root, classes[orientation])}>
         {[
-          { name: '저축', href: '/service/store' },
+          { name: '예금', href: '/service/deposit' },
+          { name: '적금', href: '/service/saving' },
           { name: '대출', href: '/service/loan' },
-          { name: '투자', href: '/service/invest' },
           { name: '맞춤 금융상품', href: '/service/recommend' },
           { name: '금융 사전', href: '/service/dict' },
         ].map(({ name, href }) => (

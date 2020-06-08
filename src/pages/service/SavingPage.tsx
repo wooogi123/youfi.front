@@ -1,12 +1,12 @@
 import React from 'react';
 import Template from '../../components/service/Template';
 
-function InvestPage() {
+function SavingPage() {
   return (
-    <Template title={'투자'}>
-      InvestPage
+    <Template title={'적금'} isSearch={false}>
+      SavingPage
     </Template>
   );
 }
 
-export default InvestPage;
+export default SavingPage;

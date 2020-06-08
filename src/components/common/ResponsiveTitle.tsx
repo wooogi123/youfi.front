@@ -13,13 +13,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export type ServiceTitle = 'You-Fi' | '저축' | '대출' | '투자' | '맞춤 금융상품' | '금융 사전' | '';
+export type ServiceTitle = 'You-Fi' | '예금' | '적금' | '대출' | '맞춤 금융상품' | '금융 사전' | '';
 
 const services: Record<ServiceTitle, string> = {
   'You-Fi': '/',
-  저축: '/service/store',
+  예금: '/service/deposit',
+  적금: '/service/saving',
   대출: '/service/loan',
-  투자: '/service/invest',
   '맞춤 금융상품': '/service/recommend',
   '금융 사전': '/service/dict',
   '': '/',
