@@ -12,6 +12,8 @@ import dictionary from './reducers/dictionary';
 import dictionarySaga from './saga/dictionary';
 import deposit from './reducers/deposit';
 import depositSaga from './saga/deposit';
+import saving from './reducers/saving';
+import savingSaga from './saga/saving';
 
 declare global {
   interface Window {
@@ -23,6 +25,7 @@ const rootReducer = combineReducers({
   auth,
   dictionary,
   deposit,
+  saving,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -32,6 +35,7 @@ function* rootSaga() {
     authSaga(),
     dictionarySaga(),
     depositSaga(),
+    savingSaga(),
   ]);
 }
 
@@ -49,3 +53,4 @@ export * from './actions/dictionary';
 export * from './types/dictionary';
 export * from './actions/deposit';
 export * from './types/deposit';
+export * from './actions/saving';
