@@ -84,7 +84,7 @@ function Appbar({
   const classes = useStyles();
 
   return (
-    <AppBar position={'absolute'} className={classes.appBar}>
+    <AppBar position={'fixed'} className={classes.appBar}>
       <Toolbar>
         <ResponsiveTitle title={title} />
         { isSearch && (
