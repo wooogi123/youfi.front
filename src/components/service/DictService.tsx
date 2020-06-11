@@ -1,14 +1,27 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import {
+  makeStyles,
+  Card,
+  CardContent,
+  Typography,
+} from '@material-ui/core';
 import Template from './Template';
 import { DictionaryContent } from '../../store';
-import { DictionaryCard, SearchProps } from '../common';
+import { SearchProps } from '../common';
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  card: {
+    marginTop: '2rem',
+    width: '75%',
+    minWidth: 300,
+  },
+  subMargin: {
+    marginBottom: '0.5rem',
   },
 });
 
@@ -30,14 +43,44 @@ function DictService({
     >
       <div className={classes.root}>
         {contents.map((dict: DictionaryContent) => (
-          <DictionaryCard
-            category={dict.category}
-            title={dict.title}
-            keywords={dict.keywords}
-            summary={dict.summary}
-            detail={dict.detail}
-            key={dict.title}
-          />
+          <Card className={classes.card} variant={'outlined'}>
+            <CardContent>
+              <Typography
+                className={classes.subMargin}
+                variant={'subtitle2'}
+                color={'textSecondary'}
+                gutterBottom
+              >
+                {dict.category}
+              </Typography>
+              <Typography
+                variant={'h5'}
+                component={'h2'}
+                gutterBottom
+              >
+                {dict.title}
+              </Typography>
+              <Typography
+                className={classes.subMargin}
+                variant={'subtitle2'}
+                color={'textSecondary'}
+                gutterBottom
+              >
+                {dict.keywords.join(', ')}
+              </Typography>
+              <Typography
+                className={classes.subMargin}
+                variant={'subtitle2'}
+                component={'p'}
+                gutterBottom
+              >
+                {dict.summary}
+              </Typography>
+              <Typography variant={'body2'} component={'p'}>
+                {dict.detail}
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </Template>

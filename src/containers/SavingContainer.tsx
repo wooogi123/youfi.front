@@ -9,7 +9,6 @@ function DepositContainer() {
   function onChange(e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (e !== undefined) setSearch(e.currentTarget.value);
   }
-  console.log(store);
 
   return (
     <SavingService

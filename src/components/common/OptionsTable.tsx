@@ -25,9 +25,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+interface OptionContent {
+  id: number;
+  data: {
+    key: string;
+    content: (string | number);
+  }[];
+}
+
 interface OptionsTableProps {
   heads: string[];
-  contents: (string | number)[][];
+  contents: OptionContent[];
 }
 
 function OptionsTable({ heads, contents }: OptionsTableProps) {
@@ -39,15 +47,15 @@ function OptionsTable({ heads, contents }: OptionsTableProps) {
         <TableHead>
           <TableRow>
             {heads.map((el) => (
-              <TableCell>{el}</TableCell>
+              <TableCell key={el}>{el}</TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {contents.map((content) => (
-            <TableRow>
-              {content.map((el) => (
-                <TableCell>{el}</TableCell>
+            <TableRow key={content.id}>
+              {content.data.map((el) => (
+                <TableCell key={el.key}>{el}</TableCell>
               ))}
             </TableRow>
           ))}

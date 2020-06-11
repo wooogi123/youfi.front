@@ -29,7 +29,7 @@ export interface Base extends Response {
 export interface Option extends Response {
   interestRateType: string;
   interestRateTypeName: string;
-  saveTerm: string;
+  saveTerm: number;
   interestRate: number;
   interestRate2: number;
   savingType: string;
