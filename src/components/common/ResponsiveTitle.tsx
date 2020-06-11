@@ -6,14 +6,13 @@ import {
   makeStyles,
   Hidden,
 } from '@material-ui/core';
+import { ServiceTitle } from './types';
 
 const useStyles = makeStyles(() => ({
   title: {
     flexGrow: 1,
   },
 }));
-
-export type ServiceTitle = 'You-Fi' | '예금' | '적금' | '대출' | '맞춤 금융상품' | '금융 사전' | '';
 
 const services: Record<ServiceTitle, string> = {
   'You-Fi': '/',

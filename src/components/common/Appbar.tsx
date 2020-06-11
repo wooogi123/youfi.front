@@ -11,8 +11,8 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ListContent from './ListContent';
-import ResponsiveTitle, { ServiceTitle } from './ResponsiveTitle';
-import { SearchProps } from './types';
+import ResponsiveTitle from './ResponsiveTitle';
+import { SearchProps, ServiceTitle } from './types';
 
 const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
@@ -79,7 +79,12 @@ interface AppbarProps extends SearchProps {
 }
 
 function Appbar({
-  title, isLogin, isSearch, search, toggleDrawer, onChangeSearch,
+  title,
+  isLogin,
+  isSearch,
+  search,
+  toggleDrawer,
+  onChangeSearch,
 }: AppbarProps) {
   const classes = useStyles();
 
@@ -87,7 +92,7 @@ function Appbar({
     <AppBar position={'fixed'} className={classes.appBar}>
       <Toolbar>
         <ResponsiveTitle title={title} />
-        { isSearch && (
+        {isSearch && (
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

@@ -4,13 +4,13 @@ import {
   SavingResponse,
   SavingResult,
   SavingState,
-} from '../types/saving';
+} from '../types';
 import {
   SAVING_ASYNC_REQUEST,
   SAVING_ASYNC_SUCCESS,
   SAVING_ASYNC_FAILURE,
   SavingAction,
-} from '../actions/saving';
+} from '../actions';
 
 const initResult: SavingResult = {
   status: [],

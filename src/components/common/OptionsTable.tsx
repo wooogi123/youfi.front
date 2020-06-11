@@ -25,12 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+interface Content {
+  key: string;
+  content: string | number;
+}
+
 interface OptionContent {
-  id: number;
-  data: {
-    key: string;
-    content: (string | number);
-  }[];
+  contentId: number;
+  data: Content[];
 }
 
 interface OptionsTableProps {
@@ -46,16 +48,16 @@ function OptionsTable({ heads, contents }: OptionsTableProps) {
       <Table className={classes.table} size={'small'}>
         <TableHead>
           <TableRow>
-            {heads.map((el) => (
+            {heads.map((el: string) => (
               <TableCell key={el}>{el}</TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {contents.map((content) => (
-            <TableRow key={content.id}>
-              {content.data.map((el) => (
-                <TableCell key={el.key}>{el}</TableCell>
+          {contents.map(({ contentId, data }: OptionContent) => (
+            <TableRow key={contentId}>
+              {data.map(({ key, content }: Content) => (
+                <TableCell key={key}>{content}</TableCell>
               ))}
             </TableRow>
           ))}

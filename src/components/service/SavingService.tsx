@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import Template from './Template';
 import { SearchProps, OptionsTable } from '../common';
-import { Base, Option } from '../../store/types/saving';
+import { SavingProduct, SavingOption } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 interface SavingServiceProps extends SearchProps {
-  products: Base[];
-  options: Option[];
+  products: SavingProduct[];
+  options: SavingOption[];
 }
 
 function SavingService({
@@ -51,8 +51,12 @@ function SavingService({
       onChangeSearch={onChangeSearch}
     >
       <div className={classes.root}>
-        {products.map((product: Base) => (
-          <Card className={classes.card} variant={'outlined'} key={product.financialProductCode}>
+        {products.map((product: SavingProduct) => (
+          <Card
+            className={classes.card}
+            variant={'outlined'}
+            key={product.financialProductCode}
+          >
             <CardContent>
               <Typography
                 className={classes.subMargin}
@@ -85,39 +89,45 @@ function SavingService({
               >
                 {product.joinMember}
               </Typography>
-              {product.maturityAfterInterest.split('\n').map((el) => (
-                <Typography
-                  className={classes.subMargin}
-                  variant={'subtitle2'}
-                  component={'p'}
-                  gutterBottom
-                  key={el}
-                >
-                  {el}
-                </Typography>
-              ))}
-              {product.specialCondition.split('\n').map((el) => (
-                <Typography
-                  className={classes.subMargin}
-                  variant={'subtitle2'}
-                  component={'p'}
-                  gutterBottom
-                  key={el}
-                >
-                  {el}
-                </Typography>
-              ))}
-              {product.comment && product.comment.split('\n').map((el) => (
-                <Typography
-                  className={classes.subMargin}
-                  variant={'subtitle2'}
-                  component={'p'}
-                  gutterBottom
-                  key={el}
-                >
-                  {el}
-                </Typography>
-              ))}
+              {product.maturityAfterInterest
+                .split('\n')
+                .map((el: string) => (
+                  <Typography
+                    className={classes.subMargin}
+                    variant={'subtitle2'}
+                    component={'p'}
+                    gutterBottom
+                    key={el}
+                  >
+                    {el}
+                  </Typography>
+                ))}
+              {product.specialCondition
+                .split('\n')
+                .map((el: string) => (
+                  <Typography
+                    className={classes.subMargin}
+                    variant={'subtitle2'}
+                    component={'p'}
+                    gutterBottom
+                    key={el}
+                  >
+                    {el}
+                  </Typography>
+                ))}
+              {product.comment && product.comment
+                .split('\n')
+                .map((el: string) => (
+                  <Typography
+                    className={classes.subMargin}
+                    variant={'subtitle2'}
+                    component={'p'}
+                    gutterBottom
+                    key={el}
+                  >
+                    {el}
+                  </Typography>
+                ))}
               {product.maxLimit && (
                 <Typography
                   className={classes.subMargin}
@@ -136,22 +146,23 @@ function SavingService({
                     '저축 금리 (소수점 두자리)',
                     '최고 우대금리 (소수점 두자리)',
                   ]}
-                  contents={options.filter((option) => (
-                    option.financialProductCode === product.financialProductCode
-                  )).sort((f, s) => {
-                    if (f.savingType === s.savingType) return f.saveTerm - s.saveTerm;
-                    if (f.savingType === 'F') return -1;
-                    return 1;
-                  }).map((el) => ({
-                    id: el.id,
-                    data: [
-                      { key: `${el.id}-1`, content: el.interestRateTypeName },
-                      { key: `${el.id}-2`, content: el.savingTypeName },
-                      { key: `${el.id}-3`, content: el.saveTerm },
-                      { key: `${el.id}-4`, content: el.interestRate / 100 },
-                      { key: `${el.id}-5`, content: el.interestRate2 / 100 },
-                    ],
-                  }))}
+                  contents={options.filter((option: SavingOption) =>
+                    (option.financialProductCode === product.financialProductCode))
+                    .sort((f, s) => {
+                      if (f.savingType === s.savingType) return f.saveTerm - s.saveTerm;
+                      if (f.savingType === 'F') return -1;
+                      return 1;
+                    })
+                    .map((el) => ({
+                      contentId: el.id,
+                      data: [
+                        { key: `${el.id}-1`, content: el.interestRateTypeName },
+                        { key: `${el.id}-2`, content: el.savingTypeName },
+                        { key: `${el.id}-3`, content: el.saveTerm },
+                        { key: `${el.id}-4`, content: el.interestRate / 100 },
+                        { key: `${el.id}-5`, content: el.interestRate2 / 100 },
+                      ],
+                    }))}
                   key={product.financialProductCode}
                 />
               )}

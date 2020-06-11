@@ -1,12 +1,12 @@
 import { createReducer } from 'typesafe-actions';
 import produce from 'immer';
-import { DictionaryContent, DictionaryState } from '../types/dictionary';
+import { DictionaryContent, DictionaryState } from '../types';
 import {
   DICTIONARY_ASYNC_REQUEST,
   DICTIONARY_ASYNC_SUCCESS,
   DICTIONARY_ASYNC_FAILURE,
   DictionaryAction,
-} from '../actions/dictionary';
+} from '../actions';
 
 const initContent: DictionaryContent = {
   category: '',

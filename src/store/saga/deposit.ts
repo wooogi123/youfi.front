@@ -1,9 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { DepositResponse } from '../types/deposit';
+import { DepositResponse } from '../types';
 import {
   depositAction, DEPOSIT_ASYNC_REQUEST,
-} from '../actions/deposit';
-import fetchDeposit from '../api/deposit';
+} from '../actions';
+import { fetchDeposit } from '../api';
 
 function* fetchDepositAsync() {
   try {

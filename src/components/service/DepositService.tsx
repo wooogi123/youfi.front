@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import Template from './Template';
 import { SearchProps, OptionsTable } from '../common';
-import { Base, Option } from '../../store';
+import { DepositProduct, DepositOption } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 interface DepositServiceProps extends SearchProps {
-  products: Base[];
-  options: Option[];
+  products: DepositProduct[];
+  options: DepositOption[];
 }
 
 function DepositService({
@@ -51,8 +51,12 @@ function DepositService({
       onChangeSearch={onChangeSearch}
     >
       <div className={classes.root}>
-        {products.map((product: Base) => (
-          <Card className={classes.card} variant={'outlined'} key={product.financialProductCode}>
+        {products.map((product: DepositProduct) => (
+          <Card
+            className={classes.card}
+            variant={'outlined'}
+            key={product.financialProductCode}
+          >
             <CardContent>
               <Typography
                 className={classes.subMargin}
@@ -85,39 +89,45 @@ function DepositService({
               >
                 {product.joinMember}
               </Typography>
-              {product.maturityAfterInterest.split('\n').map((el) => (
-                <Typography
-                  className={classes.subMargin}
-                  variant={'subtitle2'}
-                  component={'p'}
-                  gutterBottom
-                  key={el}
-                >
-                  {el}
-                </Typography>
-              ))}
-              {product.specialCondition.split('\n').map((el) => (
-                <Typography
-                  className={classes.subMargin}
-                  variant={'subtitle2'}
-                  component={'p'}
-                  gutterBottom
-                  key={el}
-                >
-                  {el}
-                </Typography>
-              ))}
-              {product.comment && product.comment.split('\n').map((el) => (
-                <Typography
-                  className={classes.subMargin}
-                  variant={'subtitle2'}
-                  component={'p'}
-                  gutterBottom
-                  key={el}
-                >
-                  {el}
-                </Typography>
-              ))}
+              {product.maturityAfterInterest
+                .split('\n')
+                .map((el: string) => (
+                  <Typography
+                    className={classes.subMargin}
+                    variant={'subtitle2'}
+                    component={'p'}
+                    gutterBottom
+                    key={el}
+                  >
+                    {el}
+                  </Typography>
+                ))}
+              {product.specialCondition
+                .split('\n')
+                .map((el: string) => (
+                  <Typography
+                    className={classes.subMargin}
+                    variant={'subtitle2'}
+                    component={'p'}
+                    gutterBottom
+                    key={el}
+                  >
+                    {el}
+                  </Typography>
+                ))}
+              {product.comment && product.comment
+                .split('\n')
+                .map((el: string) => (
+                  <Typography
+                    className={classes.subMargin}
+                    variant={'subtitle2'}
+                    component={'p'}
+                    gutterBottom
+                    key={el}
+                  >
+                    {el}
+                  </Typography>
+                ))}
               {product.maxLimit && (
                 <Typography
                   className={classes.subMargin}
@@ -135,19 +145,18 @@ function DepositService({
                     '저축 금리 (소수점 두자리)',
                     '최고 우대금리 (소수점 두자리)',
                   ]}
-                  contents={options.filter((option) => (
-                    option.financialProductCode === product.financialProductCode
-                  )).sort((f, s) => (
-                    f.saveTerm - s.saveTerm
-                  )).map((el) => ({
-                    id: el.id,
-                    data: [
-                      { key: `${el.id}-1`, content: el.interestRateTypeName },
-                      { key: `${el.id}-2`, content: el.saveTerm },
-                      { key: `${el.id}-3`, content: el.interestRate / 100 },
-                      { key: `${el.id}-4`, content: el.interestRate2 / 100 },
-                    ],
-                  }))}
+                  contents={options.filter((option: DepositOption) =>
+                    (option.financialProductCode === product.financialProductCode))
+                    .sort((f, s) => (f.saveTerm - s.saveTerm))
+                    .map((el) => ({
+                      contentId: el.id,
+                      data: [
+                        { key: `${el.id}-1`, content: el.interestRateTypeName },
+                        { key: `${el.id}-2`, content: el.saveTerm },
+                        { key: `${el.id}-3`, content: el.interestRate / 100 },
+                        { key: `${el.id}-4`, content: el.interestRate2 / 100 },
+                      ],
+                    }))}
                   key={product.financialProductCode}
                 />
               )}

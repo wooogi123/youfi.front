@@ -1,5 +1,5 @@
 import { createAsyncAction, ActionType } from 'typesafe-actions';
-import { SavingResponse } from '../types/saving';
+import { SavingResponse } from '../types';
 
 const prefix: string = 'saving';
 

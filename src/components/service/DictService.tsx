@@ -30,7 +30,10 @@ interface DictServiceProps extends SearchProps {
 }
 
 function DictService({
-  contents, isSearch, search, onChangeSearch,
+  contents,
+  isSearch,
+  search,
+  onChangeSearch,
 }: DictServiceProps) {
   const classes = useStyles();
 

@@ -1,17 +1,6 @@
-interface Response {
-  id: number;
-  disclosureMonth: Date;
-  financialCompanyCode: string;
-  financialProductCode: string;
-}
+import { Response, Status } from './common';
 
-export interface Status {
-  topFinancialGroupCode: string;
-  totalCount: number;
-  maxPageNumber: number;
-}
-
-export interface Base extends Response {
+export interface SavingProduct extends Response {
   financialCompanyName: string;
   financialProductName: string;
   joinWay: string;
@@ -26,7 +15,7 @@ export interface Base extends Response {
   financialCompanySubmitDay: Date;
 }
 
-export interface Option extends Response {
+export interface SavingOption extends Response {
   interestRateType: string;
   interestRateTypeName: string;
   saveTerm: number;
@@ -42,7 +31,7 @@ export interface Saving<S, T, U> {
   options: U[];
 }
 
-export interface SavingResult extends Saving<Status, Base, Option> {}
+export interface SavingResult extends Saving<Status, SavingProduct, SavingOption> {}
 
 export interface SavingResponse {
   results: SavingResult;

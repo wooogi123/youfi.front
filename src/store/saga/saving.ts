@@ -2,8 +2,8 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { SavingResponse } from '../types/saving';
 import {
   savingAction, SAVING_ASYNC_REQUEST,
-} from '../actions/saving';
-import fetchSaving from '../api/saving';
+} from '../actions';
+import { fetchSaving } from '../api';
 
 function* fetchDepositAsync() {
   try {

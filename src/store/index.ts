@@ -1,25 +1,22 @@
 import {
   combineReducers,
-  compose,
   applyMiddleware,
   createStore,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
-import auth from './reducers/auth';
-import authSaga from './saga/auth';
-import dictionary from './reducers/dictionary';
-import dictionarySaga from './saga/dictionary';
-import deposit from './reducers/deposit';
-import depositSaga from './saga/deposit';
-import saving from './reducers/saving';
-import savingSaga from './saga/saving';
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
+import {
+  auth,
+  dictionary,
+  deposit,
+  saving,
+} from './reducers';
+import {
+  authSaga,
+  dictionarySaga,
+  depositSaga,
+  savingSaga,
+} from './saga';
 
 const rootReducer = combineReducers({
   auth,
@@ -40,17 +37,9 @@ function* rootSaga() {
 }
 
 const sagaMiddleware = createSagaMiddleware();
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const rootStore = createStore(rootReducer, /* preloadedState, */ composeEnhancer(
-  applyMiddleware(sagaMiddleware),
-));
+const rootStore = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
 export default rootStore;
-export * from './actions/auth';
-export * from './types/auth';
-export * from './actions/dictionary';
-export * from './types/dictionary';
-export * from './actions/deposit';
-export * from './types/deposit';
-export * from './actions/saving';
+export * from './actions';
+export * from './types';

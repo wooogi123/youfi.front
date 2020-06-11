@@ -1,17 +1,6 @@
-interface Response {
-  id: number;
-  disclosureMonth: Date;
-  financialCompanyCode: string;
-  financialProductCode: string;
-}
+import { Response, Status } from './common';
 
-export interface Status {
-  topFinancialGroupCode: string;
-  totalCount: number;
-  maxPageNumber: number;
-}
-
-export interface Base extends Response {
+export interface DepositProduct extends Response {
   financialCompanyName: string;
   financialProductName: string;
   joinWay: string;
@@ -26,7 +15,7 @@ export interface Base extends Response {
   financialCompanySubmitDay: Date;
 }
 
-export interface Option extends Response {
+export interface DepositOption extends Response {
   interestRateType: string;
   interestRateTypeName: string;
   saveTerm: number;
@@ -40,7 +29,7 @@ export interface Deposit<S, T, U> {
   options: U[];
 }
 
-export interface DepositResult extends Deposit<Status, Base, Option> {}
+export interface DepositResult extends Deposit<Status, DepositProduct, DepositOption> {}
 
 export interface DepositResponse {
   results: DepositResult;
