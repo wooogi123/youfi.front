@@ -6,7 +6,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import { Option } from '../../store/types/saving';
-import SavingTable from './SavingTable';
+import OptionsTable from './OptionsTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -128,7 +128,22 @@ function SavingCard({
           </Typography>
         )}
         {options && (
-          <SavingTable options={options} />
+          <OptionsTable
+            heads={[
+              '저축 금리 유형명',
+              '적립 유형명',
+              '저축 기간 (개월)',
+              '저축 금리 (소수점 두자리)',
+              '최고 우대금리 (소수점 두자리)',
+            ]}
+            contents={options.map((el) => ([
+              el.interestRateTypeName,
+              el.savingTypeName,
+              el.saveTerm,
+              el.interestRate / 100,
+              el.interestRate2 / 100,
+            ]))}
+          />
         )}
         <Typography
           className={classes.subMargin}

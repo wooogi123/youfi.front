@@ -136,7 +136,6 @@ function DepositCard({
               '최고 우대금리 (소수점 두자리)',
             ]}
             contents={options.map((el) => ([
-              el.id,
               el.interestRateTypeName,
               el.saveTerm,
               el.interestRate / 100,
