@@ -10,12 +10,14 @@ import {
   dictionary,
   deposit,
   saving,
+  loan,
 } from './reducers';
 import {
   authSaga,
   dictionarySaga,
   depositSaga,
   savingSaga,
+  loanSaga,
 } from './saga';
 
 const rootReducer = combineReducers({
@@ -23,6 +25,7 @@ const rootReducer = combineReducers({
   dictionary,
   deposit,
   saving,
+  loan,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -33,6 +36,7 @@ function* rootSaga() {
     dictionarySaga(),
     depositSaga(),
     savingSaga(),
+    loanSaga(),
   ]);
 }
 

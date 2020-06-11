@@ -1,21 +1,15 @@
-import { Response, Status } from './common';
+import { Financial, Product, Status } from './common';
 
-export interface DepositProduct extends Response {
-  financialCompanyName: string;
-  financialProductName: string;
-  joinWay: string;
+export interface DepositProduct extends Product {
   joinDeny: string;
   joinMember: string;
   maturityAfterInterest: string;
   specialCondition: string;
   comment?: string;
   maxLimit?: number;
-  disclosureStartDay: Date;
-  disclosureEndDay?: Date;
-  financialCompanySubmitDay: Date;
 }
 
-export interface DepositOption extends Response {
+export interface DepositOption extends Financial {
   interestRateType: string;
   interestRateTypeName: string;
   saveTerm: number;

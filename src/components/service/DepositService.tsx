@@ -55,7 +55,7 @@ function DepositService({
           <Card
             className={classes.card}
             variant={'outlined'}
-            key={product.financialProductCode}
+            key={product.id}
           >
             <CardContent>
               <Typography
@@ -157,7 +157,7 @@ function DepositService({
                         { key: `${el.id}-4`, content: el.interestRate2 / 100 },
                       ],
                     }))}
-                  key={product.financialProductCode}
+                  key={product.id}
                 />
               )}
               <Typography

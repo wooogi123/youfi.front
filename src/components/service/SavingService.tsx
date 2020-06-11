@@ -55,7 +55,7 @@ function SavingService({
           <Card
             className={classes.card}
             variant={'outlined'}
-            key={product.financialProductCode}
+            key={product.id}
           >
             <CardContent>
               <Typography
@@ -163,7 +163,7 @@ function SavingService({
                         { key: `${el.id}-5`, content: el.interestRate2 / 100 },
                       ],
                     }))}
-                  key={product.financialProductCode}
+                  key={product.id}
                 />
               )}
               <Typography
