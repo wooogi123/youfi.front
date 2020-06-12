@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 interface DepositServiceProps extends SearchProps {
   products: DepositProduct[];
   options: DepositOption[];

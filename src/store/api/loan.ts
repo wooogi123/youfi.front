@@ -5,7 +5,6 @@ import {
   AllLoanResponse,
 } from '../types';
 
-
 async function fetchRentHouseLoan(): Promise<RentHouseResponse> {
   const url = 'http://localhost:3000/dev/FetchRentHouses';
   const resp: AxiosResponse = await axios.get(url);
