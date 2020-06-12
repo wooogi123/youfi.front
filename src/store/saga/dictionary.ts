@@ -1,9 +1,11 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { DictionaryContent } from '../types/dictionary';
 import {
-  dictionaryAction, DictionaryAction, DICTIONARY_ASYNC_REQUEST,
-} from '../actions/dictionary';
-import fetchDictionary from '../api/dictionary';
+  dictionaryAction,
+  DictionaryAction,
+  DICTIONARY_ASYNC_REQUEST,
+} from '../actions';
+import { fetchDictionary } from '../api';
 
 function* fetchDictionaryAsync(action: DictionaryAction) {
   try {

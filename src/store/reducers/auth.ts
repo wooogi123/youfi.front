@@ -1,6 +1,6 @@
 import { createReducer } from 'typesafe-actions';
 import produce from 'immer';
-import { LoginForm, AuthError, AuthState } from '../types/auth';
+import { LoginForm, AuthError, AuthState } from '../types';
 import {
   LOGIN_ASYNC_REQUEST,
   LOGIN_ASYNC_SUCCESS,
@@ -9,7 +9,7 @@ import {
   REGISTER_ASYNC_SUCCESS,
   REGISTER_ASYNC_FAILURE,
   AuthAction,
-} from '../actions/auth';
+} from '../actions';
 
 const initUser: LoginForm = {
   email: '',

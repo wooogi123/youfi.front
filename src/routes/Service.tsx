@@ -1,5 +1,10 @@
 import React from 'react';
-import { Switch, Route, RouteComponentProps } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  Redirect,
+  RouteComponentProps,
+} from 'react-router-dom';
 import {
   DictPage,
   DepositPage,
@@ -16,6 +21,7 @@ function Service({ match }: RouteComponentProps) {
       <Route path={`${match.path}/loan`} component={LoanPage} />
       <Route path={`${match.path}/recommend`} component={RecommendPage} />
       <Route path={`${match.path}/saving`} component={SavingPage} />
+      <Redirect from={'*'} to={'/'} />
     </Switch>
   );
 }

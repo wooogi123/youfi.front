@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import Template from './Template';
 import { SearchProps, OptionsTable } from '../common';
-import { DepositProduct, DepositOption } from '../../store';
+import { SavingProduct, SavingOption } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,18 +28,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface DepositServiceProps extends SearchProps {
-  products: DepositProduct[];
-  options: DepositOption[];
+interface SavingServiceProps extends SearchProps {
+  products: SavingProduct[];
+  options: SavingOption[];
 }
 
-function DepositService({
+function SavingService({
   products,
   options,
   isSearch,
   search,
   onChangeSearch,
-}: DepositServiceProps) {
+}: SavingServiceProps) {
   const classes = useStyles();
 
   return (
@@ -50,7 +50,7 @@ function DepositService({
       onChangeSearch={onChangeSearch}
     >
       <div className={classes.root}>
-        {products.map((product: DepositProduct) => (
+        {products.map((product: SavingProduct) => (
           <Card
             className={classes.card}
             variant={'outlined'}
@@ -140,20 +140,26 @@ function DepositService({
                 <OptionsTable
                   heads={[
                     '저축 금리 유형명',
+                    '적립 유형명',
                     '저축 기간 (개월)',
                     '저축 금리 (소수점 두자리)',
                     '최고 우대금리 (소수점 두자리)',
                   ]}
-                  contents={options.filter((option: DepositOption) =>
+                  contents={options.filter((option: SavingOption) =>
                     (option.financialProductCode === product.financialProductCode))
-                    .sort((f, s) => (f.saveTerm - s.saveTerm))
+                    .sort((f, s) => {
+                      if (f.savingType === s.savingType) return f.saveTerm - s.saveTerm;
+                      if (f.savingType === 'F') return -1;
+                      return 1;
+                    })
                     .map((el) => ({
                       contentId: el.id,
                       data: [
                         { key: `${el.id}-1`, content: el.interestRateTypeName },
-                        { key: `${el.id}-2`, content: el.saveTerm },
-                        { key: `${el.id}-3`, content: el.interestRate / 100 },
-                        { key: `${el.id}-4`, content: el.interestRate2 / 100 },
+                        { key: `${el.id}-2`, content: el.savingTypeName },
+                        { key: `${el.id}-3`, content: el.saveTerm },
+                        { key: `${el.id}-4`, content: el.interestRate / 100 },
+                        { key: `${el.id}-5`, content: el.interestRate2 / 100 },
                       ],
                     }))}
                   key={product.id}
@@ -183,4 +189,4 @@ function DepositService({
   );
 }
 
-export default DepositService;
+export default SavingService;

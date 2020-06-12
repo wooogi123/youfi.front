@@ -31,28 +31,32 @@ function ListContent({ orientation, isLogin }: ListContentProps) {
 
   return (
     <>
-      <List component={'nav'} className={clsx(classes.root, classes[orientation])}>
+      <List
+        component={'nav'}
+        className={clsx(classes.root, classes[orientation])}
+      >
         {[
           { name: '예금', href: '/service/deposit' },
           { name: '적금', href: '/service/saving' },
           { name: '대출', href: '/service/loan' },
           { name: '맞춤 금융상품', href: '/service/recommend' },
           { name: '금융 사전', href: '/service/dict' },
-        ].map(({ name, href }) => (
-          <ListItem
-            button
-            component={RouterLink}
-            to={href}
-            key={name}
-          >
-            <ListItemText
-              primary={name}
-              primaryTypographyProps={{
-                noWrap: true,
-              }}
-            />
-          </ListItem>
-        ))}
+        ]
+          .map(({ name, href }) => (
+            <ListItem
+              button
+              component={RouterLink}
+              to={href}
+              key={name}
+            >
+              <ListItemText
+                primary={name}
+                primaryTypographyProps={{
+                  noWrap: true,
+                }}
+              />
+            </ListItem>
+          ))}
         <Divider orientation={orientation} />
         {!isLogin ? (
           <ListItem button component={RouterLink} to={'/auth/login'}>

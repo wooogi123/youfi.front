@@ -16,7 +16,11 @@ interface serviceTemplateProps extends SearchProps {
 }
 
 function Template({
-  children, title, isSearch, search, onChangeSearch,
+  children,
+  title,
+  isSearch,
+  search,
+  onChangeSearch,
 }: serviceTemplateProps) {
   const classes = useStyles();
 

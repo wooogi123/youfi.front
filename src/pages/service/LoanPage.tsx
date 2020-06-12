@@ -1,11 +1,9 @@
 import React from 'react';
-import Template from '../../components/service/Template';
+import LoanContainer from '../../containers/LoanContainer';
 
 function LoanPage() {
   return (
-    <Template title={'대출'} isSearch={false}>
-      LoanPage
-    </Template>
+    <LoanContainer />
   );
 }
 

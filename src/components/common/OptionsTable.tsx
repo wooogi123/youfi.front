@@ -9,7 +9,6 @@ import {
   TableRow,
   Paper,
 } from '@material-ui/core';
-import { Option } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,11 +25,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface OptionTableProps {
-  options: Option[];
+interface Content {
+  key: string;
+  content: string | number;
 }
 
-function OptionTable({ options }: OptionTableProps) {
+interface OptionContent {
+  contentId: number;
+  data: Content[];
+}
+
+interface OptionsTableProps {
+  heads: string[];
+  contents: OptionContent[];
+}
+
+function OptionsTable({ heads, contents }: OptionsTableProps) {
   const classes = useStyles();
 
   return (
@@ -38,19 +48,17 @@ function OptionTable({ options }: OptionTableProps) {
       <Table className={classes.table} size={'small'}>
         <TableHead>
           <TableRow>
-            <TableCell>저축 금리 유형명</TableCell>
-            <TableCell>저축 기간 (개월)</TableCell>
-            <TableCell>저축 금리 (소수점 두자리)</TableCell>
-            <TableCell>최고 우대금리 (소수점 두자리)</TableCell>
+            {heads.map((el: string) => (
+              <TableCell key={el}>{el}</TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {options.map((el) => (
-            <TableRow key={el.id}>
-              <TableCell>{el.interestRateTypeName}</TableCell>
-              <TableCell>{el.saveTerm}</TableCell>
-              <TableCell>{(el.interestRate as number) / 100}</TableCell>
-              <TableCell>{(el.interestRate2 as number) / 100}</TableCell>
+          {contents.map(({ contentId, data }: OptionContent) => (
+            <TableRow key={contentId}>
+              {data.map(({ key, content }: Content) => (
+                <TableCell key={key}>{content}</TableCell>
+              ))}
             </TableRow>
           ))}
         </TableBody>
@@ -59,4 +67,4 @@ function OptionTable({ options }: OptionTableProps) {
   );
 }
 
-export default OptionTable;
+export default OptionsTable;

@@ -1,11 +1,9 @@
 import React from 'react';
-import Template from '../../components/service/Template';
+import SavingContainer from '../../containers/SavingContainer';
 
 function SavingPage() {
   return (
-    <Template title={'적금'} isSearch={false}>
-      SavingPage
-    </Template>
+    <SavingContainer />
   );
 }
 

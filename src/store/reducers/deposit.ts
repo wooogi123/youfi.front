@@ -4,13 +4,13 @@ import {
   DepositResponse,
   DepositResult,
   DepositState,
-} from '../types/deposit';
+} from '../types';
 import {
   DEPOSIT_ASYNC_REQUEST,
   DEPOSIT_ASYNC_SUCCESS,
   DEPOSIT_ASYNC_FAILURE,
   DepositAction,
-} from '../actions/deposit';
+} from '../actions';
 
 const initResult: DepositResult = {
   status: [],

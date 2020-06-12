@@ -2,8 +2,7 @@ import React from 'react';
 import { Hidden } from '@material-ui/core';
 import Appbar from './Appbar';
 import SideDrawer from './SideDrawer';
-import { ServiceTitle } from './ResponsiveTitle';
-import { SearchProps } from './types';
+import { SearchProps, ServiceTitle } from './types';
 
 interface HeaderProps extends SearchProps {
   title: ServiceTitle;
@@ -13,7 +12,13 @@ interface HeaderProps extends SearchProps {
 }
 
 function Header({
-  title, isOpen, isLogin, isSearch, search, toggleDrawer, onChangeSearch,
+  title,
+  isOpen,
+  isLogin,
+  isSearch,
+  search,
+  toggleDrawer,
+  onChangeSearch,
 }: HeaderProps) {
   return (
     <>

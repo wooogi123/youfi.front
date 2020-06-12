@@ -1,5 +1,5 @@
 import { createAsyncAction, ActionType } from 'typesafe-actions';
-import { DepositResponse } from '../types/deposit';
+import { DepositResponse } from '../types';
 
 const prefix: string = 'deposit';
 

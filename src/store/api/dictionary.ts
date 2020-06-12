@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { DictionaryContent } from '../types/dictionary';
+import { DictionaryContent } from '../types';
 
-export default async function FetchDictionary(
+export default async function fetchDictionary(
   url: string,
 ): Promise<DictionaryContent[]> {
   const resp: AxiosResponse = await axios.get(url);

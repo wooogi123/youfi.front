@@ -1,13 +1,13 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { LoginForm, RegisterForm } from '../types/auth';
+import { LoginForm, RegisterForm } from '../types';
 import {
   loginAction,
   registerAction,
   LOGIN_ASYNC_REQUEST,
   REGISTER_ASYNC_REQUEST,
   AuthAction,
-} from '../actions/auth';
-import { loginRequest, registerRequest } from '../api/auth';
+} from '../actions';
+import { loginRequest, registerRequest } from '../api';
 
 function* loginAsync(action: AuthAction) {
   try {
