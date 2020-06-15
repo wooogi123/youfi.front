@@ -1,27 +1,38 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import {
-  RentHouseResponse,
-  CreditResponse,
-  AllLoanResponse,
+  RentHouseProduct,
+  RentHouseOption,
+  RentHouseResult,
+  CreditProduct,
+  CreditOption,
+  CreditResult,
+  LoanResult,
 } from '../types';
 
-async function fetchRentHouseLoan(): Promise<RentHouseResponse> {
-  const url = 'http://localhost:3000/dev/FetchRentHouses';
-  const resp: AxiosResponse = await axios.get(url);
-  const ret: RentHouseResponse = resp.data;
-  return ret;
+async function fetchRentHouseLoan(): Promise<RentHouseResult> {
+  const uri: string = 'https://g0ya91ux8d.execute-api.ap-northeast-2.amazonaws.com/default/GetDataByDynamo';
+
+  const products: RentHouseProduct[] = (await axios.get(`${uri}?product=RentHouse&choice=product`)).data.Item.data;
+  const options: RentHouseOption[] = (await axios.get(`${uri}?product=RentHouse&choice=product`)).data.Item.data;
+  return {
+    products,
+    options,
+  };
 }
 
-async function fetchCreditLoan(): Promise<CreditResponse> {
-  const url = 'http://localhost:3000/dev/FetchCreditLoans';
-  const resp: AxiosResponse = await axios.get(url);
-  const ret: CreditResponse = resp.data;
-  return ret;
+async function fetchCreditLoan(): Promise<CreditResult> {
+  const uri: string = 'https://g0ya91ux8d.execute-api.ap-northeast-2.amazonaws.com/default/GetDataByDynamo';
+  const products: CreditProduct[] = (await axios.get(`${uri}?product=Credit&choice=product`)).data.Item.data;
+  const options: CreditOption[] = (await axios.get(`${uri}?product=Credit&choice=product`)).data.Item.data;
+  return {
+    products,
+    options,
+  };
 }
 
-export default async function fetchLoan(): Promise<AllLoanResponse> {
-  const rentHouses: RentHouseResponse = await fetchRentHouseLoan();
-  const credits: CreditResponse = await fetchCreditLoan();
+export default async function fetchLoan(): Promise<LoanResult> {
+  const rentHouses: RentHouseResult = await fetchRentHouseLoan();
+  const credits: CreditResult = await fetchCreditLoan();
   return {
     rentHouses,
     credits,

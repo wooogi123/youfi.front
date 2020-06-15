@@ -1,5 +1,5 @@
 import { createAsyncAction, ActionType } from 'typesafe-actions';
-import { SavingResponse } from '../types';
+import { SavingResult } from '../types';
 
 const prefix: string = 'saving';
 
@@ -11,6 +11,6 @@ export const savingAction = createAsyncAction(
   SAVING_ASYNC_REQUEST,
   SAVING_ASYNC_SUCCESS,
   SAVING_ASYNC_FAILURE,
-)<void, SavingResponse, Error>();
+)<void, SavingResult, Error>();
 
 export type SavingAction = ActionType<typeof savingAction>;

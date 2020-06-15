@@ -1,7 +1,6 @@
 import { createReducer } from 'typesafe-actions';
 import produce from 'immer';
 import {
-  SavingResponse,
   SavingResult,
   SavingState,
 } from '../types';
@@ -13,7 +12,6 @@ import {
 } from '../actions';
 
 const initResult: SavingResult = {
-  status: [],
   products: [],
   options: [],
 };
@@ -31,7 +29,7 @@ export default createReducer<SavingState, SavingAction>(initState, {
   [SAVING_ASYNC_SUCCESS]: (state, action: SavingAction) =>
     produce(state, (draft) => {
       draft.isError = false;
-      draft.contents = (action.payload as SavingResponse).results;
+      draft.contents = action.payload as SavingResult;
     }),
   [SAVING_ASYNC_FAILURE]: (state) =>
     produce(state, (draft) => {

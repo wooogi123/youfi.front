@@ -1,32 +1,29 @@
-import { Financial, Product, Status } from './common';
+import { Financial, Product } from './common';
 
-export interface RentHouseLoanProduct extends Product {
+export interface RentHouseProduct extends Product {
   loanIncidentalExpense: string;
   earlyPrepaymentFee: string;
   delayRate: string;
   loanLimit: string;
 }
 
-export interface RentHouseLoanOption extends Financial {
-  repaymentType: string;
-  repaymentTypeName: string;
-  lendRateType: string;
-  lendRateTypeName: string;
+export interface RentHouseOption extends Financial {
+  repaymentName: string;
+  lendRateName: string;
   lendRateMin: number;
   lendRateMax: number;
   lendRateAverage: number;
 }
 
-export interface CreditLoanProduct extends Product {
+export interface CreditProduct extends Product {
   creditProductType: string;
   creditProductTypeName: string;
-  creditBureauName: string;
+  creditBureauName?: string;
 }
 
-export interface CreditLoanOption extends Financial {
-  creditLendRateType: string;
-  creditLendRateTypeName: string;
+export interface CreditOption extends Financial {
   creditProductType: string;
+  creditLendName: string;
   creditGrade1: number;
   creditGrade2: number;
   creditGrade3: number;
@@ -36,29 +33,22 @@ export interface CreditLoanOption extends Financial {
 }
 
 interface Loan<T, U> {
-  status: Status[];
   products: T[];
   options: U[];
 }
 
-interface LoanResponse<T> {
-  results: T;
-}
+export interface RentHouseResult extends Loan<RentHouseProduct, RentHouseOption> {}
 
-export interface RentHouseLoan extends Loan<RentHouseLoanProduct, RentHouseLoanOption> {}
-export interface RentHouseResponse extends LoanResponse<RentHouseLoan> {}
+export interface CreditResult extends Loan<CreditProduct, CreditOption> {}
 
-export interface CreditLoan extends Loan<CreditLoanProduct, CreditLoanOption> {}
-export interface CreditResponse extends LoanResponse<CreditLoan> {}
-
-export interface AllLoanResponse {
-  rentHouses: RentHouseResponse;
-  credits: CreditResponse;
+export interface LoanResult {
+  rentHouses: RentHouseResult;
+  credits: CreditResult;
 }
 
 export interface LoanState {
-  rentHouses: RentHouseLoan;
-  credits: CreditLoan;
+  rentHouses: RentHouseResult;
+  credits: CreditResult;
   isRentHouseLoanError: boolean;
   isCreditLoanError: boolean;
 }

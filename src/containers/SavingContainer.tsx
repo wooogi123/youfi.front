@@ -13,7 +13,7 @@ function DepositContainer() {
   return (
     <SavingService
       products={store.contents.products.filter((el) =>
-        (el.financialCompanyName.indexOf(search) !== -1))}
+        (el.companyName.indexOf(search) !== -1))}
       options={store.contents.options}
       isSearch
       search={search}
