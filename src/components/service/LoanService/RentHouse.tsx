@@ -4,6 +4,13 @@ import {
   Card,
   CardContent,
   Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@material-ui/core';
 import {
   RentHouseProduct,
@@ -19,6 +26,15 @@ const useStyles = makeStyles((theme) => ({
   },
   nested: {
     paddingLect: theme.spacing(4),
+  },
+  table: {
+    width: 'inherit',
+    minWidth: 300,
+    margin: theme.spacing(4),
+    [theme.breakpoints.down('md')]: {
+      marginLeft: -theme.spacing(2),
+      marginRight: -theme.spacing(2),
+    },
   },
 }));
 
@@ -97,7 +113,44 @@ function RentHouse({
             >
               {`대출 한도: ${product.loanLimit}`}
             </Typography>
-            {options && (null)}
+            {options && (
+              <TableContainer className={classes.table} component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>대출상환유형</TableCell>
+                      <TableCell>대출금리유형</TableCell>
+                      <TableCell>최저 대출금리 (소수점 두자리)</TableCell>
+                      <TableCell>최대 대출금리 (소수점 두자리)</TableCell>
+                      <TableCell>전월 취급 평균금리 (소수점 두자리)</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {options.filter((option: RentHouseOption) =>
+                      (option.productCode === product.productCode))
+                      .sort((f, s) =>
+                        (f.repaymentName.length - s.repaymentName.length))
+                      .map(({
+                        companyCode,
+                        productCode,
+                        repaymentName,
+                        lendRateName,
+                        lendRateMin,
+                        lendRateMax,
+                        lendRateAverage,
+                      }: RentHouseOption) => (
+                        <TableRow key={companyCode + productCode + repaymentName + lendRateName}>
+                          <TableCell>{repaymentName}</TableCell>
+                          <TableCell>{lendRateName}</TableCell>
+                          <TableCell>{lendRateMin}</TableCell>
+                          <TableCell>{lendRateMax}</TableCell>
+                          <TableCell>{lendRateAverage}</TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
             <Typography
               className={classes.subMargin}
               variant={'subtitle2'}

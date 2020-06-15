@@ -19,7 +19,7 @@ function LoanContainer() {
     if (e !== undefined) setSearch(e.currentTarget.value);
   }
 
-  function onChangeTab(e: ChangeEvent<{}>, value: number) {
+  function onChangeTab(_e: ChangeEvent<{}>, value: number) {
     setTab(value);
   }
 
