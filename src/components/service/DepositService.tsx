@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   makeStyles,
+  createStyles,
+  Theme,
   Card,
   CardContent,
   Typography,
@@ -16,33 +18,34 @@ import Template from './Template';
 import { SearchProps } from '../common';
 import { DepositProduct, DepositOption } from '../../store';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  card: {
-    marginTop: theme.spacing(4),
-    width: '75%',
-    minWidth: 300,
-  },
-  subMargin: {
-    marginBottom: theme.spacing(1),
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-  table: {
-    width: 'inherit',
-    minWidth: 300,
-    margin: theme.spacing(4),
-    [theme.breakpoints.down('md')]: {
-      marginLeft: -theme.spacing(2),
-      marginRight: -theme.spacing(2),
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
     },
-  },
-}));
+    card: {
+      marginTop: theme.spacing(4),
+      width: '75%',
+      minWidth: 300,
+    },
+    subMargin: {
+      marginBottom: theme.spacing(1),
+    },
+    nested: {
+      paddingLeft: theme.spacing(4),
+    },
+    table: {
+      width: 'inherit',
+      minWidth: 300,
+      margin: theme.spacing(4),
+      [theme.breakpoints.down('md')]: {
+        marginLeft: -theme.spacing(2),
+        marginRight: -theme.spacing(2),
+      },
+    },
+  }));
 
 interface DepositServiceProps extends SearchProps {
   products: DepositProduct[];

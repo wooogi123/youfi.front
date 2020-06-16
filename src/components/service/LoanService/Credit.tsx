@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   makeStyles,
+  createStyles,
+  Theme,
   Card,
   CardContent,
   Typography,
@@ -17,26 +19,27 @@ import {
   CreditOption,
 } from '../../../store';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(4),
-  },
-  subMargin: {
-    marginBottom: theme.spacing(1),
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-  table: {
-    width: 'inherit',
-    minWidth: 300,
-    margin: theme.spacing(4),
-    [theme.breakpoints.down('md')]: {
-      marginLeft: -theme.spacing(2),
-      marginRight: -theme.spacing(2),
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      marginTop: theme.spacing(4),
     },
-  },
-}));
+    subMargin: {
+      marginBottom: theme.spacing(1),
+    },
+    nested: {
+      paddingLeft: theme.spacing(4),
+    },
+    table: {
+      width: 'inherit',
+      minWidth: 300,
+      margin: theme.spacing(4),
+      [theme.breakpoints.down('md')]: {
+        marginLeft: -theme.spacing(2),
+        marginRight: -theme.spacing(2),
+      },
+    },
+  }));
 
 interface CreditProps {
   value: number;

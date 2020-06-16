@@ -1,18 +1,20 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
+  makeStyles,
+  createStyles,
   Typography,
   Link,
-  makeStyles,
   Hidden,
 } from '@material-ui/core';
 import { ServiceTitle } from './types';
 
-const useStyles = makeStyles(() => ({
-  title: {
-    flexGrow: 1,
-  },
-}));
+const useStyles = makeStyles(() =>
+  createStyles({
+    title: {
+      flexGrow: 1,
+    },
+  }));
 
 const services: Record<ServiceTitle, string> = {
   'You-Fi': '/',
