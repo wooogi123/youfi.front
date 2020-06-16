@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { ServiceTitle } from '../common';
+import { ServiceTitle, SearchProps } from '../common';
 import HeaderContainer from '../../containers/HeaderContainer';
 
 const useStyles = makeStyles((theme) => ({
@@ -10,17 +10,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface serviceTemplateProps {
+interface serviceTemplateProps extends SearchProps {
   children: React.ReactNode;
   title: ServiceTitle;
 }
 
-function Template({ children, title }: serviceTemplateProps) {
+function Template({
+  children,
+  title,
+  isSearch,
+  search,
+  onChangeSearch,
+}: serviceTemplateProps) {
   const classes = useStyles();
 
   return (
     <>
-      <HeaderContainer title={title} />
+      <HeaderContainer
+        title={title}
+        isSearch={isSearch}
+        search={search}
+        onChangeSearch={onChangeSearch}
+      />
       <div className={classes.appBarSpacer}></div>
       <div>
         {children}

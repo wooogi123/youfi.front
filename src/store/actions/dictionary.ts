@@ -1,5 +1,5 @@
 import { createAsyncAction, ActionType } from 'typesafe-actions';
-import { DictionaryContent } from '../types/dictionary';
+import { DictionaryContent } from '../types';
 
 const prefix: string = 'dictionary';
 

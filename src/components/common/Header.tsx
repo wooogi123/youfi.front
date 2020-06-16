@@ -2,9 +2,9 @@ import React from 'react';
 import { Hidden } from '@material-ui/core';
 import Appbar from './Appbar';
 import SideDrawer from './SideDrawer';
-import { ServiceTitle } from './ResponsiveTitle';
+import { SearchProps, ServiceTitle } from './types';
 
-interface HeaderProps {
+interface HeaderProps extends SearchProps {
   title: ServiceTitle;
   isOpen: boolean;
   isLogin: boolean;
@@ -12,14 +12,23 @@ interface HeaderProps {
 }
 
 function Header({
-  title, isOpen, isLogin, toggleDrawer,
+  title,
+  isOpen,
+  isLogin,
+  isSearch,
+  search,
+  toggleDrawer,
+  onChangeSearch,
 }: HeaderProps) {
   return (
     <>
       <Appbar
         title={title}
         isLogin={isLogin}
+        isSearch={isSearch}
+        search={search}
         toggleDrawer={toggleDrawer}
+        onChangeSearch={onChangeSearch}
       />
       <Hidden lgUp>
         <SideDrawer

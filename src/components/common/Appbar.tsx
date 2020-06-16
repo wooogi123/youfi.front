@@ -11,7 +11,8 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ListContent from './ListContent';
-import ResponsiveTitle, { ServiceTitle } from './ResponsiveTitle';
+import ResponsiveTitle from './ResponsiveTitle';
+import { SearchProps, ServiceTitle } from './types';
 
 const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
@@ -58,44 +59,56 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: 'inherit',
+    width: '100%',
+    [theme.breakpoints.down('sm')]: {
+      width: '20ch',
+    },
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
-    width: '20ch',
-    [theme.breakpoints.down('md')]: {
-      width: '12ch',
-    },
+    width: '100%',
   },
 }));
 
-interface AppbarProps {
+interface AppbarProps extends SearchProps {
   title: ServiceTitle;
   isLogin: boolean;
   toggleDrawer: () => void;
 }
 
-function Appbar({ title, isLogin, toggleDrawer }: AppbarProps) {
+function Appbar({
+  title,
+  isLogin,
+  isSearch,
+  search,
+  toggleDrawer,
+  onChangeSearch,
+}: AppbarProps) {
   const classes = useStyles();
 
   return (
-    <AppBar position={'absolute'} className={classes.appBar}>
+    <AppBar position={'fixed'} className={classes.appBar}>
       <Toolbar>
         <ResponsiveTitle title={title} />
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
+        {isSearch && (
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder={'Search'}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              value={search}
+              onChange={onChangeSearch}
+            />
           </div>
-          <InputBase
-            placeholder={'Search'}
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </div>
+        )}
         <Hidden mdDown>
           <ListContent
             orientation={'horizontal'}

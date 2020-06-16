@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useAuthStore } from '../hooks';
-import { ServiceTitle, Header } from '../components/common';
+import { ServiceTitle, Header, SearchProps } from '../components/common';
 
-interface HeaderContainerProps {
+interface HeaderContainerProps extends SearchProps {
   title: ServiceTitle;
 }
 
-function HeaderContainer({ title }: HeaderContainerProps) {
+function HeaderContainer({
+  title, isSearch, search, onChangeSearch,
+}: HeaderContainerProps) {
   const store = useAuthStore();
   const [open, setOpen] = useState(false);
 
@@ -19,7 +21,10 @@ function HeaderContainer({ title }: HeaderContainerProps) {
       title={title}
       isOpen={open}
       isLogin={store.isLogin}
+      isSearch={isSearch}
+      search={search}
       toggleDrawer={toggleDrawer}
+      onChangeSearch={onChangeSearch}
     />
   );
 }

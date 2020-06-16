@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { dictionaryAction, RootState } from '../store';
+import { dictionaryAction, RootState, DictionaryState } from '../store';
 
-export function useDictStore() {
-  const dictionary = useSelector((state: RootState) => state.dictionary);
-  return dictionary;
+export function useDictStore(): DictionaryState {
+  return useSelector((state: RootState) => state.dictionary);
 }
 
 export function useFetchDict() {

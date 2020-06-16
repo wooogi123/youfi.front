@@ -1,5 +1,5 @@
 import { createAsyncAction, ActionType } from 'typesafe-actions';
-import { LoginForm, RegisterForm } from '../types/auth';
+import { LoginForm, RegisterForm } from '../types';
 
 const prefix: string = 'auth';
 
