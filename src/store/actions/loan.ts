@@ -1,7 +1,5 @@
 import { createAsyncAction, ActionType } from 'typesafe-actions';
-import {
-  AllLoanResponse,
-} from '../types';
+import { LoanResult } from '../types';
 
 const predix: string = 'loan';
 
@@ -13,6 +11,6 @@ export const loanAction = createAsyncAction(
   LOAN_ASYNC_REQUEST,
   LOAN_ASYNC_SUCCESS,
   LOAN_ASYNC_FAILURE,
-)<void, AllLoanResponse, Error>();
+)<void, LoanResult, Error>();
 
 export type LoanAction = ActionType<typeof loanAction>;

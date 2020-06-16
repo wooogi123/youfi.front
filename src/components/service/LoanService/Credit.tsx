@@ -4,11 +4,17 @@ import {
   Card,
   CardContent,
   Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@material-ui/core';
-import { OptionsTable } from '../../common';
 import {
-  CreditLoanProduct,
-  CreditLoanOption,
+  CreditProduct,
+  CreditOption,
 } from '../../../store';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,13 +27,22 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  table: {
+    width: 'inherit',
+    minWidth: 300,
+    margin: theme.spacing(4),
+    [theme.breakpoints.down('md')]: {
+      marginLeft: -theme.spacing(2),
+      marginRight: -theme.spacing(2),
+    },
+  },
 }));
 
 interface CreditProps {
   value: number;
   index: number;
-  products: CreditLoanProduct[];
-  options: CreditLoanOption[];
+  products: CreditProduct[];
+  options: CreditOption[];
 }
 
 function Credit({
@@ -38,50 +53,13 @@ function Credit({
 }: CreditProps) {
   const classes = useStyles();
 
-  function filteredOption(
-    product: CreditLoanProduct,
-  ): CreditLoanOption[] {
-    return options.filter((option: CreditLoanOption) =>
-      (option.creditProductType === product.creditProductType))
-      .filter((option: CreditLoanOption) =>
-        (option.financialCompanyCode === product.financialCompanyCode))
-      .sort((f, s) => {
-        if (f.creditLendRateType !== 'A') {
-          if (f.creditLendRateType === 'B') {
-            if (s.creditLendRateType === 'A') return 1;
-            return -1;
-          }
-          if (f.creditLendRateType === 'C') {
-            if (s.creditLendRateType === 'A') return 1;
-            if (s.creditLendRateType === 'B') return 1;
-            return -1;
-          }
-          if (f.creditLendRateType === 'D') {
-            if (s.creditLendRateType === 'A') return 1;
-            if (s.creditLendRateType === 'B') return 1;
-            if (s.creditLendRateType === 'C') return 1;
-            return -1;
-          }
-          if (f.creditLendRateType === 'E') {
-            if (s.creditLendRateType === 'A') return 1;
-            if (s.creditLendRateType === 'B') return 1;
-            if (s.creditLendRateType === 'C') return 1;
-            if (s.creditLendRateType === 'D') return 1;
-            return -1;
-          }
-          return -1;
-        }
-        return -1;
-      });
-  }
-
   return (
     <div hidden={value !== index}>
-      {products.map((product: CreditLoanProduct) => (
+      {products.map((product: CreditProduct) => (
         <Card
           className={classes.root}
           variant={'outlined'}
-          key={product.id}
+          key={product.companyCode + product.productCode + product.productName}
         >
           <CardContent>
             <Typography
@@ -90,14 +68,14 @@ function Credit({
               color={'textSecondary'}
               gutterBottom
             >
-              {product.financialCompanyName}
+              {product.companyName}
             </Typography>
             <Typography
               variant={'h5'}
               component={'h2'}
               gutterBottom
             >
-              {product.financialProductName}
+              {product.productName}
             </Typography>
             <Typography
               className={classes.subMargin}
@@ -123,46 +101,69 @@ function Credit({
                 {`신용조회회사 - ${product.creditBureauName.replace(',', ', ')}`}
               </Typography>
             )}
-            {options && (
-              <OptionsTable
-                heads={[
-                  '금리 구분',
-                  '은행: 1 ~ 2등급, 비은행: 1 ~ 3등급 (소수점 두자리)',
-                  '은행: 3 ~ 4등급, 비은행: 4등급 (소수점 두자리)',
-                  '은행: 5 ~ 6등급, 비은행: 5등급 (소수점 두자리)',
-                  '은행: 7 ~ 8등급, 비은행: 6등급 (소수점 두자리)',
-                  '은행: 9 ~ 10등급, 비은행: 7 ~ 10등급 (소수점 두자리)',
-                  '평균 금리 (소수점 두자리)',
-                ]}
-                contents={filteredOption(product).map((el) => ({
-                  contentId: el.id,
-                  data: [
-                    { key: `${el.id}-1`, content: el.creditLendRateTypeName },
-                    { key: `${el.id}-2`, content: el.creditGrade1 / 100 },
-                    { key: `${el.id}-3`, content: el.creditGrade2 / 100 },
-                    { key: `${el.id}-4`, content: el.creditGrade3 / 100 },
-                    { key: `${el.id}-5`, content: el.creditGrade4 / 100 },
-                    { key: `${el.id}-6`, content: el.creditGrade5 / 100 },
-                    { key: `${el.id}-7`, content: el.creditGradeAverage / 100 },
-                  ],
-                }))}
-                key={product.id}
-              />
+            {options.filter((option: CreditOption) =>
+              (option.creditProductType === product.creditProductType))
+              .filter((option: CreditOption) =>
+                (option.companyCode === product.companyCode)) && (
+                <TableContainer className={classes.table} component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>금리 구분</TableCell>
+                        <TableCell>신용 1 ~ 2 등급 (소수점 두자리)</TableCell>
+                        <TableCell>신용 3 ~ 4 등급 (소수점 두자리)</TableCell>
+                        <TableCell>신용 5 ~ 6 등급 (소수점 두자리)</TableCell>
+                        <TableCell>신용 7 ~ 8 등급 (소수점 두자리)</TableCell>
+                        <TableCell>신용 9 ~ 10 등급 (소수점 두자리)</TableCell>
+                        <TableCell>평균 금리 (소수점 두자리)</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {options.filter((option: CreditOption) =>
+                        (option.creditProductType === product.creditProductType))
+                        .filter((option: CreditOption) =>
+                          (option.companyCode === product.companyCode))
+                        .sort((f, s) =>
+                          (f.creditLendName.length - s.creditLendName.length))
+                        .map(({
+                          companyCode,
+                          productCode,
+                          creditLendName,
+                          creditGrade1,
+                          creditGrade2,
+                          creditGrade3,
+                          creditGrade4,
+                          creditGrade5,
+                          creditGradeAverage,
+                        }: CreditOption) => (
+                          <TableRow key={companyCode + productCode + creditLendName}>
+                            <TableCell>{creditLendName}</TableCell>
+                            <TableCell>{creditGrade1}</TableCell>
+                            <TableCell>{creditGrade2}</TableCell>
+                            <TableCell>{creditGrade3}</TableCell>
+                            <TableCell>{creditGrade4}</TableCell>
+                            <TableCell>{creditGrade5}</TableCell>
+                            <TableCell>{creditGradeAverage}</TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
             )}
             <Typography
               className={classes.subMargin}
               variant={'subtitle2'}
               gutterBottom
             >
-              {`공시 시작일 - ${product.disclosureStartDay}`}
+              {`공시 시작일 - ${product.startDate}`}
             </Typography>
-            {product.disclosureEndDay && (
+            {product.endDate && (
               <Typography
                 className={classes.subMargin}
                 variant={'subtitle2'}
                 gutterBottom
               >
-                {`공시 종료일 - ${product.disclosureEndDay}`}
+                {`공시 종료일 - ${product.endDate}`}
               </Typography>
             )}
           </CardContent>

@@ -4,19 +4,19 @@ import {
   loanAction,
   RootState,
   LoanState,
-  RentHouseLoan,
-  CreditLoan,
+  RentHouseResult,
+  CreditResult,
 } from '../store';
 
 export function useLoanStore(): LoanState {
   return useSelector((state: RootState) => state.loan);
 }
 
-export function useRentHouseLoanStore(): RentHouseLoan {
+export function useRentHouseStore(): RentHouseResult {
   return useSelector((state: RootState) => state.loan.rentHouses);
 }
 
-export function useCreditLoanStore(): CreditLoan {
+export function useCreditStore(): CreditResult {
   return useSelector((state: RootState) => state.loan.credits);
 }
 

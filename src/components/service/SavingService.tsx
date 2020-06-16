@@ -4,9 +4,16 @@ import {
   Card,
   CardContent,
   Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@material-ui/core';
 import Template from './Template';
-import { SearchProps, OptionsTable } from '../common';
+import { SearchProps } from '../common';
 import { SavingProduct, SavingOption } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
   nested: {
     paddingLeft: theme.spacing(4),
+  },
+  table: {
+    width: 'inherit',
+    minWidth: 300,
+    margin: theme.spacing(4),
+    [theme.breakpoints.down('md')]: {
+      marginLeft: -theme.spacing(2),
+      marginRight: -theme.spacing(2),
+    },
   },
 }));
 
@@ -54,7 +70,7 @@ function SavingService({
           <Card
             className={classes.card}
             variant={'outlined'}
-            key={product.id}
+            key={product.productName}
           >
             <CardContent>
               <Typography
@@ -63,14 +79,14 @@ function SavingService({
                 color={'textSecondary'}
                 gutterBottom
               >
-                {product.financialCompanyName}
+                {product.companyName}
               </Typography>
               <Typography
                 variant={'h5'}
                 component={'h2'}
                 gutterBottom
               >
-                {product.financialProductName}
+                {product.productName}
               </Typography>
               <Typography
                 className={classes.subMargin}
@@ -101,7 +117,7 @@ function SavingService({
                     {el}
                   </Typography>
                 ))}
-              {product.specialCondition
+              {product.special
                 .split('\n')
                 .map((el: string) => (
                   <Typography
@@ -137,48 +153,52 @@ function SavingService({
                 </Typography>
               )}
               {options && (
-                <OptionsTable
-                  heads={[
-                    '저축 금리 유형명',
-                    '적립 유형명',
-                    '저축 기간 (개월)',
-                    '저축 금리 (소수점 두자리)',
-                    '최고 우대금리 (소수점 두자리)',
-                  ]}
-                  contents={options.filter((option: SavingOption) =>
-                    (option.financialProductCode === product.financialProductCode))
-                    .sort((f, s) => {
-                      if (f.savingType === s.savingType) return f.saveTerm - s.saveTerm;
-                      if (f.savingType === 'F') return -1;
-                      return 1;
-                    })
-                    .map((el) => ({
-                      contentId: el.id,
-                      data: [
-                        { key: `${el.id}-1`, content: el.interestRateTypeName },
-                        { key: `${el.id}-2`, content: el.savingTypeName },
-                        { key: `${el.id}-3`, content: el.saveTerm },
-                        { key: `${el.id}-4`, content: el.interestRate / 100 },
-                        { key: `${el.id}-5`, content: el.interestRate2 / 100 },
-                      ],
-                    }))}
-                  key={product.id}
-                />
+                <TableContainer className={classes.table} component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>저축 금리 유형명</TableCell>
+                        <TableCell>적립 유형명</TableCell>
+                        <TableCell>저축 기간 (개월)</TableCell>
+                        <TableCell>저축 금리 (소수점 두자리)</TableCell>
+                        <TableCell>최고 우대금리 (소수점 두자리)</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {options.filter((option: SavingOption) =>
+                        (option.productCode === product.productCode))
+                        .sort((f, s) => {
+                          if (f.savingName === s.savingName) return f.saveTerm - s.saveTerm;
+                          if (f.savingName === '자유적립식') return -1;
+                          return 1;
+                        })
+                        .map((option: SavingOption) => (
+                          <TableRow key={option.productCode + option.savingName + option.saveTerm}>
+                            <TableCell>{option.interestName}</TableCell>
+                            <TableCell>{option.savingName}</TableCell>
+                            <TableCell>{option.saveTerm}</TableCell>
+                            <TableCell>{option.interestRate}</TableCell>
+                            <TableCell>{option.interestRate2}</TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               )}
               <Typography
                 className={classes.subMargin}
                 variant={'subtitle2'}
                 gutterBottom
               >
-                {`공시 시작일 - ${product.disclosureStartDay}`}
+                {`공시 시작일 - ${product.startDate}`}
               </Typography>
-              {product.disclosureEndDay && (
+              {product.endDate && (
                 <Typography
                   className={classes.subMargin}
                   variant={'subtitle2'}
                   gutterBottom
                 >
-                  {`공시 종료일 - ${product.disclosureEndDay}`}
+                  {`공시 종료일 - ${product.endDate}`}
                 </Typography>
               )}
             </CardContent>

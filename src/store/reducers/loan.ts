@@ -1,9 +1,9 @@
 import { createReducer } from 'typesafe-actions';
 import produce from 'immer';
 import {
-  AllLoanResponse,
-  RentHouseLoan,
-  CreditLoan,
+  RentHouseResult,
+  CreditResult,
+  LoanResult,
   LoanState,
 } from '../types';
 import {
@@ -13,15 +13,14 @@ import {
   LoanAction,
 } from '../actions';
 
-const initResult: RentHouseLoan | CreditLoan = {
-  status: [],
+const initResult: RentHouseResult | CreditResult = {
   products: [],
   options: [],
 };
 
 const initState: LoanState = {
-  rentHouses: initResult as RentHouseLoan,
-  credits: initResult as CreditLoan,
+  rentHouses: initResult as RentHouseResult,
+  credits: initResult as CreditResult,
   isRentHouseLoanError: false,
   isCreditLoanError: false,
 };
@@ -36,14 +35,14 @@ export default createReducer<LoanState, LoanAction>(initState, {
     produce(state, (draft) => {
       draft.isRentHouseLoanError = false;
       draft.isCreditLoanError = false;
-      draft.rentHouses = (action.payload as AllLoanResponse).rentHouses.results;
-      draft.credits = (action.payload as AllLoanResponse).credits.results;
+      draft.rentHouses = (action.payload as LoanResult).rentHouses;
+      draft.credits = (action.payload as LoanResult).credits;
     }),
   [LOAN_ASYNC_FAILURE]: (state) =>
     produce(state, (draft) => {
       draft.isRentHouseLoanError = true;
       draft.isCreditLoanError = true;
-      draft.rentHouses = initResult as RentHouseLoan;
-      draft.credits = initResult as CreditLoan;
+      draft.rentHouses = initResult as RentHouseResult;
+      draft.credits = initResult as CreditResult;
     }),
 });

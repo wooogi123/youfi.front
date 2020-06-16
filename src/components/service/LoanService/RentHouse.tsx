@@ -4,11 +4,17 @@ import {
   Card,
   CardContent,
   Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@material-ui/core';
-import { OptionsTable } from '../../common';
 import {
-  RentHouseLoanProduct,
-  RentHouseLoanOption,
+  RentHouseProduct,
+  RentHouseOption,
 } from '../../../store';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,13 +27,22 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLect: theme.spacing(4),
   },
+  table: {
+    width: 'inherit',
+    minWidth: 300,
+    margin: theme.spacing(4),
+    [theme.breakpoints.down('md')]: {
+      marginLeft: -theme.spacing(2),
+      marginRight: -theme.spacing(2),
+    },
+  },
 }));
 
 interface RentHouseProps {
   value: number;
   index: number;
-  products: RentHouseLoanProduct[];
-  options: RentHouseLoanOption[];
+  products: RentHouseProduct[];
+  options: RentHouseOption[];
 }
 
 function RentHouse({
@@ -40,11 +55,11 @@ function RentHouse({
 
   return (
     <div hidden={value !== index}>
-      {products.map((product: RentHouseLoanProduct) => (
+      {products.map((product: RentHouseProduct) => (
         <Card
           className={classes.root}
           variant={'outlined'}
-          key={product.id}
+          key={product.productName}
         >
           <CardContent>
             <Typography
@@ -53,14 +68,14 @@ function RentHouse({
               color={'textSecondary'}
               gutterBottom
             >
-              {product.financialCompanyName}
+              {product.companyName}
             </Typography>
             <Typography
               variant={'h5'}
               component={'h2'}
               gutterBottom
             >
-              {product.financialProductName}
+              {product.productName}
             </Typography>
             <Typography
               className={classes.subMargin}
@@ -99,51 +114,57 @@ function RentHouse({
               {`대출 한도: ${product.loanLimit}`}
             </Typography>
             {options && (
-              <OptionsTable
-                heads={[
-                  '대출상환유형',
-                  '대출금리유형',
-                  '최저 대출금리 (소수점 두자리)',
-                  '최대 대출금리 (소수점 두자리)',
-                  '전월 취급 평균금리 (소수점 두자리)',
-                ]}
-                contents={options.filter((option: RentHouseLoanOption) =>
-                  (option.financialProductCode === product.financialProductCode))
-                  .sort((f, s) => {
-                    if (f.repaymentType === s.repaymentType) {
-                      if (f.lendRateType === 'F') return -1;
-                      return 1;
-                    }
-                    if (f.repaymentType === 'D') return -1;
-                    return 1;
-                  })
-                  .map((el) => ({
-                    contentId: el.id,
-                    data: [
-                      { key: `${el.id}-1`, content: el.repaymentTypeName },
-                      { key: `${el.id}-2`, content: el.lendRateTypeName },
-                      { key: `${el.id}-3`, content: el.lendRateMin / 100 },
-                      { key: `${el.id}-4`, content: el.lendRateMax / 100 },
-                      { key: `${el.id}-5`, content: el.lendRateAverage / 100 },
-                    ],
-                  }))}
-                key={product.id}
-              />
+              <TableContainer className={classes.table} component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>대출상환유형</TableCell>
+                      <TableCell>대출금리유형</TableCell>
+                      <TableCell>최저 대출금리 (소수점 두자리)</TableCell>
+                      <TableCell>최대 대출금리 (소수점 두자리)</TableCell>
+                      <TableCell>전월 취급 평균금리 (소수점 두자리)</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {options.filter((option: RentHouseOption) =>
+                      (option.productCode === product.productCode))
+                      .sort((f, s) =>
+                        (f.repaymentName.length - s.repaymentName.length))
+                      .map(({
+                        companyCode,
+                        productCode,
+                        repaymentName,
+                        lendRateName,
+                        lendRateMin,
+                        lendRateMax,
+                        lendRateAverage,
+                      }: RentHouseOption) => (
+                        <TableRow key={companyCode + productCode + repaymentName + lendRateName}>
+                          <TableCell>{repaymentName}</TableCell>
+                          <TableCell>{lendRateName}</TableCell>
+                          <TableCell>{lendRateMin}</TableCell>
+                          <TableCell>{lendRateMax}</TableCell>
+                          <TableCell>{lendRateAverage}</TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             )}
             <Typography
               className={classes.subMargin}
               variant={'subtitle2'}
               gutterBottom
             >
-              {`공시 시작일 - ${product.disclosureStartDay}`}
+              {`공시 시작일 - ${product.startDate}`}
             </Typography>
-            {product.disclosureEndDay && (
+            {product.endDate && (
               <Typography
                 className={classes.subMargin}
                 variant={'subtitle2'}
                 gutterBottom
               >
-                {`공시 종료일 - ${product.disclosureEndDay}`}
+                {`공시 종료일 - ${product.endDate}`}
               </Typography>
             )}
           </CardContent>

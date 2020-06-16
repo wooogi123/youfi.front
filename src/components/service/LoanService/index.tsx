@@ -7,7 +7,7 @@ import {
 import SwipeableView from 'react-swipeable-views';
 import Template from '../Template';
 import { SearchProps } from '../../common';
-import { RentHouseLoan, CreditLoan } from '../../../store';
+import { RentHouseResult, CreditResult } from '../../../store';
 import RentHouse from './RentHouse';
 import Credit from './Credit';
 
@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface LoanServiceProps extends SearchProps {
-  rentHouses: RentHouseLoan;
-  credits: CreditLoan;
+  rentHouses: RentHouseResult;
+  credits: CreditResult;
   tab: number;
   onChangeTab: (e: ChangeEvent<{}>, value: number) => void;
   onChangeIndex: (value: number) => void;

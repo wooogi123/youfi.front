@@ -1,25 +1,25 @@
 import React, { useState, ChangeEvent } from 'react';
 import {
-  useRentHouseLoanStore,
-  useCreditLoanStore,
+  useRentHouseStore,
+  useCreditStore,
 } from '../hooks';
 import LoanService from '../components/service/LoanService';
 import {
-  RentHouseLoanProduct,
-  CreditLoanProduct,
+  RentHouseProduct,
+  CreditProduct,
 } from '../store';
 
 function LoanContainer() {
   const [search, setSearch] = useState('');
   const [tab, setTab] = useState(0);
-  const rentHouses = useRentHouseLoanStore();
-  const credits = useCreditLoanStore();
+  const rentHouses = useRentHouseStore();
+  const credits = useCreditStore();
 
   function onChangeSearch(e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (e !== undefined) setSearch(e.currentTarget.value);
   }
 
-  function onChangeTab(e: ChangeEvent<{}>, value: number) {
+  function onChangeTab(_e: ChangeEvent<{}>, value: number) {
     setTab(value);
   }
 
@@ -30,15 +30,13 @@ function LoanContainer() {
   return (
     <LoanService
       rentHouses={{
-        status: rentHouses.status,
-        products: rentHouses.products.filter((product: RentHouseLoanProduct) =>
-          (product.financialCompanyName.indexOf(search) !== -1)),
+        products: rentHouses.products.filter((product: RentHouseProduct) =>
+          (product.companyName.indexOf(search) !== -1)),
         options: rentHouses.options,
       }}
       credits={{
-        status: credits.status,
-        products: credits.products.filter((product: CreditLoanProduct) =>
-          (product.financialCompanyName.indexOf(search) !== -1)),
+        products: credits.products.filter((product: CreditProduct) =>
+          (product.companyName.indexOf(search) !== -1)),
         options: credits.options,
       }}
       isSearch

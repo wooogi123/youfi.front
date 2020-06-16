@@ -1,5 +1,5 @@
 import { createAsyncAction, ActionType } from 'typesafe-actions';
-import { DepositResponse } from '../types';
+import { DepositResult } from '../types';
 
 const prefix: string = 'deposit';
 
@@ -11,6 +11,6 @@ export const depositAction = createAsyncAction(
   DEPOSIT_ASYNC_REQUEST,
   DEPOSIT_ASYNC_SUCCESS,
   DEPOSIT_ASYNC_FAILURE,
-)<void, DepositResponse, Error>();
+)<void, DepositResult, Error>();
 
 export type DepositAction = ActionType<typeof depositAction>;

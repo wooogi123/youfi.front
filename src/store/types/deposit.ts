@@ -1,33 +1,27 @@
-import { Financial, Product, Status } from './common';
+import { Financial, Product } from './common';
 
 export interface DepositProduct extends Product {
   joinDeny: string;
   joinMember: string;
   maturityAfterInterest: string;
-  specialCondition: string;
+  special: string;
   comment?: string;
   maxLimit?: number;
 }
 
 export interface DepositOption extends Financial {
-  interestRateType: string;
-  interestRateTypeName: string;
+  interestName: string;
   saveTerm: number;
   interestRate: number;
   interestRate2: number;
 }
 
-export interface Deposit<S, T, U> {
-  status: S[];
+export interface Deposit<T, U> {
   products: T[];
   options: U[];
 }
 
-export interface DepositResult extends Deposit<Status, DepositProduct, DepositOption> {}
-
-export interface DepositResponse {
-  results: DepositResult;
-}
+export interface DepositResult extends Deposit<DepositProduct, DepositOption> {}
 
 export interface DepositState {
   contents: DepositResult;

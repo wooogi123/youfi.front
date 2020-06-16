@@ -1,35 +1,28 @@
-import { Financial, Product, Status } from './common';
+import { Financial, Product } from './common';
 
 export interface SavingProduct extends Product {
   joinDeny: string;
   joinMember: string;
   maturityAfterInterest: string;
-  specialCondition: string;
+  special: string;
   comment?: string;
   maxLimit?: number;
 }
 
 export interface SavingOption extends Financial {
-  interestRateType: string;
-  interestRateTypeName: string;
+  interestName: string;
+  savingName: string;
   saveTerm: number;
   interestRate: number;
   interestRate2: number;
-  savingType: string;
-  savingTypeName: string;
 }
 
-export interface Saving<S, T, U> {
-  status: S[];
+export interface Saving<T, U> {
   products: T[];
   options: U[];
 }
 
-export interface SavingResult extends Saving<Status, SavingProduct, SavingOption> {}
-
-export interface SavingResponse {
-  results: SavingResult;
-}
+export interface SavingResult extends Saving<SavingProduct, SavingOption> {}
 
 export interface SavingState {
   contents: SavingResult;

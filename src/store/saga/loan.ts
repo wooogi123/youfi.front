@@ -1,11 +1,11 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { AllLoanResponse } from '../types';
+import { LoanResult } from '../types';
 import { loanAction, LOAN_ASYNC_REQUEST } from '../actions';
 import { fetchLoan } from '../api';
 
 function* fetchLoanAsync() {
   try {
-    const resp: AllLoanResponse = yield call(fetchLoan);
+    const resp: LoanResult = yield call(fetchLoan);
     yield put(loanAction.success(resp));
   } catch (err) {
     yield put(loanAction.failure(err));
