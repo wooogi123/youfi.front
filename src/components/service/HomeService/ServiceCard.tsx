@@ -23,32 +23,44 @@ const useStyles = makeStyles(() =>
   }));
 
 interface ServiceCardProps {
+  title?: string,
   keywords: string[];
-  href: string,
+  href?: string,
 }
 
-function ServiceCard({ keywords, href }: ServiceCardProps) {
+function ServiceCard({ title, keywords, href }: ServiceCardProps) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root} variant={'outlined'}>
       <CardContent className={classes.content}>
-        {keywords.map((keyword: string) => (
+        {title && (
           <Typography
             variant={'h5'}
+            component={'h2'}
+            gutterBottom
+          >
+            {title}
+          </Typography>
+        )}
+        {keywords && keywords.map((keyword: string) => (
+          <Typography
+            variant={'body1'}
             gutterBottom
             key={keyword}
           >
             {keyword}
           </Typography>
         ))}
-        <Button
-          variant={'contained'}
-          component={RouterLink}
-          to={href}
-        >
-          시작하기
-        </Button>
+        {href && (
+          <Button
+            variant={'contained'}
+            component={RouterLink}
+            to={href}
+          >
+            시작하기
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

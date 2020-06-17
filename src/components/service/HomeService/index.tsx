@@ -9,7 +9,6 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import Template from '../Template';
 import ServiceCard from './ServiceCard';
-import TitleCard from './TitleCard';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -50,7 +49,16 @@ function HomeService({
           onChangeIndex={onChangeIndex}
           interval={5000}
         >
-          <TitleCard />
+          <ServiceCard
+            title={'You-Fi'}
+            keywords={[
+              'Youth(청년)에게 쉽고, 편하게 Financial(금융)을!',
+              '고등교육 수료 후 사회에 진출하는',
+              '20대 청년들의 67.8%가 금융 교육 부재 (2019 교육부 통계 기준)',
+              '금융이 어려운 것은 여러분의 잘못이 아닙니다.',
+              'You-Fi가 여러분의 빈자리를 채워드리겟습니다.',
+            ]}
+          />
           <ServiceCard
             keywords={[
               '금융 상품을 빠르고 쉽게!',
