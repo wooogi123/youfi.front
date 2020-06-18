@@ -176,8 +176,8 @@ function SavingCard({
                       <TableCell>{option.interestName}</TableCell>
                       <TableCell>{option.savingName}</TableCell>
                       <TableCell>{option.saveTerm}</TableCell>
-                      <TableCell>{option.interestRate}</TableCell>
-                      <TableCell>{option.interestRate2}</TableCell>
+                      <TableCell>{`${option.interestRate}%`}</TableCell>
+                      <TableCell>{`${option.interestRate2}%`}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

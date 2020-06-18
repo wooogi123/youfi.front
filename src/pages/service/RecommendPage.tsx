@@ -1,11 +1,9 @@
 import React from 'react';
-import Template from '../../components/service/Template';
+import RecommendContainer from '../../containers/RecommendContainer';
 
 function RecommendPage() {
   return (
-    <Template title={'맞춤 금융상품'} isSearch={false}>
-      RecommendPage
-    </Template>
+    <RecommendContainer />
   );
 }
 

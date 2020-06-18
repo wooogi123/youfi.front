@@ -164,9 +164,9 @@ function RentHouseCard({
                     <TableRow key={companyCode + productCode + repaymentName + lendRateName}>
                       <TableCell>{repaymentName}</TableCell>
                       <TableCell>{lendRateName}</TableCell>
-                      <TableCell>{lendRateMin}</TableCell>
-                      <TableCell>{lendRateMax}</TableCell>
-                      <TableCell>{lendRateAverage}</TableCell>
+                      <TableCell>{`${lendRateMin}%`}</TableCell>
+                      <TableCell>{`${lendRateMax}%`}</TableCell>
+                      <TableCell>{`${lendRateAverage}%`}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

@@ -187,8 +187,8 @@ function DepositCard({
                     <TableRow key={option.productCode + option.saveTerm}>
                       <TableCell>{option.interestName}</TableCell>
                       <TableCell>{option.saveTerm}</TableCell>
-                      <TableCell>{option.interestRate}</TableCell>
-                      <TableCell>{option.interestRate2}</TableCell>
+                      <TableCell>{`${option.interestRate}%`}</TableCell>
+                      <TableCell>{`${option.interestRate2}%`}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

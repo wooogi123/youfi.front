@@ -93,7 +93,7 @@ function CreditCard({
             variant={'h5'}
             component={'h2'}
           >
-            {product.productName}
+            {`${product.productName} - ${product.creditProductTypeName}`}
           </Typography>
         </div>
         <IconButton
@@ -114,13 +114,6 @@ function CreditCard({
             gutterBottom
           >
             {product.joinWay.replace(/,/g, ', ')}
-          </Typography>
-          <Typography
-            className={classes.subMargin}
-            variant={'subtitle2'}
-            gutterBottom
-          >
-            {product.creditProductTypeName}
           </Typography>
           {product.creditBureauName && (
             <Typography
@@ -159,12 +152,12 @@ function CreditCard({
                   }: CreditOption) => (
                     <TableRow key={companyCode + productCode + creditLendName}>
                       <TableCell>{creditLendName}</TableCell>
-                      <TableCell>{creditGrade1}</TableCell>
-                      <TableCell>{creditGrade2}</TableCell>
-                      <TableCell>{creditGrade3}</TableCell>
-                      <TableCell>{creditGrade4}</TableCell>
-                      <TableCell>{creditGrade5}</TableCell>
-                      <TableCell>{creditGradeAverage}</TableCell>
+                      <TableCell>{`${creditGrade1}%`}</TableCell>
+                      <TableCell>{`${creditGrade2}%`}</TableCell>
+                      <TableCell>{`${creditGrade3}%`}</TableCell>
+                      <TableCell>{`${creditGrade4}%`}</TableCell>
+                      <TableCell>{`${creditGrade5}%`}</TableCell>
+                      <TableCell>{`${creditGradeAverage}%`}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
