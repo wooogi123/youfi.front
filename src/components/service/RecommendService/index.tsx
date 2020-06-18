@@ -15,6 +15,12 @@ import Template from '../Template';
 import DepositCard from './DepositCard';
 import SavingCard from './SavingCard';
 import LoanCard from './LoanCard';
+import {
+  DepositResult,
+  SavingResult,
+  RentHouseResult,
+  CreditResult,
+} from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,13 +31,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       marginTop: theme.spacing(4),
-      width: '75%',
+      width: '50%',
       minWidth: 300,
     },
     cardContent: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'start',
+      alignItems: 'center',
+    },
+    button: {
+      width: '100%',
+      fontSize: '1rem',
+      marginTop: theme.spacing(2),
     },
     minSelect: {
       minWidth: 268,
@@ -40,21 +51,29 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
-function RecommendService() {
+interface RecommendServiceProps {
+  deposits: DepositResult;
+  savings: SavingResult;
+  rentHouses: RentHouseResult;
+  credits: CreditResult;
+}
+
+function RecommendService({
+  deposits,
+  savings,
+}: RecommendServiceProps) {
   const classes = useStyles();
   const [choice, setChoice] = useState(0);
   const [open, setOpen] = useState(false);
 
+  function uniqBy(value: [string, string][]) {
+    return [...new Map(value.map((x) =>
+      ([JSON.stringify(x), x])))
+      .values()];
+  }
+
   function onChangeChoice(e: React.ChangeEvent<{ value: unknown }>) {
     setChoice(+(e.target.value as number));
-  }
-
-  function onClickOpen() {
-    setOpen(true);
-  }
-
-  function onClickClose() {
-    setOpen(false);
   }
 
   return (
@@ -66,8 +85,9 @@ function RecommendService() {
         <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
             <Button
-              className={classes.minSelect}
-              onClick={onClickOpen}
+              className={classes.button}
+              variant={'outlined'}
+              onClick={() => (setOpen(true))}
             >
               어떤 종류의 상품을 추천받으시겠습니까?
             </Button>
@@ -76,8 +96,8 @@ function RecommendService() {
               <Select
                 labelId={'recommend-choice-label'}
                 open={open}
-                onClose={onClickClose}
-                onOpen={onClickOpen}
+                onClose={() => (setOpen(false))}
+                onOpen={() => (setOpen(true))}
                 value={choice}
                 onChange={onChangeChoice}
               >
@@ -89,8 +109,26 @@ function RecommendService() {
             </FormControl>
           </CardContent>
         </Card>
-        {choice === 1 && (<DepositCard />)}
-        {choice === 2 && (<SavingCard />)}
+        {choice === 1 && (
+          <DepositCard
+            companys={uniqBy(deposits.products
+              .map((product) =>
+                ([product.companyCode, product.companyName])))}
+            saveTerms={[
+              6, 12, 24, 36,
+            ]}
+          />
+        )}
+        {choice === 2 && (
+          <SavingCard
+            companys={uniqBy(savings.products
+              .map((product) =>
+                ([product.companyCode, product.companyName])))}
+            saveTerms={[
+              6, 12, 24, 36,
+            ]}
+          />
+        )}
         {choice === 3 && (<LoanCard />)}
       </div>
     </Template>
