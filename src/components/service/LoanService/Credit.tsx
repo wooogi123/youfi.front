@@ -29,6 +29,7 @@ function Credit({
               (option.companyCode === product.companyCode))
             .sort((f, s) =>
               (f.creditLendName.length - s.creditLendName.length))}
+          key={product.productCode + product.companyCode + product.creditProductType}
         />
       ))}
     </div>

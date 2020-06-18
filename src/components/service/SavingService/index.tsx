@@ -50,6 +50,7 @@ function SavingService({
                 if (f.savingName === '자유적립식') return -1;
                 return 1;
               })}
+            key={product.productCode}
           />
         ))}
       </div>

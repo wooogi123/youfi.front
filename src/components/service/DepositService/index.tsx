@@ -45,6 +45,7 @@ function DepositService({
             options={options.filter((option: DepositOption) =>
               (option.productCode === product.productCode))
               .sort((f, s) => (f.saveTerm - s.saveTerm))}
+            key={product.productCode}
           />
         ))}
       </div>

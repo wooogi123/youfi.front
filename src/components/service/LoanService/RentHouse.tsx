@@ -27,6 +27,7 @@ function RentHouse({
             (option.productCode === product.productCode))
             .sort((f, s) =>
               (f.repaymentName.length - s.repaymentName.length))}
+          key={product.productCode + product.companyCode}
         />
       ))}
     </div>
