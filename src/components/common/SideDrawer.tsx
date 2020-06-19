@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
-  Drawer,
   makeStyles,
+  createStyles,
+  Drawer,
   List,
   ListItem,
   ListItemText,
@@ -10,11 +11,12 @@ import {
 } from '@material-ui/core';
 import ListContent from './ListContent';
 
-const useStyles = makeStyles({
-  list: {
-    width: 200,
-  },
-});
+const useStyles = makeStyles(() =>
+  createStyles({
+    list: {
+      width: 200,
+    },
+  }));
 
 interface SideDrawerProps {
   open: boolean;

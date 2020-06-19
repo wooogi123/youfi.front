@@ -1,14 +1,19 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import { ServiceTitle, SearchProps } from '../common';
+import { makeStyles, createStyles, Theme } from '@material-ui/core';
+import { Copyright, ServiceTitle, SearchProps } from '../common';
 import HeaderContainer from '../../containers/HeaderContainer';
 
-const useStyles = makeStyles((theme) => ({
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+      flexGrow: 1,
+    },
+    footer: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+    },
+  }));
 
 interface serviceTemplateProps extends SearchProps {
   children: React.ReactNode;
@@ -36,6 +41,9 @@ function Template({
       <div>
         {children}
       </div>
+      <footer className={classes.footer}>
+        <Copyright />
+      </footer>
     </>
   );
 }

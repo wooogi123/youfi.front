@@ -1,6 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import {
   makeStyles,
+  createStyles,
+  Theme,
   Tabs,
   Tab,
 } from '@material-ui/core';
@@ -11,26 +13,27 @@ import { RentHouseResult, CreditResult } from '../../../store';
 import RentHouse from './RentHouse';
 import Credit from './Credit';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  card: {
-    marginTop: '2rem',
-    width: '75%',
-    minWidth: 300,
-  },
-  subMargin: {
-    marginBottom: '0.5rem',
-  },
-  tabs: {
-    backgroundColor: theme.palette.background.paper,
-    width: '75%',
-    minWidth: 300,
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    card: {
+      marginTop: '2rem',
+      width: '75%',
+      minWidth: 300,
+    },
+    subMargin: {
+      marginBottom: '0.5rem',
+    },
+    tabs: {
+      backgroundColor: theme.palette.background.paper,
+      width: '75%',
+      minWidth: 300,
+    },
+  }));
 
 interface LoanServiceProps extends SearchProps {
   rentHouses: RentHouseResult;
@@ -69,7 +72,7 @@ function LoanService({
           onChange={onChangeTab}
         >
           <Tab
-            label={'주택 청약대출'}
+            label={'전세자금 대출'}
             id={'full-width-tab-0'}
           />
           <Tab

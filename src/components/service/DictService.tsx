@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   makeStyles,
+  createStyles,
   Card,
   CardContent,
   Typography,
@@ -9,21 +10,22 @@ import Template from './Template';
 import { DictionaryContent } from '../../store';
 import { SearchProps } from '../common';
 
-const useStyles = makeStyles({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  card: {
-    marginTop: '2rem',
-    width: '75%',
-    minWidth: 300,
-  },
-  subMargin: {
-    marginBottom: '0.5rem',
-  },
-});
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    card: {
+      marginTop: '2rem',
+      width: '75%',
+      minWidth: 300,
+    },
+    subMargin: {
+      marginBottom: '0.5rem',
+    },
+  }));
 
 interface DictServiceProps extends SearchProps {
   contents: DictionaryContent[];

@@ -1,11 +1,9 @@
 import React from 'react';
-import Template from '../components/service/Template';
+import HomeContainer from '../containers/HomeContainer';
 
 function HomePage() {
   return (
-    <Template title={'You-Fi'} isSearch={false}>
-      HomePage
-    </Template>
+    <HomeContainer />
   );
 }
 
