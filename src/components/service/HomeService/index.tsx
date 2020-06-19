@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column',
       alignItems: 'center',
     },
+    slide: {
+      width: '100vw',
+    },
     pagination: {
       marginTop: theme.spacing(2),
     },
@@ -45,6 +48,7 @@ function HomeService({
     >
       <div className={classes.root}>
         <AutoPlaySwipeableViews
+          className={classes.slide}
           index={index}
           onChangeIndex={onChangeIndex}
           interval={5000}
