@@ -10,10 +10,12 @@ import {
 } from '../types';
 
 async function fetchRentHouseLoan(): Promise<RentHouseResult> {
-  const uri: string = 'https://g0ya91ux8d.execute-api.ap-northeast-2.amazonaws.com/default/GetDataByDynamo';
-
-  const products: RentHouseProduct[] = (await axios.get(`${uri}?product=RentHouse&choice=product`)).data.Item.data;
-  const options: RentHouseOption[] = (await axios.get(`${uri}?product=RentHouse&choice=option`)).data.Item.data;
+  const uri: URL = new URL('https://g0ya91ux8d.execute-api.ap-northeast-2.amazonaws.com/default/GetDataByDynamo');
+  uri.searchParams.set('product', 'RentHouse');
+  uri.searchParams.set('choice', 'product');
+  const products: RentHouseProduct[] = (await axios.get(uri.toString())).data.Item.data;
+  uri.searchParams.set('choice', 'option');
+  const options: RentHouseOption[] = (await axios.get(uri.toString())).data.Item.data;
   return {
     products,
     options,
@@ -21,9 +23,12 @@ async function fetchRentHouseLoan(): Promise<RentHouseResult> {
 }
 
 async function fetchCreditLoan(): Promise<CreditResult> {
-  const uri: string = 'https://g0ya91ux8d.execute-api.ap-northeast-2.amazonaws.com/default/GetDataByDynamo';
-  const products: CreditProduct[] = (await axios.get(`${uri}?product=Credit&choice=product`)).data.Item.data;
-  const options: CreditOption[] = (await axios.get(`${uri}?product=Credit&choice=option`)).data.Item.data;
+  const uri: URL = new URL('https://g0ya91ux8d.execute-api.ap-northeast-2.amazonaws.com/default/GetDataByDynamo');
+  uri.searchParams.set('product', 'Credit');
+  uri.searchParams.set('choice', 'product');
+  const products: CreditProduct[] = (await axios.get(uri.toString())).data.Item.data;
+  uri.searchParams.set('choice', 'option');
+  const options: CreditOption[] = (await axios.get(uri.toString())).data.Item.data;
   return {
     products,
     options,

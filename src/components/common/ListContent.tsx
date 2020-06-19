@@ -1,25 +1,27 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
+  makeStyles,
+  createStyles,
   List,
   ListItem,
   ListItemText,
   Divider,
-  makeStyles,
 } from '@material-ui/core';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-  },
-  vertical: {
-    flexDirection: 'column',
-  },
-  horizontal: {
-    flexDirection: 'row',
-  },
-}));
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      display: 'flex',
+    },
+    vertical: {
+      flexDirection: 'column',
+    },
+    horizontal: {
+      flexDirection: 'row',
+    },
+  }));
 
 interface ListContentProps {
   orientation: 'vertical' | 'horizontal';

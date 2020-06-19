@@ -1,9 +1,11 @@
 import React from 'react';
 import {
+  makeStyles,
+  createStyles,
+  Theme,
   AppBar,
   Toolbar,
   IconButton,
-  makeStyles,
   fade,
   InputBase,
   Hidden,
@@ -14,63 +16,64 @@ import ListContent from './ListContent';
 import ResponsiveTitle from './ResponsiveTitle';
 import { SearchProps, ServiceTitle } from './types';
 
-const useStyles = makeStyles((theme) => ({
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  menuButton: {
-    paddingRight: 12,
-    marginRight: -12,
-  },
-  search: {
-    flexGrow: 1,
-    width: 'auto',
-    marginRight: 12,
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    toolbarIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
+      ...theme.mixins.toolbar,
     },
-    [theme.breakpoints.down('md')]: {
-      marginLeft: theme.spacing(1),
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    menuButton: {
+      paddingRight: 12,
+      marginRight: -12,
+    },
+    search: {
+      flexGrow: 1,
       width: 'auto',
+      marginRight: 12,
+      position: 'relative',
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.15),
+      '&:hover': {
+        backgroundColor: fade(theme.palette.common.white, 0.25),
+      },
+      [theme.breakpoints.down('md')]: {
+        marginLeft: theme.spacing(1),
+        width: 'auto',
+      },
     },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%',
-    [theme.breakpoints.down('sm')]: {
-      width: '20ch',
+    searchIcon: {
+      padding: theme.spacing(0, 2),
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-  },
-}));
+    inputRoot: {
+      color: 'inherit',
+      width: '100%',
+      [theme.breakpoints.down('sm')]: {
+        width: '20ch',
+      },
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+    },
+  }));
 
 interface AppbarProps extends SearchProps {
   title: ServiceTitle;
