@@ -54,7 +54,6 @@ function DepositCard({
   const [openBank, setOpenBank] = useState(false);
   const [openDate, setOpenDate] = useState(false);
 
-
   function onChangeBirthday(e: React.ChangeEvent<{ value: unknown }>) {
     setBirthday(e.target.value as string);
   }
