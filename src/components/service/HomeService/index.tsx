@@ -69,7 +69,11 @@ function HomeService({
               '당신에게 맞는 맞춤 금융상품을 추천해줍니다!',
               '- 맞춤 금융상품 추천 -',
             ]}
-            href={'/service/recommend'}
+            href={'/static/images/service/recommend.png'}
+            image={{
+              href: '/recommend.png',
+              title: 'Recommend Title',
+            }}
           />
           <ServiceCard
             keywords={[
@@ -78,6 +82,10 @@ function HomeService({
               '- 금융 지식 사전 -',
             ]}
             href={'/service/dict'}
+            image={{
+              href: '/static/images/dictionary.png',
+              title: 'Dictionary Title',
+            }}
           />
           <ServiceCard
             keywords={[
@@ -86,6 +94,10 @@ function HomeService({
               '- 예금 상품 목록 -',
             ]}
             href={'/service/deposit'}
+            image={{
+              href: '/static/images/deposit.png',
+              title: 'Deposit Title',
+            }}
           />
           <ServiceCard
             keywords={[
@@ -102,6 +114,10 @@ function HomeService({
               '- 대출 상품 목록 -',
             ]}
             href={'/service/loan'}
+            image={{
+              href: '/static/images/loan.png',
+              title: 'Loan Title',
+            }}
           />
         </AutoPlaySwipeableViews>
         <Pagination

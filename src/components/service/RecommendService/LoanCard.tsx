@@ -7,10 +7,7 @@ import {
   CardContent,
   Select,
   InputLabel,
-  Radio,
-  RadioGroup,
   FormControl,
-  FormControlLabel,
   MenuItem,
   Button,
 } from '@material-ui/core';
@@ -43,14 +40,9 @@ function LoanCard() {
   const classes = useStyles();
   const [purpose, setPurpose] = useState(0);
   const [open, setOpen] = useState(false);
-  const [work, setWork] = useState<'' | 'Y' | 'N'>('');
 
   function onChangePurpose(e: React.ChangeEvent<{ value: unknown }>) {
     setPurpose(e.target.value as number);
-  }
-
-  function onChangeWork(e: React.ChangeEvent<{ value: unknown }>) {
-    setWork(e.target.value as '' | 'Y' | 'N');
   }
 
   function onClick() {
@@ -64,7 +56,7 @@ function LoanCard() {
           variant={'outlined'}
           onClick={() => (setOpen(true))}
         >
-          대출 목적을 선택해주세요.
+          목적을 선택해주세요.
         </Button>
         <FormControl className={classes.minSelect}>
           <InputLabel>목적</InputLabel>
@@ -82,30 +74,6 @@ function LoanCard() {
             <MenuItem value={2}>보증부월세 (보증금 + 월세)</MenuItem>
             <MenuItem value={3}>주거안정 (생활비)</MenuItem>
           </Select>
-        </FormControl>
-        <Button
-          className={classes.button}
-          variant={'outlined'}
-        >
-          현재 중소, 중견기업에 재직 중 이십니까?
-        </Button>
-        <FormControl>
-          <RadioGroup
-            row
-            value={work}
-            onChange={onChangeWork}
-          >
-            <FormControlLabel
-              value={'Y'}
-              control={<Radio color={'primary'} />}
-              label={'예'}
-            />
-            <FormControlLabel
-              value={'N'}
-              control={<Radio color={'primary'} />}
-              label={'아니요'}
-            />
-          </RadioGroup>
         </FormControl>
         <Button
           className={classes.button}

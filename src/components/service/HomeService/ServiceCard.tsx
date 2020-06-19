@@ -5,6 +5,7 @@ import {
   createStyles,
   Card,
   CardContent,
+  CardMedia,
   Typography,
   Button,
 } from '@material-ui/core';
@@ -14,6 +15,13 @@ const useStyles = makeStyles(() =>
     root: {
       width: '100%',
       height: '80vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    media: {
+      width: 300,
+      height: 300,
     },
     content: {
       display: 'flex',
@@ -26,13 +34,29 @@ interface ServiceCardProps {
   title?: string,
   keywords: string[];
   href?: string,
+  image?: {
+    href?: string;
+    title?: string;
+  },
 }
 
-function ServiceCard({ title, keywords, href }: ServiceCardProps) {
+function ServiceCard({
+  title,
+  keywords,
+  href,
+  image,
+}: ServiceCardProps) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root} variant={'outlined'}>
+      {image && (
+        <CardMedia
+          className={classes.media}
+          image={image.href}
+          title={image.title}
+        />
+      )}
       <CardContent className={classes.content}>
         {title && (
           <Typography
