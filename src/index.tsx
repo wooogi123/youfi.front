@@ -10,7 +10,7 @@ import store, {
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-store.dispatch(dictionaryAction.request('/dictionary.json'));
+store.dispatch(dictionaryAction.request('/static/data/dictionary.json'));
 store.dispatch(depositAction.request());
 store.dispatch(savingAction.request());
 store.dispatch(loanAction.request());

@@ -62,16 +62,20 @@ function HomeService({
               '금융이 어려운 것은 여러분의 잘못이 아닙니다.',
               'You-Fi가 여러분의 빈자리를 채워드리겟습니다.',
             ]}
+            image={{
+              href: '/static/images/mainman.png',
+              title: 'Main Man Image',
+            }}
           />
           <ServiceCard
             keywords={[
               '금융 상품을 빠르고 쉽게!',
               '당신에게 맞는 맞춤 금융상품을 추천해줍니다!',
-              '- 맞춤 금융상품 추천 -',
             ]}
-            href={'/static/images/service/recommend.png'}
+            buttonText={'- 맞춤 금융상품 -'}
+            href={'/service/recommend'}
             image={{
-              href: '/recommend.png',
+              href: '/static/images/recommend.png',
               title: 'Recommend Title',
             }}
           />
@@ -79,9 +83,9 @@ function HomeService({
             keywords={[
               '금융지식이 필요할 때!',
               '금융 상품 이해가 안될 때!',
-              '- 금융 지식 사전 -',
             ]}
             href={'/service/dict'}
+            buttonText={'- 금융 지식 사전 -'}
             image={{
               href: '/static/images/dictionary.png',
               title: 'Dictionary Title',
@@ -91,9 +95,9 @@ function HomeService({
             keywords={[
               '재테크의 첫걸음!',
               '저축을 위한 예금 상품!',
-              '- 예금 상품 목록 -',
             ]}
             href={'/service/deposit'}
+            buttonText={'- 예금 상품 목록 -'}
             image={{
               href: '/static/images/deposit.png',
               title: 'Deposit Title',
@@ -103,17 +107,21 @@ function HomeService({
             keywords={[
               '큰 목돈 마련을 위한 시작!',
               '은행, 금리, 우대조건을 한눈에!',
-              '- 적금 상품 목록 -',
             ]}
             href={'/service/saving'}
+            buttonText={'- 적금 상품 목록 -'}
+            image={{
+              href: '/static/images/saving.png',
+              title: 'Saving Title',
+            }}
           />
           <ServiceCard
             keywords={[
               '전세금 마련을 도와줄 전세대출!',
               '급전 마련을 위한 신용대출!',
-              '- 대출 상품 목록 -',
             ]}
             href={'/service/loan'}
+            buttonText={'- 대출 상품 목록 -'}
             image={{
               href: '/static/images/loan.png',
               title: 'Loan Title',
