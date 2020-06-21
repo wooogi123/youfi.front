@@ -104,7 +104,7 @@ function RecommendService({
                 <MenuItem value={0} disabled />
                 <MenuItem value={1}>예금</MenuItem>
                 <MenuItem value={2}>적금</MenuItem>
-                <MenuItem value={3}>청년 대출상품 (만 15세 ~ 34세)</MenuItem>
+                <MenuItem value={3}>청년 대출상품 (만 18세 ~ 34세)</MenuItem>
               </Select>
             </FormControl>
           </CardContent>

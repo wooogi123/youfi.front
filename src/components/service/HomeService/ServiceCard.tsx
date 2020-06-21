@@ -3,22 +3,34 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
   makeStyles,
   createStyles,
+  Theme,
   Card,
   CardContent,
+  CardMedia,
   Typography,
   Button,
 } from '@material-ui/core';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      height: '80vh',
+      height: '75vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    media: {
+      width: 300,
+      height: 300,
     },
     content: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+    },
+    subMargin: {
+      marginBottom: theme.spacing(2),
     },
   }));
 
@@ -26,16 +38,35 @@ interface ServiceCardProps {
   title?: string,
   keywords: string[];
   href?: string,
+  buttonText?: string,
+  image?: {
+    href?: string;
+    title?: string;
+  },
 }
 
-function ServiceCard({ title, keywords, href }: ServiceCardProps) {
+function ServiceCard({
+  title,
+  keywords,
+  href,
+  buttonText,
+  image,
+}: ServiceCardProps) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root} variant={'outlined'}>
+      {image && (
+        <CardMedia
+          className={classes.media}
+          image={image.href}
+          title={image.title}
+        />
+      )}
       <CardContent className={classes.content}>
         {title && (
           <Typography
+            className={classes.subMargin}
             variant={'h5'}
             component={'h2'}
             gutterBottom
@@ -45,6 +76,7 @@ function ServiceCard({ title, keywords, href }: ServiceCardProps) {
         )}
         {keywords && keywords.map((keyword: string) => (
           <Typography
+            className={classes.subMargin}
             variant={'body1'}
             gutterBottom
             key={keyword}
@@ -54,11 +86,12 @@ function ServiceCard({ title, keywords, href }: ServiceCardProps) {
         ))}
         {href && (
           <Button
-            variant={'contained'}
+            variant={'outlined'}
             component={RouterLink}
             to={href}
+            color={'primary'}
           >
-            시작하기
+            {buttonText || '시작하기'}
           </Button>
         )}
       </CardContent>
