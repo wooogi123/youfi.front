@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, SetStateAction } from 'react';
 import {
   makeStyles,
   createStyles,
@@ -6,7 +6,9 @@ import {
   Tabs,
   Tab,
 } from '@material-ui/core';
-import SwipeableView from 'react-swipeable-views';
+import clsx from 'clsx';
+import { useKeenSlider } from 'keen-slider/react';
+import 'keen-slider/keen-slider.min.css';
 import Template from '../Template';
 import { SearchProps } from '../../common';
 import { RentHouseResult, CreditResult } from '../../../store';
@@ -39,8 +41,8 @@ interface LoanServiceProps extends SearchProps {
   rentHouses: RentHouseResult;
   credits: CreditResult;
   tab: number;
+  setTab: React.Dispatch<React.SetStateAction<number>>;
   onChangeTab: (e: ChangeEvent<{}>, value: number) => void;
-  onChangeIndex: (value: number) => void;
 }
 
 function LoanService({
@@ -50,10 +52,17 @@ function LoanService({
   search,
   onChangeSearch,
   tab,
+  setTab,
   onChangeTab,
-  onChangeIndex,
 }: LoanServiceProps) {
   const classes = useStyles();
+
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    initial: 0,
+    slideChanged: (s) => {
+      setTab(s.details().relativeSlide);
+    },
+  });
 
   return (
     <Template
@@ -74,30 +83,32 @@ function LoanService({
           <Tab
             label={'전세자금 대출'}
             id={'full-width-tab-0'}
+            onClick={() => {
+              setTab(0);
+              slider.moveToSlideRelative(0);
+            }}
           />
           <Tab
             label={'개인 신용대출'}
             id={'full-width-tab-1'}
+            onClick={() => {
+              setTab(1);
+              slider.moveToSlideRelative(1);
+            }}
           />
         </Tabs>
-        <SwipeableView
-          className={classes.tabs}
-          index={tab}
-          onChangeIndex={onChangeIndex}
-        >
+        <div ref={sliderRef} className={clsx(classes.card, 'keen-slider')}>
           <RentHouse
-            value={tab}
-            index={0}
+            className={'keen-slider__slide'}
             products={rentHouses.products}
             options={rentHouses.options}
           />
           <Credit
-            value={tab}
-            index={1}
+            className={'keen-slider__slide'}
             products={credits.products}
             options={credits.options}
           />
-        </SwipeableView>
+        </div>
       </div>
     </Template>
   );

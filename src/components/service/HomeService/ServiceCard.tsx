@@ -10,6 +10,7 @@ import {
   Typography,
   Button,
 } from '@material-ui/core';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }));
 
 interface ServiceCardProps {
+  className?: string;
   title?: string,
   keywords: string[];
   href?: string,
@@ -46,6 +48,7 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({
+  className,
   title,
   keywords,
   href,
@@ -55,7 +58,7 @@ function ServiceCard({
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} variant={'outlined'}>
+    <Card className={clsx(classes.root, className)} variant={'outlined'}>
       {image && (
         <CardMedia
           className={classes.media}
