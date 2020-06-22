@@ -15,11 +15,13 @@ import Template from '../Template';
 import DepositCard from './DepositCard';
 import SavingCard from './SavingCard';
 import LoanCard from './LoanCard';
+import SpecialDeposit from './SpecialDepositCard';
+import SpecialLoan from './SpecialLoanCard';
+import SpecialOther from './SpecialOtherCard';
 import {
   DepositResult,
   SavingResult,
   RentHouseResult,
-  CreditResult,
 } from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,12 +57,12 @@ interface RecommendServiceProps {
   deposits: DepositResult;
   savings: SavingResult;
   rentHouses: RentHouseResult;
-  credits: CreditResult;
 }
 
 function RecommendService({
   deposits,
   savings,
+  rentHouses,
 }: RecommendServiceProps) {
   const classes = useStyles();
   const [choice, setChoice] = useState(0);
@@ -104,7 +106,10 @@ function RecommendService({
                 <MenuItem value={0} disabled />
                 <MenuItem value={1}>예금</MenuItem>
                 <MenuItem value={2}>적금</MenuItem>
-                <MenuItem value={3}>청년 대출상품 (만 18세 ~ 34세)</MenuItem>
+                <MenuItem value={3}>전세자금 대출</MenuItem>
+                <MenuItem value={4}>청년 저축상품 (저축지원, 주택청약)</MenuItem>
+                <MenuItem value={5}>청년 대출상품 (생활비, 전월세 보증금 대출)</MenuItem>
+                <MenuItem value={6}>청년 부가 지원상품 (이자 지원, 신용회복, 청년 기본소득 등)</MenuItem>
               </Select>
             </FormControl>
           </CardContent>
@@ -129,7 +134,19 @@ function RecommendService({
             ]}
           />
         )}
-        {choice === 3 && (<LoanCard />)}
+        {choice === 3 && (
+          <LoanCard
+            companys={uniqBy(rentHouses.products
+              .map((product) =>
+                ([product.companyCode, product.companyName])))}
+            terms={[
+              1, 2, 3,
+            ]}
+          />
+        )}
+        {choice === 4 && (<SpecialDeposit />)}
+        {choice === 5 && (<SpecialLoan />)}
+        {choice === 6 && (<SpecialOther />)}
       </div>
     </Template>
   );
