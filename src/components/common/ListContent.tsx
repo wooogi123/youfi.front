@@ -25,7 +25,6 @@ const useStyles = makeStyles(() =>
 
 interface ListContentProps {
   orientation: 'vertical' | 'horizontal';
-  isLogin: boolean;
 }
 
 function ListContent({ orientation }: ListContentProps) {

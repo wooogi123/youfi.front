@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useAuthStore } from '../hooks';
 import { ServiceTitle, Header, SearchProps } from '../components/common';
 
 interface HeaderContainerProps extends SearchProps {
@@ -9,7 +8,6 @@ interface HeaderContainerProps extends SearchProps {
 function HeaderContainer({
   title, isSearch, search, onChangeSearch,
 }: HeaderContainerProps) {
-  const store = useAuthStore();
   const [open, setOpen] = useState(false);
 
   function toggleDrawer() {
@@ -20,7 +18,6 @@ function HeaderContainer({
     <Header
       title={title}
       isOpen={open}
-      isLogin={store.isLogin}
       isSearch={isSearch}
       search={search}
       toggleDrawer={toggleDrawer}
