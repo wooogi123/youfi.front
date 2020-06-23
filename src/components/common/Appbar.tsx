@@ -77,13 +77,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface AppbarProps extends SearchProps {
   title: ServiceTitle;
-  isLogin: boolean;
   toggleDrawer: () => void;
 }
 
 function Appbar({
   title,
-  isLogin,
   isSearch,
   search,
   toggleDrawer,
@@ -115,7 +113,6 @@ function Appbar({
         <Hidden mdDown>
           <ListContent
             orientation={'horizontal'}
-            isLogin={isLogin}
           />
         </Hidden>
         <Hidden lgUp>
