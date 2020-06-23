@@ -7,19 +7,12 @@ import {
   CardActions,
   CardContent,
   Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Collapse,
   IconButton,
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
-import { DepositProduct, DepositOption } from '../../../store';
+import { RecommendContent } from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,20 +21,16 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '75%',
       minWidth: 300,
     },
+    actions: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
     title: {
       marginLeft: theme.spacing(1),
     },
     subMargin: {
       marginBottom: theme.spacing(1),
-    },
-    table: {
-      width: 'inherit',
-      minWidth: 300,
-      margin: theme.spacing(4),
-      [theme.breakpoints.down('md')]: {
-        marginLeft: -theme.spacing(2),
-        marginRight: -theme.spacing(2),
-      },
     },
     expanded: {
       transform: 'rotate(0deg)',
@@ -55,31 +44,24 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
-interface DepositCardProps {
-  product: DepositProduct;
-  options: DepositOption[];
+interface SpecialLoanProps {
+  product: RecommendContent;
 }
 
-function DepositCard({
+function SpecialLoanCard({
   product,
-  options,
-}: DepositCardProps) {
+}: SpecialLoanProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-
-  function onClickExpanded() {
-    setExpanded(!expanded);
-  }
 
   return (
     <Card
       className={classes.root}
       variant={'outlined'}
-      key={product.productName}
     >
       <CardActions
-        onClick={onClickExpanded}
-        disableSpacing
+        className={classes.actions}
+        onClick={() => (setExpanded(!expanded))}
       >
         <div className={classes.title}>
           <Typography
@@ -87,11 +69,12 @@ function DepositCard({
             color={'textSecondary'}
             gutterBottom
           >
-            {product.companyName}
+            {product.region}
           </Typography>
           <Typography
             variant={'h5'}
             component={'h2'}
+            gutterBottom
           >
             {product.productName}
           </Typography>
@@ -113,18 +96,31 @@ function DepositCard({
             color={'textSecondary'}
             gutterBottom
           >
-            {product.joinWay.replace(/,/g, ', ')}
+            {product.joinWay}
           </Typography>
           <Typography
             className={classes.subMargin}
             variant={'subtitle2'}
-            color={'textSecondary'}
             gutterBottom
           >
-            {product.joinMember}
+            {product.loanDateInfo}
           </Typography>
-          {product.maturityAfterInterest
-            .split('\n')
+          {product.joinMember
+            ?.split('\n')
+            .map((el: string) => (
+              <Typography
+                className={classes.subMargin}
+                variant={'subtitle2'}
+                color={'textSecondary'}
+                component={'p'}
+                gutterBottom
+                key={el}
+              >
+                {el}
+              </Typography>
+            ))}
+          {product.loanInciedntalExpense
+            ?.split('\n')
             .map((el: string) => (
               <Typography
                 className={classes.subMargin}
@@ -136,8 +132,8 @@ function DepositCard({
                 {el}
               </Typography>
             ))}
-          {product.special
-            .split('\n')
+          {product.earlyPrepaymentFee
+            ?.split('\n')
             .map((el: string) => (
               <Typography
                 className={classes.subMargin}
@@ -149,8 +145,8 @@ function DepositCard({
                 {el}
               </Typography>
             ))}
-          {product.comment && product.comment
-            .split('\n')
+          {product.loanLimit
+            ?.split('\n')
             .map((el: string) => (
               <Typography
                 className={classes.subMargin}
@@ -162,43 +158,52 @@ function DepositCard({
                 {el}
               </Typography>
             ))}
-          {product.maxLimit && (
-            <Typography
-              className={classes.subMargin}
-              variant={'subtitle2'}
-              gutterBottom
-            >
-              {`최고 한도 - ${product.maxLimit}원`}
-            </Typography>
-          )}
-          {options && (
-            <TableContainer className={classes.table} component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>저축 금리 유형명</TableCell>
-                    <TableCell>저축 기간</TableCell>
-                    <TableCell>저축 금리</TableCell>
-                    <TableCell>최고 우대금리</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {options.map((option: DepositOption) => (
-                    <TableRow key={option.productCode + option.saveTerm}>
-                      <TableCell>{option.interestName}</TableCell>
-                      <TableCell>{option.saveTerm}</TableCell>
-                      <TableCell>{`${option.interestRate}%`}</TableCell>
-                      <TableCell>{`${option.interestRate2}%`}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
+          {product.option?.map((el) => (
+            <div key={el.lendRateName + product.productName}>
+              <Typography
+                className={classes.subMargin}
+                variant={'subtitle2'}
+                component={'p'}
+                gutterBottom
+              >
+                {`- ${el.repaymentName}, ${el.lendRateName}`}
+              </Typography>
+              {el.lendRateMin && (
+                <Typography
+                  className={classes.subMargin}
+                  variant={'subtitle2'}
+                  component={'p'}
+                  gutterBottom
+                >
+                  {`최소 금리: ${el.lendRateMin}%`}
+                </Typography>
+              )}
+              {el.lendRateMax && (
+                <Typography
+                  className={classes.subMargin}
+                  variant={'subtitle2'}
+                  component={'p'}
+                  gutterBottom
+                >
+                  {`최대 금리: ${el.lendRateMax}%`}
+                </Typography>
+              )}
+              {el.lendRateAverage && (
+                <Typography
+                  className={classes.subMargin}
+                  variant={'subtitle2'}
+                  component={'p'}
+                  gutterBottom
+                >
+                  {`평균 금리: ${el.lendRateAverage}%`}
+                </Typography>
+              )}
+            </div>
+          ))}
         </CardContent>
       </Collapse>
     </Card>
   );
 }
 
-export default DepositCard;
+export default SpecialLoanCard;

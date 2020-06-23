@@ -6,20 +6,18 @@ import {
 } from '../../../store';
 
 interface RentHouseProps {
-  value: number;
-  index: number;
+  className?: string;
   products: RentHouseProduct[];
   options: RentHouseOption[];
 }
 
 function RentHouse({
-  value,
-  index,
+  className,
   products,
   options,
 }: RentHouseProps) {
   return (
-    <div hidden={value !== index}>
+    <div className={className}>
       {products.map((product: RentHouseProduct) => (
         <RentHouseCard
           product={product}

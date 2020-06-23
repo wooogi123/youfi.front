@@ -12,12 +12,18 @@ import {
   MenuItem,
   Button,
 } from '@material-ui/core';
+import {
+  DepositProduct,
+  SavingProduct,
+  RentHouseProduct,
+  RecommendContent,
+} from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       marginTop: theme.spacing(4),
-      width: '50%',
+      width: '75%',
       minWidth: 300,
     },
     content: {
@@ -37,26 +43,36 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
+interface Result {
+  contents: DepositProduct[] | SavingProduct[] | RentHouseProduct[] | RecommendContent[];
+  type: 'deposit' | 'saving' | 'rentHouse' | 'recommend' | '';
+  money?: string;
+  date?: number;
+  recommend?: string;
+  recommendType?: number;
+}
+
 interface DepositCardProps {
+  deposits: DepositProduct[];
+  setResult: React.Dispatch<React.SetStateAction<Result>>;
   companys: [string, string][];
   saveTerms: number[];
+  setOpenResult: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function DepositCard({
+  deposits,
+  setResult,
   companys,
   saveTerms,
+  setOpenResult,
 }: DepositCardProps) {
   const classes = useStyles();
-  const [birthday, setBirthday] = useState('2000-01-01');
   const [bank, setBank] = useState('');
   const [date, setDate] = useState(6);
   const [money, setMoney] = useState('');
   const [openBank, setOpenBank] = useState(false);
   const [openDate, setOpenDate] = useState(false);
-
-  function onChangeBirthday(e: React.ChangeEvent<{ value: unknown }>) {
-    setBirthday(e.target.value as string);
-  }
 
   function onChangeBank(e: React.ChangeEvent<{ value: unknown }>) {
     setBank(e.target.value as string);
@@ -71,24 +87,30 @@ function DepositCard({
   }
 
   function onClick() {
+    if (bank !== '' && date !== 0 && money !== '') {
+      if (bank === 'all') {
+        setResult({
+          contents: deposits,
+          type: 'deposit',
+          money,
+          date,
+        });
+      } else {
+        setResult({
+          contents: deposits.filter((deposit) =>
+            (deposit.companyCode === bank)),
+          type: 'deposit',
+          money,
+          date,
+        });
+      }
+      setOpenResult(true);
+    }
   }
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <FormControl className={classes.minSelect}>
-          <TextField
-            required
-            error={birthday === ''}
-            label={'생년월일'}
-            type={'date'}
-            value={birthday}
-            onChange={onChangeBirthday}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </FormControl>
         <Button
           className={classes.button}
           variant={'outlined'}
@@ -107,6 +129,7 @@ function DepositCard({
             value={bank}
             onChange={onChangeBank}
           >
+            <MenuItem value={'all'}>전체</MenuItem>
             {companys.map((el) => (
               <MenuItem value={el[0]} key={el[0]}>{el[1]}</MenuItem>
             ))}
