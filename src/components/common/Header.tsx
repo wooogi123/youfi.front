@@ -7,14 +7,12 @@ import { SearchProps, ServiceTitle } from './types';
 interface HeaderProps extends SearchProps {
   title: ServiceTitle;
   isOpen: boolean;
-  isLogin: boolean;
   toggleDrawer: () => void;
 }
 
 function Header({
   title,
   isOpen,
-  isLogin,
   isSearch,
   search,
   toggleDrawer,
@@ -24,7 +22,6 @@ function Header({
     <>
       <Appbar
         title={title}
-        isLogin={isLogin}
         isSearch={isSearch}
         search={search}
         toggleDrawer={toggleDrawer}
@@ -33,7 +30,6 @@ function Header({
       <Hidden lgUp>
         <SideDrawer
           open={isOpen}
-          isLogin={isLogin}
           toggleDrawer={toggleDrawer}
         />
       </Hidden>

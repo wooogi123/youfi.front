@@ -20,11 +20,10 @@ const useStyles = makeStyles(() =>
 
 interface SideDrawerProps {
   open: boolean;
-  isLogin: boolean;
   toggleDrawer: () => void;
 }
 
-function SideDrawer({ open, isLogin, toggleDrawer }: SideDrawerProps) {
+function SideDrawer({ open, toggleDrawer }: SideDrawerProps) {
   const classes = useStyles();
 
   return (
@@ -45,7 +44,6 @@ function SideDrawer({ open, isLogin, toggleDrawer }: SideDrawerProps) {
         <Divider />
         <ListContent
           orientation={'vertical'}
-          isLogin={isLogin}
         />
       </div>
     </Drawer>
