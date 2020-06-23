@@ -28,7 +28,7 @@ interface ListContentProps {
   isLogin: boolean;
 }
 
-function ListContent({ orientation, isLogin }: ListContentProps) {
+function ListContent({ orientation }: ListContentProps) {
   const classes = useStyles();
 
   return (
@@ -60,25 +60,6 @@ function ListContent({ orientation, isLogin }: ListContentProps) {
             </ListItem>
           ))}
         <Divider orientation={orientation} />
-        {!isLogin ? (
-          <ListItem button component={RouterLink} to={'/auth/login'}>
-            <ListItemText
-              primary={'로그인'}
-              primaryTypographyProps={{
-                noWrap: true,
-              }}
-            />
-          </ListItem>
-        ) : (
-          <ListItem button component={RouterLink} to={'/auth/logout'}>
-            <ListItemText
-              primary={'로그아웃'}
-              primaryTypographyProps={{
-                noWrap: true,
-              }}
-            />
-          </ListItem>
-        )}
       </List>
     </>
   );
