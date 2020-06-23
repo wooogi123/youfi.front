@@ -11,12 +11,18 @@ import {
   MenuItem,
   Button,
 } from '@material-ui/core';
+import {
+  DepositProduct,
+  SavingProduct,
+  RentHouseProduct,
+  RecommendContent,
+} from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       marginTop: theme.spacing(4),
-      width: '50%',
+      width: '75%',
       minWidth: 300,
     },
     content: {
@@ -36,7 +42,26 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
-function SpecialDepositCard() {
+interface Result {
+  contents: DepositProduct[] | SavingProduct[] | RentHouseProduct[] | RecommendContent[];
+  type: 'deposit' | 'saving' | 'rentHouse' | 'recommend' | '';
+  money?: string;
+  date?: number;
+  recommend?: string;
+  recommendType?: number;
+}
+
+interface SpecialDepositProps {
+  recommends: RecommendContent[];
+  setResult: React.Dispatch<React.SetStateAction<Result>>;
+  setOpenResult: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function SpecialDepositCard({
+  recommends,
+  setResult,
+  setOpenResult,
+}: SpecialDepositProps) {
   const classes = useStyles();
   const [region, setRegion] = useState('');
   const [openRegion, setOpenRegion] = useState(false);
@@ -45,7 +70,25 @@ function SpecialDepositCard() {
     setRegion(e.target.value as string);
   }
 
-  function onClick() {}
+  function onClick() {
+    if (region !== '') {
+      if (region === 'all') {
+        setResult({
+          contents: recommends,
+          type: 'recommend',
+          recommend: 'deposit',
+        });
+      } else {
+        setResult({
+          contents: recommends.filter((recommend) =>
+            (recommend.region === region)),
+          type: 'recommend',
+          recommend: 'deposit',
+        });
+      }
+      setOpenResult(true);
+    }
+  }
 
   return (
     <Card className={classes.root}>
@@ -68,6 +111,7 @@ function SpecialDepositCard() {
             value={region}
             onChange={onChangeRegion}
           >
+            <MenuItem value={'all'}>전체</MenuItem>
             <MenuItem value={'서울'}>서울</MenuItem>
             <MenuItem value={'경기'}>경기</MenuItem>
             <MenuItem value={'강원'}>강원</MenuItem>

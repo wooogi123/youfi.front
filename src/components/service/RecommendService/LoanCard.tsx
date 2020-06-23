@@ -12,12 +12,18 @@ import {
   Button,
   TextField,
 } from '@material-ui/core';
+import {
+  DepositProduct,
+  SavingProduct,
+  RentHouseProduct,
+  RecommendContent,
+} from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       marginTop: theme.spacing(4),
-      width: '50%',
+      width: '75%',
       minWidth: 300,
     },
     content: {
@@ -37,14 +43,29 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
+interface Result {
+  contents: DepositProduct[] | SavingProduct[] | RentHouseProduct[] | RecommendContent[];
+  type: 'deposit' | 'saving' | 'rentHouse' | 'recommend' | '';
+  money?: string;
+  date?: number;
+  recommend?: string;
+  recommendType?: number;
+}
+
 interface LoanCardProps {
+  rentHouses: RentHouseProduct[];
+  setResult: React.Dispatch<React.SetStateAction<Result>>;
   companys: [string, string][];
   terms: number[];
+  setOpenResult: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function LoanCard({
+  rentHouses,
+  setResult,
   companys,
   terms,
+  setOpenResult,
 }: LoanCardProps) {
   const classes = useStyles();
   const [bank, setBank] = useState('');
@@ -66,6 +87,25 @@ function LoanCard({
   }
 
   function onClick() {
+    if (bank !== '' && date !== 0 && money !== '') {
+      if (bank === 'all') {
+        setResult({
+          contents: rentHouses,
+          type: 'rentHouse',
+          money,
+          date,
+        });
+      } else {
+        setResult({
+          contents: rentHouses.filter((rentHouse) =>
+            (rentHouse.companyCode === bank)),
+          type: 'rentHouse',
+          money,
+          date,
+        });
+      }
+      setOpenResult(true);
+    }
   }
 
   return (
@@ -89,6 +129,7 @@ function LoanCard({
             value={bank}
             onChange={onChangeBank}
           >
+            <MenuItem value={'all'}>전체</MenuItem>
             {companys.map((el) => (
               <MenuItem value={el[0]} key={el[0]}>{el[1]}</MenuItem>
             ))}
@@ -113,7 +154,9 @@ function LoanCard({
             onChange={onChangeDate}
           >
             {terms.map((el) => (
-              <MenuItem value={el} key={el}>{el}</MenuItem>
+              <MenuItem value={el} key={el}>
+                {`${el}년`}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

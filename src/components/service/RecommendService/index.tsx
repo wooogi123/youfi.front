@@ -20,8 +20,12 @@ import SpecialLoan from './SpecialLoanCard';
 import SpecialOther from './SpecialOtherCard';
 import {
   DepositResult,
+  DepositProduct,
   SavingResult,
+  SavingProduct,
   RentHouseResult,
+  RentHouseProduct,
+  RecommendContent,
 } from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       marginTop: theme.spacing(4),
-      width: '50%',
+      width: '75%',
       minWidth: 300,
     },
     cardContent: {
@@ -53,16 +57,31 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
+interface Result {
+  contents: DepositProduct[] | SavingProduct[] | RentHouseProduct[] | RecommendContent[];
+  type: 'deposit' | 'saving' | 'rentHouse' | 'recommend' | '';
+  money?: string;
+  date?: number;
+  recommend?: string;
+  recommendType?: number;
+}
+
 interface RecommendServiceProps {
   deposits: DepositResult;
   savings: SavingResult;
   rentHouses: RentHouseResult;
+  recommends: RecommendContent[];
+  setResult: React.Dispatch<React.SetStateAction<Result>>;
+  setOpenResult: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function RecommendService({
   deposits,
   savings,
   rentHouses,
+  recommends,
+  setResult,
+  setOpenResult,
 }: RecommendServiceProps) {
   const classes = useStyles();
   const [choice, setChoice] = useState(0);
@@ -116,37 +135,64 @@ function RecommendService({
         </Card>
         {choice === 1 && (
           <DepositCard
+            deposits={deposits.products}
+            setResult={setResult}
             companys={uniqBy(deposits.products
               .map((product) =>
                 ([product.companyCode, product.companyName])))}
             saveTerms={[
               6, 12, 24, 36,
             ]}
+            setOpenResult={setOpenResult}
           />
         )}
         {choice === 2 && (
           <SavingCard
+            savings={savings.products}
+            setResult={setResult}
             companys={uniqBy(savings.products
               .map((product) =>
                 ([product.companyCode, product.companyName])))}
             saveTerms={[
               6, 12, 24, 36,
             ]}
+            setOpenResult={setOpenResult}
           />
         )}
         {choice === 3 && (
           <LoanCard
+            rentHouses={rentHouses.products}
+            setResult={setResult}
             companys={uniqBy(rentHouses.products
               .map((product) =>
                 ([product.companyCode, product.companyName])))}
             terms={[
               1, 2, 3,
             ]}
+            setOpenResult={setOpenResult}
           />
         )}
-        {choice === 4 && (<SpecialDeposit />)}
-        {choice === 5 && (<SpecialLoan />)}
-        {choice === 6 && (<SpecialOther />)}
+        {choice === 4 && (
+          <SpecialDeposit
+            recommends={recommends}
+            setResult={setResult}
+            setOpenResult={setOpenResult}
+          />
+        )}
+        {choice === 5 && (
+          <SpecialLoan
+            recommends={recommends}
+            setResult={setResult}
+            setOpenResult={setOpenResult}
+          />
+        )}
+        {choice === 6 && (
+          <SpecialOther
+            recommends={recommends}
+            setResult={setResult}
+            setOpenResult={setOpenResult}
+          />
+        )}
       </div>
     </Template>
   );

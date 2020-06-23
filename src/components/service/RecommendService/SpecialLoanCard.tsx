@@ -11,12 +11,18 @@ import {
   MenuItem,
   Button,
 } from '@material-ui/core';
+import {
+  DepositProduct,
+  SavingProduct,
+  RentHouseProduct,
+  RecommendContent,
+} from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       marginTop: theme.spacing(4),
-      width: '50%',
+      width: '75%',
       minWidth: 300,
     },
     content: {
@@ -36,7 +42,26 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }));
 
-function SpecialLoanCard() {
+interface Result {
+  contents: DepositProduct[] | SavingProduct[] | RentHouseProduct[] | RecommendContent[];
+  type: 'deposit' | 'saving' | 'rentHouse' | 'recommend' | '';
+  money?: string;
+  date?: number;
+  recommend?: string;
+  recommendType?: number;
+}
+
+interface SpecialLoanProps {
+  recommends: RecommendContent[];
+  setResult: React.Dispatch<React.SetStateAction<Result>>;
+  setOpenResult: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function SpecialLoanCard({
+  recommends,
+  setResult,
+  setOpenResult,
+}: SpecialLoanProps) {
   const classes = useStyles();
   const [type, setType] = useState(0);
   const [region, setRegion] = useState('');
@@ -51,7 +76,27 @@ function SpecialLoanCard() {
     setRegion(e.target.value as string);
   }
 
-  function onClick() {}
+  function onClick() {
+    if (region !== '' && type !== 0) {
+      if (region === 'all') {
+        setResult({
+          contents: recommends,
+          type: 'recommend',
+          recommend: 'loan',
+          recommendType: type,
+        });
+      } else {
+        setResult({
+          contents: recommends.filter((recommend) =>
+            (recommend.region === region)),
+          type: 'recommend',
+          recommend: 'loan',
+          recommendType: type,
+        });
+      }
+      setOpenResult(true);
+    }
+  }
 
   return (
     <Card className={classes.root}>
@@ -75,8 +120,9 @@ function SpecialLoanCard() {
             onChange={onChangeType}
           >
             <MenuItem value={0} disabled />
-            <MenuItem value={1}>청년 전월세, 보증금 대출</MenuItem>
-            <MenuItem value={2}>청년 생활비 대출</MenuItem>
+            <MenuItem value={1}>전체</MenuItem>
+            <MenuItem value={2}>청년 전월세, 보증금 대출</MenuItem>
+            <MenuItem value={3}>청년 생활비 대출</MenuItem>
           </Select>
         </FormControl>
         <Button
@@ -97,6 +143,7 @@ function SpecialLoanCard() {
             value={region}
             onChange={onChangeRegion}
           >
+            <MenuItem value={'all'}>전체</MenuItem>
             <MenuItem value={'서울'}>서울</MenuItem>
             <MenuItem value={'경기'}>경기</MenuItem>
             <MenuItem value={'강원'}>강원</MenuItem>

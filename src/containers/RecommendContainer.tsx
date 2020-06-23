@@ -1,21 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RecommendService from '../components/service/RecommendService';
+import RecommendResultService from '../components/service/RecommendResultService';
 import {
   useDepositStore,
   useSavingStore,
   useRentHouseStore,
+  useRecommendStore,
 } from '../hooks';
+import {
+  DepositResult,
+  DepositProduct,
+  SavingResult,
+  SavingProduct,
+  RentHouseResult,
+  RentHouseProduct,
+  RecommendContent,
+} from '../store';
+
+interface Result {
+  contents: DepositProduct[] | SavingProduct[] | RentHouseProduct[] | RecommendContent[];
+  type: 'deposit' | 'saving' | 'rentHouse' | 'recommend' | '';
+  money?: string;
+  date?: number;
+  recommend?: string;
+  recommendType?: number;
+}
 
 function RecommendContainer() {
-  const deposits = useDepositStore().contents;
-  const savings = useSavingStore().contents;
-  const rentHouses = useRentHouseStore();
+  const [openResult, setOpenResult] = useState(false);
+  const [result, setResult] = useState<Result>({
+    contents: [],
+    type: '',
+  });
+  const deposits: DepositResult = useDepositStore().contents;
+  const savings: SavingResult = useSavingStore().contents;
+  const rentHouses: RentHouseResult = useRentHouseStore();
+  const recommends = useRecommendStore().contents;
+
   return (
-    <RecommendService
-      deposits={deposits}
-      savings={savings}
-      rentHouses={rentHouses}
-    />
+    <>
+      {openResult ? (
+        <RecommendResultService
+          result={result}
+          deposits={deposits}
+          savings={savings}
+          rentHouses={rentHouses}
+        />
+      ) : (
+        <RecommendService
+          deposits={deposits}
+          savings={savings}
+          rentHouses={rentHouses}
+          recommends={recommends}
+          setResult={setResult}
+          setOpenResult={setOpenResult}
+        />
+      )}
+    </>
   );
 }
 
