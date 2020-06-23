@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import {
   useRentHouseStore,
   useCreditStore,
@@ -19,11 +19,7 @@ function LoanContainer() {
     if (e !== undefined) setSearch(e.currentTarget.value);
   }
 
-  function onChangeTab(_e: ChangeEvent<{}>, value: number) {
-    setTab(value);
-  }
-
-  function onChangeIndex(value: number) {
+  function onChangeTab(_e: React.ChangeEvent<{}>, value: number) {
     setTab(value);
   }
 
@@ -43,8 +39,8 @@ function LoanContainer() {
       search={search}
       onChangeSearch={onChangeSearch}
       tab={tab}
+      setTab={setTab}
       onChangeTab={onChangeTab}
-      onChangeIndex={onChangeIndex}
     />
   );
 }

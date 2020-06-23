@@ -11,6 +11,7 @@ import {
   deposit,
   saving,
   loan,
+  recommend,
 } from './reducers';
 import {
   authSaga,
@@ -18,6 +19,7 @@ import {
   depositSaga,
   savingSaga,
   loanSaga,
+  recommendSaga,
 } from './saga';
 
 const rootReducer = combineReducers({
@@ -26,6 +28,7 @@ const rootReducer = combineReducers({
   deposit,
   saving,
   loan,
+  recommend,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -37,6 +40,7 @@ function* rootSaga() {
     depositSaga(),
     savingSaga(),
     loanSaga(),
+    recommendSaga(),
   ]);
 }
 

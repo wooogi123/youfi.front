@@ -3,3 +3,4 @@ export * from './dictionary';
 export * from './deposit';
 export * from './saving';
 export * from './loan';
+export * from './recommend';

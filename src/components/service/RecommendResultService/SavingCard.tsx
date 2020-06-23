@@ -7,19 +7,12 @@ import {
   CardActions,
   CardContent,
   Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Collapse,
   IconButton,
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
-import { SavingProduct, SavingOption } from '../../../store';
+import { SavingResult, SavingProduct } from '../../../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,20 +21,16 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '75%',
       minWidth: 300,
     },
+    actions: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
     title: {
       marginLeft: theme.spacing(1),
     },
     subMargin: {
       marginBottom: theme.spacing(1),
-    },
-    table: {
-      width: 'inherit',
-      minWidth: 300,
-      margin: theme.spacing(4),
-      [theme.breakpoints.down('md')]: {
-        marginLeft: -theme.spacing(2),
-        marginRight: -theme.spacing(2),
-      },
     },
     expanded: {
       transform: 'rotate(0deg)',
@@ -57,29 +46,28 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface SavingCardProps {
   product: SavingProduct;
-  options: SavingOption[];
+  savings: SavingResult;
+  money: string;
+  date: number;
 }
 
 function SavingCard({
   product,
-  options,
+  savings,
+  money,
+  date,
 }: SavingCardProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-
-  function onClickExpanded() {
-    setExpanded(!expanded);
-  }
 
   return (
     <Card
       className={classes.root}
       variant={'outlined'}
-      key={product.productName}
     >
       <CardActions
-        onClick={onClickExpanded}
-        disableSpacing
+        className={classes.actions}
+        onClick={() => (setExpanded(!expanded))}
       >
         <div className={classes.title}>
           <Typography
@@ -92,9 +80,31 @@ function SavingCard({
           <Typography
             variant={'h5'}
             component={'h2'}
+            gutterBottom
           >
             {product.productName}
           </Typography>
+          {savings.options.filter((option) =>
+            (option.productCode === product.productCode))
+            .map((el) => (
+              <div key={el.productCode + el.companyCode + el.saveTerm}>
+                <Typography
+                  variant={'subtitle2'}
+                  hidden={(el.saveTerm !== date)}
+                  gutterBottom
+                >
+                  {`- 월 ${money}원을 ${el.saveTerm}개월 예치시 예상 만기 금액`}
+                </Typography>
+                <Typography
+                  variant={'subtitle2'}
+                  hidden={(el.saveTerm !== date)}
+                  gutterBottom
+                >
+                  {(Number(money) * date * ((24 + (date * el.interestRate2)) / 24)).toFixed()}
+                  원
+                </Typography>
+              </div>
+            ))}
         </div>
         <IconButton
           className={clsx(classes.expanded, {
@@ -149,6 +159,19 @@ function SavingCard({
                 {el}
               </Typography>
             ))}
+          {product.comment && product.comment
+            .split('\n')
+            .map((el: string) => (
+              <Typography
+                className={classes.subMargin}
+                variant={'subtitle2'}
+                component={'p'}
+                gutterBottom
+                key={el}
+              >
+                {el}
+              </Typography>
+            ))}
           {product.maxLimit && (
             <Typography
               className={classes.subMargin}
@@ -157,32 +180,6 @@ function SavingCard({
             >
               {`최고 한도 - ${product.maxLimit}원`}
             </Typography>
-          )}
-          {options && (
-            <TableContainer className={classes.table} component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>저축 금리 유형명</TableCell>
-                    <TableCell>적립 유형명</TableCell>
-                    <TableCell>저축 기간</TableCell>
-                    <TableCell>저축 금리</TableCell>
-                    <TableCell>최고 우대금리</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {options.map((option: SavingOption) => (
-                    <TableRow key={option.productCode + option.savingName + option.saveTerm}>
-                      <TableCell>{option.interestName}</TableCell>
-                      <TableCell>{option.savingName}</TableCell>
-                      <TableCell>{option.saveTerm}</TableCell>
-                      <TableCell>{`${option.interestRate}%`}</TableCell>
-                      <TableCell>{`${option.interestRate2}%`}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
           )}
         </CardContent>
       </Collapse>

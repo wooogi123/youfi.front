@@ -6,20 +6,18 @@ import {
 } from '../../../store';
 
 interface CreditProps {
-  value: number;
-  index: number;
+  className?: string;
   products: CreditProduct[];
   options: CreditOption[];
 }
 
 function Credit({
-  value,
-  index,
+  className,
   products,
   options,
 }: CreditProps) {
   return (
-    <div hidden={value !== index}>
+    <div className={className}>
       {products.map((product: CreditProduct) => (
         <CreditCard
           product={product}
