@@ -143,7 +143,7 @@ function DepositCard({
           예치기간과 금액을 기입해주세요.
         </Button>
         <FormControl className={classes.minSelect}>
-          <InputLabel>예치기간</InputLabel>
+          <InputLabel>예치기간 (개월)</InputLabel>
           <Select
             required
             error={date === 0}

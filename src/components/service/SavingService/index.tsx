@@ -33,7 +33,7 @@ function SavingService({
 
   return (
     <Template
-      title={'예금'}
+      title={'적금'}
       isSearch={isSearch}
       search={search}
       onChangeSearch={onChangeSearch}
