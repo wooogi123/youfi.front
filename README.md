@@ -15,3 +15,9 @@ You-Fi
 
 - If you want eject Create-React-App
 > ```> npm run eject or yarn eject```
+
+## Todo
+- Refactoring
+- new Design
+- Atomic design? or Others?
+
