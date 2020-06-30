@@ -1,7 +1,11 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
-import { Copyright, ServiceTitle, SearchProps } from '../common';
-import HeaderContainer from '../../containers/HeaderContainer';
+import {
+  Header,
+  Copyright,
+  ServiceTitle,
+  SearchProps,
+} from '../common';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +35,7 @@ function Template({
 
   return (
     <>
-      <HeaderContainer
+      <Header
         title={title}
         isSearch={isSearch}
         search={search}
